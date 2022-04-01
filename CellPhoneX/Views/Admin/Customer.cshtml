@@ -3,14 +3,31 @@
     ViewBag.Title = "Customer";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<link href="~/Content/Admin.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Admin.css" rel="stylesheet" type="text/css"/>
 <div class="layout__content">
     <div class="layout__content-main">
-        <section id="dashboard">
-            <div class="dashboard">
-                <p> Customer</p>
+        <div class="admin-user">
+            <span style="display: flex; padding: 1rem; font-size: 20px; font-weight: 600; color: #6b6b6b;">Customers</span>
+            <div class="admin-user-list" style=" background: white; margin: 0 .5rem 0 1rem; color: #6b6b6b; padding: 1rem; border-radius: 4px; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                <table style=" width: 100%; text-align: left; padding: 1rem;">
+                    <tr style="color: #6b6b6b; font-size: 18px; font-weight: 600; background: #f9f9f9; padding: 0.5rem 0; min-width: 30px;">
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>dangkhang</td>
+                        <td>dangkhang1811@gmail.com</td>
+                        <td>60 Biên Hòa mãi đỉnh</td>
+                        <td>0122222222</td>
+                        <td class="delete-user"><DeleteOutlined /></td>
+                    </tr>
+                </table>
             </div>
-        </section>
+        </div>
     </div>
 </div>
 
