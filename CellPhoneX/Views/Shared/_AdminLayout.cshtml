@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/admin" class="sidebar-list-item">
+                    <span>/Admin.css" rel="stylesheet"type="text/css"/>
+</head>
+<body>
+    
+    <div class="layout">
+            <div class="sidebar">
+                <div class="sidebar-top">
+                    <img src="https://we.race.vn/wp-content/uploads/2021/01/cellphoneS.png"></img>
+                </div>
+                <div class="sidebar-list">
+                    <div to="
+                       @* <AppstoreOutlined></AppstoreOutlined>*@
+                    </span>
+                    <p>
+                        <a href="/Admin/Index" class="haha" style="text-decoration: none; color: #6b6b6b">Dashboard</a>
+                    </p>
+                    </div>
+                    <div to="/admin/customer" class="sidebar-list-item" >
+                    <span>
+                        @*<UsergroupAddOutlined></UsergroupAddOutlined>*@
+                    </span>
+                    <p>
+                        <a href="/Admin/Customer" class="haha" style="text-decoration: none; color: #6b6b6b">Customer</a>
+                    </p>
+                    </div>
+                    <div to="/admin/product" class="sidebar-list-item">
+                    <span>
+                        @*<ShopOutlined></ShopOutlined>
+ *@                   </span>
+                    <p>
+                        <a href="/Admin/Customer" class="haha" style="text-decoration: none; color: #6b6b6b">Product</a>
+                    </p>
+                    </div>
+                    <div to="/admin/order" class="sidebar-list-item">
+                    <span>
+                        @*<OrderedListOutlined></OrderedListOutlined>
+*@                    </span>
+                    <p>
+                         
+                        <a href="/Admin/Customer" class="haha" style="text-decoration: none; color: #6b6b6b">Order</a>
+                    </p>
+                        <div class="admin-order-new">
+                            5
+                        </div>
+                    </p>
+                    </div>
+                </div>
+            
+
+        </div>
+        <div class="right">    
+                @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>

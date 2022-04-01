@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+  @*  Layout = "~/Views/Shared/_Layout.cshtml";*@
+}
+<link href="~/Content/DetailProduct.css" rel="stylesheet" type="text/css" />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Css/Detail.css" type="text/css" rel="stylesheet" />
+</head>
+<div class="detail">
+    <div class="detail-title">
+        <h2>iPhone 12 Pro Max 256GB I Chính hãng VN/A</h2>
+    </div>
+    <div class="detail-info">
+        @*LEFT*@
+        <div class="detail-info-slide">
+            <div class="detail-info-slide-image">
+                <img src="https://cdn.cellphones.com.vn/media/catalog/product/cache/7/small_image/220x175/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-12_7__6.jpg"></img>
+            </div>
+        </div>
+        @*MID*@
+        <div class="detail-info-right">
+            <div class="detail-info-right-price">
+                <p class="price-box">
+                    <span class="saleprice">20.000.000đ</span>
+                    <span class="old-price">Giá niêm yết : <strong className="price">20.000.000đ</strong> </span>
+                </p>
+                <p class="detail-info-sale">
+                    Sản phẩm thuộc chương trình HOT SALE CUỐI TUẦN - Nhanh tay thanh toán!
+                </p>
+            </div>
+
+            <div class="detail-info-right-buy">
+                <div class="detail-info-right-buy-now">
+                    <a>MUA NGAY</a>
+                    <br></br>
+                    <span>(Giao tận nơi hoặc lấy tại cửa hàng)</span>
+                </div>
+                <div class="detail-info-right-buy-installment">
+                    <a>
+                        <strong>TRẢ GÓP 0%</strong>
+                        <br></br>
+                        <span>(Xét duyệt qua điện thoại)</span>
+                    </a>
+                    <a>
+                        <strong>TRẢ GÓP QUA THẺ</strong>
+                        <br></br>
+                        <span>(Visa, Master, JCB)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        @*RIGHT*@
+        <div class="block-information__box-right">
+            <div class="block-technical-info">
+                <div class="box-title">
+                    <h2 class="box-title__title">Thông số kỹ thuật</h2>
+                </div>
+                <div class="box-content">
+
+                    <table id="tskt text" class="tables">
+                        <tbody class='body-tskt'>
+                            <tr key={index}>
+                                <th class="text-name color">kích thước màn hình</th>
+                                <th class="text-value color">5.4 inches</th>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="tskt text" class="tables">
+                        <tbody class='body-tskt'>
+                            <tr key={index}>
+                                <th class="text-name">Công nghệ màn hình</th>
+                                <th class="text-value">LCD</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="tskt text" class="tables">
+                        <tbody class='body-tskt'>
+                            <tr key={index}>
+                                <th class="text-name color">Dung lượng ram</th>
+                                <th class="text-value color">4 GB</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="tskt text" class="tables">
+                        <tbody class='body-tskt'>
+                            <tr key={index}>
+                                <th class="text-name">Bộ nhớ trong</th>
+                                <th class="text-value">256 GB</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+    </div>
+
+</html>
+
