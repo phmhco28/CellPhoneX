@@ -127,6 +127,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\body.css" />
     <Content Include="Content\footer.css" />
     <Content Include="Content\header.css" />
     <Content Include="Content\images\logo.png" />
