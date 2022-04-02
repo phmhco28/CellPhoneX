@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CellPhoneDB" Class="CellPhoneDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-RO60OD8;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.account" Member="accounts">
+    <Type Name="account">
+      <Column Name="account_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="account_customer" Member="customers" ThisKey="account_id" OtherKey="account_id" Type="customer" />
+      <Association Name="account_employee" Member="employees" ThisKey="account_id" OtherKey="account_id" Type="employee" />
+      <Association Name="role_account" Member="role" ThisKey="role_id" OtherKey="role_id" Type="role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.color" Member="colors">
+    <Type Name="color">
+      <Column Name="color_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="color_name" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="color_product_version" Member="product_versions" ThisKey="color_id" OtherKey="color_id" Type="product_version" />
+    </Type>
+  </Table>
+  <Table Name="dbo.customer" Member="customers">
+    <Type Name="customer">
+      <Column Name="customer_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="customer_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="date_of_birth" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="sex" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="mail" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="registration_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="account_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="customer_customer_comment" Member="customer_comments" ThisKey="customer_id" OtherKey="customer_id" Type="customer_comment" />
+      <Association Name="customer_invoice" Member="invoices" ThisKey="customer_id" OtherKey="customer_id" Type="invoice" />
+      <Association Name="customer_rating" Member="ratings" ThisKey="customer_id" OtherKey="customer_id" Type="rating" />
+      <Association Name="account_customer" Member="account" ThisKey="account_id" OtherKey="account_id" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.customer_comment" Member="customer_comments">
+    <Type Name="customer_comment">
+      <Column Name="customer_comment_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="comment_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="customer_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="version_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="customer_comment_employee_comment" Member="employee_comments" ThisKey="customer_comment_id" OtherKey="customer_comment_id" Type="employee_comment" />
+      <Association Name="customer_customer_comment" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.employee" Member="employees">
+    <Type Name="employee">
+      <Column Name="employee_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="date_of_birth" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="sex" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="id_card" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="mail" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="registration_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="account_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="employee_employee_comment" Member="employee_comments" ThisKey="employee_id" OtherKey="employee_id" Type="employee_comment" />
+      <Association Name="account_employee" Member="account" ThisKey="account_id" OtherKey="account_id" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.employee_comment" Member="employee_comments">
+    <Type Name="employee_comment">
+      <Column Name="employee_comment_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="comment_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="employee_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="customer_comment_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="customer_comment_employee_comment" Member="customer_comment" ThisKey="customer_comment_id" OtherKey="customer_comment_id" Type="customer_comment" IsForeignKey="true" />
+      <Association Name="employee_employee_comment" Member="employee" ThisKey="employee_id" OtherKey="employee_id" Type="employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.invoice" Member="invoices">
+    <Type Name="invoice">
+      <Column Name="invoice_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="invoice_status_pay" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="invoice_confirm" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deliver_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="invoice_invoice_detail" Member="invoice_details" ThisKey="invoice_id" OtherKey="invoice_id" Type="invoice_detail" />
+      <Association Name="customer_invoice" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.invoice_detail" Member="invoice_details">
+    <Type Name="invoice_detail">
+      <Column Name="version_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="invoice_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Association Name="invoice_invoice_detail" Member="invoice" ThisKey="invoice_id" OtherKey="invoice_id" Type="invoice" IsForeignKey="true" />
+      <Association Name="product_version_invoice_detail" Member="product_version" ThisKey="version_id" OtherKey="version_id" Type="product_version" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.phone_brand" Member="phone_brands">
+    <Type Name="phone_brand">
+      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.product" Member="products">
+    <Type Name="product">
+      <Column Name="product_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="release_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="specs_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="product_product_version" Member="product_versions" ThisKey="product_id" OtherKey="product_id" Type="product_version" />
+      <Association Name="phone_brand_product" Member="phone_brand" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="phone_brand" IsForeignKey="true" />
+      <Association Name="spec_product" Member="spec" ThisKey="specs_id" OtherKey="specs_id" Type="spec" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.product_version" Member="product_versions">
+    <Type Name="product_version">
+      <Column Name="version_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="memory_ram" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="memory_internal" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="special_price" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="image" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="product_version_invoice_detail" Member="invoice_details" ThisKey="version_id" OtherKey="version_id" Type="invoice_detail" />
+      <Association Name="product_version_rating" Member="ratings" ThisKey="version_id" OtherKey="version_id" Type="rating" />
+      <Association Name="color_product_version" Member="color" ThisKey="color_id" OtherKey="color_id" Type="color" IsForeignKey="true" />
+      <Association Name="product_product_version" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.rating" Member="ratings">
+    <Type Name="rating">
+      <Column Name="rating_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rating_star" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="version_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="customer_rating" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+      <Association Name="product_version_rating" Member="product_version" ThisKey="version_id" OtherKey="version_id" Type="product_version" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.roles" Member="roles">
+    <Type Name="role">
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="role_name" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="role_account" Member="accounts" ThisKey="role_id" OtherKey="role_id" Type="account" />
+    </Type>
+  </Table>
+  <Table Name="dbo.specs" Member="specs">
+    <Type Name="spec">
+      <Column Name="specs_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="display_size" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="display_type" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="display_resolution" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="display_feature" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="main_camera" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="main_camera_video" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="selfie_camera" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="camera_feature" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="platform_os" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="platform_chipset" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="platform_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="platform_gpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="comms_wlan" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="comms_sound_jack" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="comms_bluetooth" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="comms_usb" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="comms_gps" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="body_size" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="body_weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="body_sim" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="body_build" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="battery_type" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="battery_charging" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="feature_special" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="spec_product" Member="products" ThisKey="specs_id" OtherKey="specs_id" Type="product" />
+    </Type>
+  </Table>
+</Database>
