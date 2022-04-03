@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CellPhoneX.Models.product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/Admin.css" rel="stylesheet" type="text/css" />
+<div class="layout__content">
+    <div class="layout__content-main">
+        <div class="admin-user">
+            <span style="display: flex; padding: 1rem; font-size: 20px; font-weight: 600; color: #6b6b6b;">Customers</span>
+            <div class="admin-user-list" style=" background: white; margin: 0 .5rem 0 1rem; color: #6b6b6b; padding: 1rem; border-radius: 4px; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                <table style=" width: 100%; text-align: left; padding: 1rem;">
+                    <tr style="color: #6b6b6b; font-size: 18px; font-weight: 600; background: #f9f9f9; padding: 0.5rem 0; min-width: 30px;">
+                        <th>
+                            @Html.DisplayNameFor(model => model.product_name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.release_date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.specs_id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.phone_brand_id)
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.product_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.release_date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.specs_id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.phone_brand_id)
+                            </td>
+                            <td>
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.product_id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.product_id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
