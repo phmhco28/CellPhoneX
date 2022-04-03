@@ -1,12 +1,51 @@
 ﻿
 .slide-container {
     /*position: relative;*/
-    margin-top: 80px;
+    margin-top: 0px;
     height: 341px;
 }
 /*.slide-container{
     position: absolute;
 }*/
+.cps-container {
+    margin-top: 80px;
+    height: 370px;
+}
+
+.block-sliding-home__box-left {
+    width: 70%;
+    float: left;
+    height: 100%;
+}
+
+.block-sliding-home__box-right {
+    width: 30%;
+    float: left;
+    height: 341px;
+    padding-left: 13px;
+}
+
+.block-information__box-right_item {
+    height: 32%;
+    width: 100%;
+    background: gray;
+    border-radius: 4px;
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+
+    .block-information__box-right_item img {
+        width: 98%;
+        height: 98%;
+        margin-top: 2px;
+        padding-left: 2px;
+    }
+
+.img-qc {
+    height: 30%;
+    float: left;
+}
+
 .slides img {
     width: 100%;
     height: 340px;
@@ -14,12 +53,13 @@
 
 .slides {
     display: none;
+    cursor: pointer;
 }
 
 /*.prev,  .next {
     cursor: pointer;*/
-    /*position: absolute;*/
-    /*top: 50%;
+/*position: absolute;*/
+/*top: 50%;
     width: auto;
     margin-top: -22px;
     padding: 16px;
@@ -86,7 +126,152 @@
         opacity: 1
     }
 }
-.banner-container >a>img{
+
+.banner-container > a > img {
     width: 100%;
     height: 80px;
 }
+
+.block-hotsale {
+    height: 433px;
+    background: linear-gradient(to bottom, #2D0798, #C114E0);
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+
+.block-hotsale__box-tab-menu {
+    padding-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+    color: white;
+}
+
+.product-hotsale {
+    height: 34px;
+    display: flex;
+    -webkit-box-align: center;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin: 0 1rem 0 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: 1px solid orange;
+    background: #D70018;
+    overflow: hidden;
+    text-decoration: none;
+    border-radius: 1rem;
+}
+
+.lock-hotsale__box-product__sticker-percent {
+    width: 80px;
+    height: 31px;
+    background-image: url(/Content/images/logo.png);
+    background-color: red;
+    left: -4px;
+}
+
+.block-hotsale__box-title {
+    width: 100%;
+    padding: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    height: 55px;
+}
+
+.block-hotsale__box-product {
+    padding-left: 10px;
+    margin-top: 10px;
+    height: 290px;
+    display: flex;
+}
+
+.product-item {
+    width: 228px;
+    height: auto;
+    min-height: 202px;
+    float: left;
+    margin-bottom: 1rem;
+    padding: 1rem 1rem 0 1rem;
+    background: #ffffff;
+}
+
+.block-hotsale__box-product__item__box-img {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    /* margin: 1rem 0; */
+    margin: 2rem 0 1.5rem 0;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+
+.block-hotsale__box-product__item__box-img {
+}
+
+.box-title {
+    margin-top: 10px;
+    padding: 0;
+    background: unset;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+}
+
+.box-title__title {
+    -webkit-box-flex: 1;
+    flex: 1;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 22px;
+    color: #444444;
+    text-decoration: none;
+    float: left;
+}
+
+    .box-title__title > h2 {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 22px;
+        color: #444444;
+        text-align: left;
+        text-transform: uppercase;
+        justify-content: center;
+        align-items: center;
+        margin: 0 1rem 0 0;
+    }
+
+.list-related-tag {
+    display: flex;
+    float: right;
+    flex-wrap: wrap;
+    padding: 0 0 0 0;
+}
+
+    .list-related-tag .item-related-tag {
+        height: 34px;
+        display: flex;
+        -webkit-box-align: center;
+        justify-content: center;
+        align-items: center;
+        float: left;
+        margin: 0 1rem 0 0;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: #444444;
+        border: 1px solid #E5E7EB;
+        background: #F3F4F6;
+        overflow: hidden;
+        text-decoration: none;
+        border-radius: 1rem;
+    }
