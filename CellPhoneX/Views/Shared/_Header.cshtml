@@ -1,5 +1,5 @@
 ﻿<link href="~/Content/header.css" type="text/css" rel="stylesheet" />
-
+@model IEnumerable<CellPhoneX.Models.product>
 @*<div class="header">
         <div class="navbar navbar-fixed-top" >
             <div class="container">
@@ -36,10 +36,27 @@
             <img src="~/Content/images/logo.png" />
         </div>
 
-        <div class="search-bar">
-            <i class="fa fa-search"></i>
-            <input type="search" class="form-control" placeholder="Bạn cần tìm gì?">
-        </div>
+        <form class="form-search">
+            <div class="search-bar">
+                <i class="fa fa-search"></i>
+                <input type="search" class="form-control" placeholder="Bạn cần tìm gì?">
+            </div>
+            <div class="search-box">
+                @*<ul>
+                    <li>
+                        <a>
+                            <div class="phone-image"></div>
+                            <div class="phone-info">
+                                <div class="phone-name"></div>
+                                <div class="phone-price"></div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>*@
+            </div>
+        </form>
+
+        <div id="overlay"></div>
 
         <div class="navbar-menu">
             <ul>
@@ -51,8 +68,52 @@
     </section>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>
-    $('#search-bar').change(function () {
+    
+    @*$(".search-bar").click(function () {
+        $('#overlay').css({display: "block"});
+    })*@
+
+    $('#overlay').click(function () {
+        $('#overlay').css({display: "none" });
+    })
+
+    $(".search-bar").keyup(function () {
+        GetPhone();
+
+        function GetPhone() {
+            var strKey = $(".search-bar").focus().val;
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/Product/SearchPhone",
+                    data: "{PhoneName: '" + strKey + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        var searchBox = $(".search-box");
+                        searchBox.append(
+                            $("<ul></ul>").append(
+                                $.each(result, function (item, phone) {
+                                    $.append(
+                                        $("<li></li>").append(
+                                            $("<li></li>").append(
+                                                $("<a></a>").append(
+                                                    $("<div></div>").append(
+                                                        $("<img/>").attr("src", "~/Content/images/" + phone.image)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                })
+                            )
+                        )
+                        
+                    }
+                })
+        }
 
     })
 </script>
