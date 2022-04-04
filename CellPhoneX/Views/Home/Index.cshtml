@@ -2,37 +2,85 @@
     ViewBag.Title = "Home Page";
 }
 <link href="~/Content/body.css" rel="stylesheet" />
+<section class="cps-section">
+    <div class="std">
+        <div class="cps-container">
+            <div class="block-sliding-home">
+                <div class="block-sliding-home__box-left">
+                    <div class="swiper-container gallery-top swiper-container-initialized swiper-container-horizontal">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="#">
+                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png" />
+                                </a>
 
-<div class="cps-container">
-    <div class="block-sliding-home__box-left">
-        <div class="slide-container">
-            <div class="slides"><img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png"></div>
-            <div class="slides"><img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png"></div>
-            <div class="slides"><img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/S22_uLTRA.png"></div>
-            <div class="slides"><img src="./images/slide4_713_384.jpg"></div>
-        </div>
-        <div class="dot-container" style="text-align: center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-        </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png" />
+                                </a>
 
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png" />
+                                </a>
+
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png" />
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="swiper-container gallery-thumbs swiper-container-initialized swiper-container-horizontal swiper-container-free-mode swiper-container-thumbs">
+                        <div class="swiper-wrapper">
+                            
+                            <div class="swiper-dot " onclick="currentSlide(1)">
+                                GALAXY S22 SERIES
+                                <br />
+                                Ưu đãi hấp dẫn
+                            </div>
+                            <div class="swiper-dot" onclick="currentSlide(2)">
+                                GALAXY S22 SERIES
+                                <br />
+                                Ưu đãi hấp dẫn
+                            </div>
+                            <div class="swiper-dot" onclick="currentSlide(3)">
+                                GALAXY S22 SERIES
+                                <br />
+                                Ưu đãi hấp dẫn
+                            </div>
+                            <div class="swiper-dot" onclick="currentSlide(4)">
+                                GALAXY S22 SERIES
+                                <br />
+                                Ưu đãi hấp dẫn
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="block-sliding-home__box-right">
+                    <a href="#" class="item-banner-right">
+                        <img class="cpslazy loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Xiaomi_buds_3.png" />
+                    </a>
+                    <a href="#" class="item-banner-right">
+                        <img class="cpslazy loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Xiaomi_buds_3.png" />
+                    </a>
+                    <a href="#" class="item-banner-right">
+                        <img class="cpslazy loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Xiaomi_buds_3.png" />
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="block-sliding-home__box-right">
-        <div class="block-information__box-right_item">
-            <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/note_20_ultra.png" />
-        </div>
-        <div class="block-information__box-right_item">
-            <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/note_20_ultra.png" />
-        </div>
-        <div class="block-information__box-right_item">
-            <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/note_20_ultra.png" />
-        </div>
+</section>
 
-    </div>
-
-</div>
 <div class="banner-container">
     <a href="#" rel="nofollow" target="_blank">
         <img alt="#" src="https://cdn.cellphones.com.vn/media/wysiwyg/Banner/1200-75-max.png">
@@ -147,8 +195,8 @@
     // //auto show
     function autoShow() {
         var i;
-        var slides = document.getElementsByClassName("slides");
-        var dots = document.getElementsByClassName("dot");
+        var slides = document.getElementsByClassName("swiper-slide");
+        var dots = document.getElementsByClassName("swiper-dot");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
@@ -156,10 +204,16 @@
         if (slideIndex > slides.length) {
             slideIndex = 1;
         }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].className = slides[i].className.replace(" active", "");
+        }
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex - 1].setAttribute("style", "display: block");
+        
+        slides[slideIndex - 1].className += " active";
+       
         dots[slideIndex - 1].className += " active";
         setTimeout(autoShow, 3000);
     }
@@ -172,8 +226,8 @@
 
     function showSlides(n) {
         var i;
-        var slides = document.getElementsByClassName("slides");
-        var dots = document.getElementsByClassName("dot");
+        var slides = document.getElementsByClassName("swiper-slide");
+        var dots = document.getElementsByClassName("swiper-dot");
         if (n > slides.length) { slideIndex = 1 }
         if (n < 1) { slideIndex = slides.length }
         for (i = 0; i < slides.length; i++) {
@@ -183,6 +237,7 @@
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex - 1].setAttribute("style", "display: block");
+        slides[slideIndex - 1].className += " active";
         dots[slideIndex - 1].className += " active";
     }
 

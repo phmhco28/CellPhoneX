@@ -251,4 +251,11 @@ header.cps-header nav.cps-navbar .cps-container .box-about {
             line-height: 1.2;
             color: #ffffff;
         }
+header.cps-header nav.cps-navbar .cps-navbar__box-main.affix + .clear {
+    padding-top: 64px;
+    background: #D70018;
+}
+.clear{
+    clear: both;
+}
 
