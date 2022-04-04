@@ -1,4 +1,4 @@
-﻿.header {
+﻿/*.header {
     width:100%;
     height:70px;
     background-color: #d70018;
@@ -9,8 +9,8 @@
     margin:0;
     
 }
-
-#overlay {
+*/
+/*#overlay {
     position: fixed;
     display: none;
     width: 100%;
@@ -110,6 +110,145 @@
 
 .navbar-menu li a:hover {
     background-color: #e33b4a;
+}*/
+i{
+    font-style: normal!important;
 }
+input {
+    writing-mode: horizontal-tb !important;
+    
+    text-rendering: auto;
+   
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+   
+    cursor: text;
+   
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+   
+    border-image: initial;
+    
 
+}
+.cps-navbar__box-main.affix {
+    position: fixed;
+    top: 0;
+    z-index: 1000 !important;
+}
+.cps-navbar__box-main {
+    width: 100%;
+    height: 64px;
+    background: #D70018;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+}
+    .cps-navbar__box-main .cps-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 0;
+    }
+    .cps-navbar__box-main .cps-container .box-logo{
+        margin: 0 10px 0 0 !important;
+        height: 30px;
+        float: left;
+    }
+        .cps-navbar__box-main .cps-container .box-logo img{
+            width: 161px;
+            height: 30px;
+        }
+        .cps-navbar__box-main .cps-container .box-logo .form-box-search{
+            margin: 0 15px 0 0;
+            position: relative;
+        }
+        .box-search{
+            position: relative;
+            width: 300px;
+            float:left;
+        }
+        .box-search .cps-group-input{
+            position: relative;
+
+        }
+        .cps-group-input {
+    border-radius: 1rem;
+    -webkit-box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+    box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+}
+        
+        .box-search .cps-group-input .input-group-btn {
+    width: 26px;
+    height: 34px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    float: left;
+    padding: 2px 0 0 9px;
+    background: #ffffff;
+    border-radius: 1rem 0 0 1rem;
+    font-size: 16px;
+    color: #707070;
+    position: relative;
+    z-index: 2;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+            .fas {
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                line-height: 1;
+            }
+            .box-search .cps-group-input .cps-input {
+                width: calc(100% - 26px);
+                padding: 0.5rem 1rem 0.5rem 0.6rem;
+                border: 0;
+                border-radius: 0 1rem 1rem 0 !important;
+                -webkit-box-shadow: none !important;
+                box-shadow: none !important;
+                position: relative;
+                z-index: 2;
+                float: left;
+            }
+            .cps-input {
+                height: 34px;
+                padding: 0.4rem 1rem 0.6rem 1rem;
+                border: 0;
+                outline: none;
+                font-size: 1.2rem;
+            }
+header.cps-header nav.cps-navbar .cps-container .box-about {
+    width: 739px;
+    display: flex;
+    justify-content: space-between;
+}
+    header.cps-header nav.cps-navbar .cps-container .box-about .item-about {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        padding: 3px 5px 3px 5px;
+        border-radius: 10px;
+        text-decoration: none !important;
+        position: relative;
+    }
+        header.cps-header nav.cps-navbar .cps-container .box-about .item-about .about__box-content {
+            font-size: 12px;
+            line-height: 1.2;
+            color: #ffffff;
+        }
 

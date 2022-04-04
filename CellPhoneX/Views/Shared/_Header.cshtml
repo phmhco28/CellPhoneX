@@ -1,35 +1,68 @@
 ﻿<link href="~/Content/header.css" type="text/css" rel="stylesheet" />
 @model IEnumerable<CellPhoneX.Models.product>
-@*<div class="header">
-        <div class="navbar navbar-fixed-top" >
-            <div class="container">
-                <div class="navbar-header" style="background-color: #d70018; color: white">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="~/Home/Index">
-                        <img src="~/Content/images/logo.png" style="width:100%; height:100%"/>
+
+<header class="cps-header">
+    <nav class="cps-navbar">
+        <div class="cps-navbar__box-main affix" data-spy="affix">
+            <div class="cps-container">
+                <div class="box-logo">
+                    <a href="#" title="CellPhoneX">
+                        <img src="~/Content/images/logo.png" />
                     </a>
                 </div>
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Bạn cần tìm gì ..." aria-label="Search" aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
+                <form class="form-box-search">
+                    <div class="box-search">
+                        <div class="cps-group-input">
+                            <div class="input-group-btn">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <input type="text" name="q" id="search" class="cps-input cta-search" placeholder="Bạn cần tìm gì?" maxlength="128" autocomplete="off" />
+                        </div>
+                    </div>
+                </form>
+                <div class="box-about">
+                    <a href="#" class="item-about about-1 about-delivery-tracking cta-tra-cuu-dh">
+                        <div class="about__box-icon">
+                            <img />
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title">
+                                Tra cứu
+                                <br />
+                                đơn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a href="#" class="item-about about-2 about-delivery-tracking gio-hang">
+                        <div class="about__box-icon">
+                            <img />
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title">
+                                Giỏ
+                                <br />
+                                hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a href="#" class="item-about about-3 about-delivery-tracking tai-khoan">
+                        <div class="about__box-icon">
+                            <img />
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title">
+                               Tài
+                                <br />
+                                khoản
+                            </p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>*@
-<div class="header">
+    </nav>
+</header>
+<!--<div class="header">
     <section id="menu">
 
         <div class="logo">
@@ -41,7 +74,7 @@
                 <i class="fa fa-search"></i>
                 <input type="search" class="form-control" placeholder="Bạn cần tìm gì?">
             </div>
-            <div class="search-box">
+            <div class="search-box">-->
                 @*<ul>
                     <li>
                         <a>
@@ -53,7 +86,7 @@
                         </a>
                     </li>
                 </ul>*@
-            </div>
+            <!--</div>
         </form>
 
         <div id="overlay"></div>
@@ -66,7 +99,7 @@
             </ul>
         </div>
     </section>
-</div>
+</div>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>
