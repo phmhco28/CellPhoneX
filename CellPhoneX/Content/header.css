@@ -233,6 +233,8 @@ input {
                 font-size: 1.2rem;
             }
 header.cps-header nav.cps-navbar .cps-container .box-about {
+    margin-left: 15rem;
+    justify-content: space-around;
     width: 739px;
     display: flex;
     justify-content: space-between;
@@ -247,7 +249,7 @@ header.cps-header nav.cps-navbar .cps-container .box-about {
         position: relative;
     }
         header.cps-header nav.cps-navbar .cps-container .box-about .item-about .about__box-content {
-            font-size: 12px;
+            font-size: 17px;
             line-height: 1.2;
             color: #ffffff;
         }
