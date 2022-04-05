@@ -221,6 +221,7 @@
     <Content Include="Content\images\ip13pro-128gb-xanhduong.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\Product.css" />
+    <Content Include="Content\ProductAdmin.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -277,6 +278,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Customer.cshtml" />
     <Content Include="Views\Product\ListProduct.cshtml" />
+    <Content Include="Views\Admin\ProductAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
