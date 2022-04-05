@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CellPhoneDB" Class="CellPhoneDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=ADMIN\SQLEXPRESS;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-RO60OD8;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.account" Member="accounts">
     <Type Name="account">
       <Column Name="account_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -97,6 +97,13 @@
       <Association Name="product_version_invoice_detail" Member="product_version" ThisKey="version_id" OtherKey="version_id" Type="product_version" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.phone_brand" Member="phone_brands">
+    <Type Name="phone_brand">
+      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
+    </Type>
+  </Table>
   <Table Name="dbo.product" Member="products">
     <Type Name="product">
       <Column Name="product_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -124,13 +131,6 @@
       <Association Name="product_version_rating" Member="ratings" ThisKey="version_id" OtherKey="version_id" Type="rating" />
       <Association Name="color_product_version" Member="color" ThisKey="color_id" OtherKey="color_id" Type="color" IsForeignKey="true" />
       <Association Name="product_product_version" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.phone_brand" Member="phone_brands">
-    <Type Name="phone_brand">
-      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
     </Type>
   </Table>
   <Table Name="dbo.rating" Member="ratings">

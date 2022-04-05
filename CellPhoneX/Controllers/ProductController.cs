@@ -19,23 +19,34 @@ namespace CellPhoneX.Controllers
 
 
         [HttpPost]
-        public JsonResult SearchPhone(string keyword)
+        public JsonResult SearchPhone(String keyword)
         {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return Json(null);
+            }
+            var result = new List<Object>();
+            /*List<string> b = new List<string>();*/
             var listResult = data.products.Where(p => p.product_name.Contains(keyword.ToLower())).ToList();
-            var result = new List<product_version>();
             if (listResult == null)
             {
-                return Json(result);
+                return Json(null);
             }
             else
             {
                 listResult = listResult.OrderByDescending(p => p.release_date).Take(5).ToList();
                 foreach (var item in listResult)
                 {
-                    List<product_version> listPhone_version = data.product_versions.Where(p => p.product_id == item.product_id)
+                    var resultPhone_version = data.product_versions.Where(p => p.product_id == item.product_id)
                                                                                    .OrderByDescending(p => p.amount)
-                                                                                   .Take(2).ToList();
-                    product_version resultPhone_version = listPhone_version.First();
+                                                                                   .Take(1).Select(a => new {
+                                                                                       phone_name = a.product.product_name,
+                                                                                       rom = a.memory_internal,
+                                                                                       price = string.Format("{0:0.00}", a.price),
+                                                                                       special_price = a.special_price,
+                                                                                       image = a.image
+                                                                                   });
+                    /*b.Add(resultPhone_version.product.product_name);*/
                     result.Add(resultPhone_version);
                 }
             }

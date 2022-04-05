@@ -111,6 +111,77 @@
 .navbar-menu li a:hover {
     background-color: #e33b4a;
 }*/
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+    margin-top: 64px;
+}
+
+.suggestBox {
+    position: absolute;
+    display: block;
+    width: 300px;
+    margin-top: 1.7rem;
+    background-color: white;
+    box-sizing: border-box;
+    font-size: small;
+    border-radius: 0rem 0 0.5rem 0.5rem;
+}
+
+.data-box {
+    position: relative;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+    .data-box a {
+        text-decoration: none;
+        color: black;
+        font-weight: bolder;
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+    }
+
+.phone-image img {
+    height: 60px;
+    width: 60px;
+}
+
+.phone-info {
+    margin-left: 6px;
+}
+
+.phone-price {
+    display: flex;
+    flex-direction: row;
+    color: red;
+    margin-top: 4px;
+}
+
+.price {
+    font-size: x-small;
+    font-weight: normal;
+    color: black;
+    margin-left: 13px;
+}
+
+
 i{
     font-style: normal!important;
 }
@@ -230,7 +301,7 @@ input {
                 padding: 0.4rem 1rem 0.6rem 1rem;
                 border: 0;
                 outline: none;
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 header.cps-header nav.cps-navbar .cps-container .box-about {
     margin-left: 15rem;

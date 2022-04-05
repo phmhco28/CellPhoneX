@@ -42,11 +42,11 @@
                     <a href="#" class="item-about about-2 about-delivery-tracking gio-hang">
                         <div class="about__box-icon">
                             <img />
-                            <svg xmlns="http://www.w3.org/2000/svg"  color="white" width="30"  height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" color="white" width="30" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                             </svg>
                         </div>
-                        
+
                         <div class="about__box-content">
                             <p class="mb-0 title">
                                 Giỏ
@@ -58,13 +58,13 @@
                     <a href="#" class="item-about about-3 about-delivery-tracking tai-khoan">
                         <div class="about__box-icon">
                             <img />
-                            <svg xmlns="http://www.w3.org/2000/svg" color="white" width="30"  height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" color="white" width="30" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                             </svg>
                         </div>
                         <div class="about__box-content">
                             <p class="mb-0 title">
-                               Tài
+                                Tài
                                 <br />
                                 khoản
                             </p>
@@ -76,6 +76,8 @@
         <div class="clear">
 
         </div>
+        <div id="overlay"></div>
+
     </nav>
 </header>
 <!--<div class="header">
@@ -91,18 +93,18 @@
                 <input type="search" class="form-control" placeholder="Bạn cần tìm gì?">
             </div>
             <div class="search-box">-->
-                @*<ul>
-                    <li>
-                        <a>
-                            <div class="phone-image"></div>
-                            <div class="phone-info">
-                                <div class="phone-name"></div>
-                                <div class="phone-price"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>*@
-            <!--</div>
+@*<ul>
+        <li>
+            <a>
+                <div class="phone-image"></div>
+                <div class="phone-info">
+                    <div class="phone-name"></div>
+                    <div class="phone-price"></div>
+                </div>
+            </a>
+        </li>
+    </ul>*@
+<!--</div>
         </form>
 
         <div id="overlay"></div>
@@ -118,50 +120,67 @@
 </div>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<link href="~/Content/header.css" type="text/css" rel="stylesheet" />
 <script>
-    
-    @*$(".search-bar").click(function () {
+
+    $(".cps-input").click(function () {
         $('#overlay').css({display: "block"});
-    })*@
+    })
 
     $('#overlay').click(function () {
         $('#overlay').css({display: "none" });
     })
 
-    $(".search-bar").keyup(function () {
-        GetPhone();
+    $(".cps-input").blur(function () {
+        $(".suggestBox").remove()
+        $("#search").val("");
+    })
 
-        function GetPhone() {
-            var strKey = $(".search-bar").focus().val;
+    $(".cps-input").keyup(function () {
+        var strKey = $(".cps-input").val();
+        GetPhone(strKey);
+
+        function GetPhone(strKey) {
+            function GetValue(str, data) {
+                var a = ""
+                $.each(data, function (k, val) {
+                    a = val[`${str}`]
+                })
+                return a;
+            }
+
             $.ajax(
                 {
                     type: "POST",
                     url: "/Product/SearchPhone",
-                    data: "{PhoneName: '" + strKey + "'}",
+                    data: "{keyword: '" + strKey + "'}",
                     contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (result) {
-                        var searchBox = $(".search-box");
-                        searchBox.append(
-                            $("<ul></ul>").append(
-                                $.each(result, function (item, phone) {
-                                    $.append(
-                                        $("<li></li>").append(
-                                            $("<li></li>").append(
-                                                $("<a></a>").append(
-                                                    $("<div></div>").append(
-                                                        $("<img/>").attr("src", "~/Content/images/" + phone.image)
-                                                    )
-                                                )
-                                            )
-                                        )
+                    dataType: "json"
+                }).done(function (data) {
+                    $(".suggestBox").remove()
+                    $("<div></div>").addClass("suggestBox").appendTo(".form-box-search")
+                    $("<ul></ul>").addClass("data-box").appendTo(".suggestBox")
+                    $.each(data, function (index, item) {
+                        $("<li></li>").append(
+                            $("<a></a>").attr("href", "#").append(
+                                $("<div></div>").addClass("phone-image").append(
+                                    $("<img/>").attr("src", "Content/images/" + GetValue("image", item))
+                                ),
+                                $("<div></div>").addClass("phone-info").append(
+                                    $("<div></div>").addClass("phone-name").append(GetValue("phone_name", item)),
+                                    $("<div></div>").addClass("phone-price").append(
+                                        $("<div></div>").addClass("specialprice").append(GetValue("special_price", item) + " đ"),
+                                        $("<del></del>").addClass("price").append(GetValue("price", item) + " đ")
                                     )
-                                })
+                                )
                             )
-                        )
-                        
-                    }
-                })
+                        ).appendTo(".data-box")
+                    })
+
+                    @*$.each(data, function (i, item) {
+                        console.log(GetValue("price", item))
+                    })*@
+                });
         }
 
     })
