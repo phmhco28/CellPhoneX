@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CellPhoneX.Models.product_version>
+@{
+    ViewBag.Title = "ListProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="cps-section">
+    <div class="std">
+        <div class="cps-container d-flex flex-column">
+            <div class="block-products products-home mb-3 san-pham-noi-bat">
+                <div class="box-title">
+                    <a href="#" class="box-title__title">
+                        <h2>ĐIỆN THOẠI</h2>
+                    </a>
+
+                    
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="box-product">
+                        <div class="list-product">
+
+                            <div class="item-product">
+                                <div class="item-product__box-img">
+                                    <a href="#" class="img-product">
+                                        <img src="" />
+                                    </a>
+                                </div>
+                                <div class="item-product__sticker-percent">
+                                    <p>Giảm</p>
+                                </div>
+                                <div class="item-product__box-name">
+                                    <a href="#">
+                                        <p></p>
+                                    </a>
+                                </div>
+                                <div class="item-product__box-price">
+                                    <p class="special-price">@item.price</p>
+                                    <p class="old-price">Giá cũ</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="block-banner-sis">
+                <div class="box-title">
+                    <p class="box-title__title" style="font-size: 1.3rem">CHUYÊN TRANG THƯƠNG HIỆU</p>
+                </div>
+                <div class="block-list-banner-sis">
+                    <div class="list-banner-sis">
+                        <a href="https://cellphones.com.vn/apple" class="item-banner-sis"><img class="cpslazy loaded" alt="Sản phẩm Apple chính hãng | Giá ưu đãi, thu cũ đổi mới" data-ll-status="loaded" src="https://cellphones.com.vn/media/icons/banner/banner-sis-apple-homepage.png"></a>
+                        <a href="https://cellphones.com.vn/samsung" class="item-banner-sis"><img class="cpslazy loaded" alt="Mua Samsung chính hãng - Giá tốt nhất tại CellphoneS" data-ll-status="loaded" src="https://cellphones.com.vn/media/icons/banner/banner-sis-samsung-homepage.png"></a>
+                        <a href="https://cellphones.com.vn/asus" class="item-banner-sis"><img class="cpslazy loaded" alt="Mua ASUS chính hãng - Giá tốt nhất tại CellphoneS" data-ll-status="loaded" src="https://cellphones.com.vn/media/icons/banner/banner-sis-asus-homepage.png"></a>
+                        <a href="https://cellphones.com.vn/xiaomi" class="item-banner-sis"><img class="cpslazy loaded" alt="Mua Xiaomi chính hãng - Giá tốt nhất tại CellphoneS" data-ll-status="loaded" src="https://cellphones.com.vn/media/icons/banner/banner-sis-xiaomi-homepage.png"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+

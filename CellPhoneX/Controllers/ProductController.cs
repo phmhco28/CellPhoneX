@@ -11,9 +11,10 @@ namespace CellPhoneX.Controllers
     {
         CellPhoneDBDataContext data = new CellPhoneDBDataContext();
         // GET: Product
-        public ActionResult Index()
+        public ActionResult ListProduct()
         {
-            return View();
+            var all_pro = from ss in data.product_versions select ss;
+            return View(all_pro);
         }
 
 
