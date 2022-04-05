@@ -129,6 +129,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +223,8 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\Product.css" />
     <Content Include="Content\ProductAdmin.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\Signup.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -257,6 +260,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Login_js\main.js" />
+    <Content Include="Scripts\Login_js\popper.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -279,6 +284,10 @@
     <Content Include="Views\Admin\Customer.cshtml" />
     <Content Include="Views\Product\ListProduct.cshtml" />
     <Content Include="Views\Admin\ProductAdmin.cshtml" />
+    <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
