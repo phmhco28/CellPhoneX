@@ -37,8 +37,9 @@
                         @using (Html.BeginForm())
                         {
                             @Html.ValidationSummary(true)
-                            @ViewBag.Notify
+                            
                             <form action="#" class="signin-form">
+                                <p style="color:red; font-weight: bold">@ViewBag.Notify</p>
                                 <div class="form-group mb-3">
                                     <label class="label" for="name">Username</label>
                                     <input type="text" name="username" class="form-control" placeholder="Username" required>

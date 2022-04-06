@@ -68,6 +68,7 @@ namespace CellPhoneX.Controllers
 
         public ActionResult SignIn()
         {
+            Session["TaiKhoan"] = null;
             return View();
         }
 
@@ -90,7 +91,7 @@ namespace CellPhoneX.Controllers
                 }
             }
             ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng !!!";
-            return RedirectToAction("SignIn", "User");
+            return this.SignIn();
         }
 
         public ActionResult SignUp()
@@ -174,5 +175,10 @@ namespace CellPhoneX.Controllers
             return RedirectToAction("Index", "User");
         }
 
+        public ActionResult Logout()
+        {
+
+            return RedirectToAction("SignIn", "User");
+        }
     }
 }

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<CellPhoneX.Models.Giohang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/cart.css" rel="stylesheet" />
+<div id="__layout">
+    <div class="mb-3">
+        <div class="cart-header d-flex align-items-center justify-content-center">
+            <div class="go-back">
+                <a class="d-flex align-items-center">
+                    @* icon*@
+                    <p> Trở về</p>
+                </a>
+            </div>
+            <p class="title m-auto">Giỏ hàng</p>
+        </div>
+        @*Lap*@
+        @foreach (var item in Model)
+        {
+            <div class="container mt-3 mb-2">
+                <div class="product-item mb-3 block-box">
+                    <div class="product-item__info d-flex">
+                        <div class="product-item__image">
+                            <img src="~/Content/images/@item.image" />
+                        </div>
+                        <div class="product-item__info-detail">
+                            <p class="product-name">@item.namePro</p>
+                            <div class="product-item__price d-flex align-items-end">
+                                <p class="special-price">@item.special_price</p>
+                                <p class="price">@item.price</p>
+                                <span class="onsale">Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %</span>
+                            </div>
+                            <div class="item-action mt-2">
+                                <div class="change-quantity d-flex align-items-end mt-2">
+                                    <p>Chọn số lượng</p>
+                                    <div class="number d-flex">
+                                        <span class="minus d-flex justify-content-center align-items-center">-</span>
+                                        <input id="amount" type="text" min="1" value="@item.amount">
+                                        <span class="plus d-flex justify-content-center align-items-center">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="bottom-bar container mt-auto block-box">
+            <div class="total-box d-flex justify-content-between align-items-start">
+                <p class="title-temp">
+                    Tổng tiền tạm tính:
+                </p>
+                <div class="price d-flex flex-column align-items-end">
+                    <span class="total">@String.Format("{0:0,0}", ViewBag.Tongtien)&nbsp;₫</span>
+                </div>
+            </div>
+            <div class="btn-submit mt-2">
+                <button class="btn btn-danger d-flex flex-column justify-content-center align-items-center w-100 mb-2">
+                    Tiến hành đặt hàng
+                </button>
+                <a href="@Url.Action("ListProduct","Product")" class="btn btn-outline-danger d-flex flex-column justify-content-center align-items-center w-100">
+                    Chọn thêm sản phẩm khác
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script language='javascript' type='text/javascript'>
+  $(document).ready(function(){
+    $(".minus").click(function(){
+      if($('#amount').val() !="1"){
+        var $n = $("#amount");
+        $n.val(Number($n.val())-1);
+        var value = $n.val();
+        $("#amount").val(value );
+       }
+    });
+
+    $(".plus").click(function(){
+      if($('#amount').val() !="max"){
+        var $n = $("#amount");
+        $n.val(Number($n.val())+1);
+        var value = $n.val();
+        $("#amount").val(value);
+      }
+    });
+  });
+</script>
+
