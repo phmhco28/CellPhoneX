@@ -1,0 +1,85 @@
+﻿@model CellPhoneX.Models.customer
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>THÔNG TIN TÀI KHOẢN</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.customer_name)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.customer_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_of_birth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_of_birth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registration_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.account_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.customer_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
