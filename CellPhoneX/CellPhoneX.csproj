@@ -130,6 +130,7 @@
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,7 +208,8 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
-    <Content Include="Content\Admin.css" />
+    <Content Include="Content\Admin\css\sb-admin-2.css" />
+    <Content Include="Content\Admin\css\sb-admin-2.min.css" />
     <Content Include="Content\body.css" />
     <Content Include="Content\cart.css" />
     <Content Include="Content\DetailProduct.css" />
@@ -223,7 +225,9 @@
     <Content Include="Content\images\ip13pro-128gb-xam.jpg" />
     <Content Include="Content\images\ip13pro-128gb-xanhduong.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\Login.css" />
     <Content Include="Content\Product.css" />
+    <Content Include="Content\Signup.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -259,6 +263,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\validate.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -283,6 +288,9 @@
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
     <Content Include="Views\GioHang\GioHang.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
