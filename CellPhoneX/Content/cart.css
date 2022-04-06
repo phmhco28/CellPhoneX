@@ -157,6 +157,7 @@ img {
     font-weight: 700;
     font-size: 16px;
     color: #D70018;
+<<<<<<< HEAD
 }
 .product-item .delete-item {
     position: absolute;
@@ -174,3 +175,6 @@ img {
         background: #D70018;
         
     }
+=======
+}
+>>>>>>> Admin-UI
