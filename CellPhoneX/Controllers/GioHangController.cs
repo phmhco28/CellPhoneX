@@ -29,24 +29,14 @@ namespace CellPhoneX.Controllers
             {
                 sanpham = new Giohang(id);
                 lst.Add(sanpham);
-<<<<<<< HEAD
                 return RedirectToAction("ListProduct", "Product");
-=======
-                return Redirect(strURL);
->>>>>>> Admin-UI
             }
             else
             {
                 sanpham.amount++;
-<<<<<<< HEAD
                 return RedirectToAction("ListProduct", "Product");
             }
-
-=======
-                return Redirect(strURL);
-            }
            
->>>>>>> Admin-UI
         }
         private double Tongtien()
         {
@@ -67,10 +57,9 @@ namespace CellPhoneX.Controllers
         }
         public ActionResult GioHangPartial()
         {
-<<<<<<< HEAD
-
+            
             ViewBag.Tongtien = Tongtien();
-
+            
             return PartialView();
         }
         public ActionResult XoaGiohang(string id)
@@ -200,20 +189,9 @@ namespace CellPhoneX.Controllers
             return View();
         }
 
-=======
-            
-            ViewBag.Tongtien = Tongtien();
-            
-            return PartialView();
-        }
->>>>>>> Admin-UI
         public ActionResult Index()
         {
             return View();
         }
-<<<<<<< HEAD
-    }  
-=======
     }
->>>>>>> Admin-UI
 }

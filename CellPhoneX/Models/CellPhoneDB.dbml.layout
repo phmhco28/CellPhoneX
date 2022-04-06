@@ -2,7 +2,6 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 16.875" name="CellPhoneDB">
   <DataContextMoniker Name="/CellPhoneDBDataContext" />
   <nestedChildShapes>
-<<<<<<< HEAD
     <classShape Id="ce544d9c-5d52-4248-8c8a-126dbdeedf6f" absoluteBounds="3.5, 7.375, 2, 1.5785953776041675">
       <DataClassMoniker Name="/CellPhoneDBDataContext/account" />
       <nestedChildShapes>
@@ -85,211 +84,74 @@
       <DataClassMoniker Name="/CellPhoneDBDataContext/spec" />
       <nestedChildShapes>
         <elementListCompartment Id="713aad09-21c9-4c97-8e6f-ca2e05f16882" absoluteBounds="0.765, 11.46, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-=======
-    <classShape Id="9945249c-4f6d-45c9-8f47-04f9135edf4f" absoluteBounds="3.5, 7.375, 2, 1.5785953776041675">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/account" />
-      <nestedChildShapes>
-        <elementListCompartment Id="4db96b57-9ee9-424b-b97b-c16ccb0832cd" absoluteBounds="3.515, 7.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="16d3dc67-ac87-44a9-897e-fcf66f43b69b" absoluteBounds="3.5, 1, 2, 1.3862939453125">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/color" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6c5e70b3-975c-4118-81c2-63ea73d6fda9" absoluteBounds="3.515, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="26547a21-2953-47a0-b6c0-b0b72f7268c3" absoluteBounds="6.25, 6.875, 2, 2.5401025390625005">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/customer" />
-      <nestedChildShapes>
-        <elementListCompartment Id="a94241ba-8a3c-4ac4-9d03-ac8467e2897d" absoluteBounds="6.265, 7.335, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="0b115759-e6bc-4c01-a826-233be13a9fb9" absoluteBounds="9, 7.25, 2, 1.7708968098958327">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/customer_comment" />
-      <nestedChildShapes>
-        <elementListCompartment Id="f05a9f60-cc29-44ed-b3c4-596693238f94" absoluteBounds="9.015, 7.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="9653c39f-a815-428e-bcfa-5a8bd39412fe" absoluteBounds="6.25, 13.625, 2, 2.7324039713541666">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/employee" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c2facff2-3618-474c-8fae-dc8dbb525090" absoluteBounds="6.265, 14.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="80ae994f-c10f-4a3f-be58-77fa79bd71cd" absoluteBounds="11.75, 10.875, 2, 1.7708968098958344">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/employee_comment" />
-      <nestedChildShapes>
-        <elementListCompartment Id="83757274-440c-49e7-a2c5-73b3c6a8153b" absoluteBounds="11.765, 11.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="49018bee-f22a-498d-883f-78eef5a8f0e1" absoluteBounds="6.25, 10.5, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/invoice" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0243fae6-3ea5-4f8c-9197-9023fb70b103" absoluteBounds="6.265, 10.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="fa583ee7-5854-4b24-a3be-e7676ad8f656" absoluteBounds="9, 3.875, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/invoice_detail" />
-      <nestedChildShapes>
-        <elementListCompartment Id="125c074c-5b55-4716-925d-10c959f10009" absoluteBounds="9.015, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="5b39d708-87cd-46dc-8f1f-ac1b36a9cf09" absoluteBounds="0.75, 4, 2, 1.1939925130208335">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/phone_brand" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6128b3ea-7394-4843-9d8c-0acf2558e25b" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="81bdbced-5430-40f8-bee9-b62d9103984a" absoluteBounds="3.5, 3.75, 2, 1.7708968098958327">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/product" />
-      <nestedChildShapes>
-        <elementListCompartment Id="1e6beb8c-4fba-476b-808d-14f630f6ab5f" absoluteBounds="3.515, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="edff0ef3-a3f5-4ee1-828d-cc899662abe3" absoluteBounds="6.25, 3.375, 2, 2.5401025390625">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/product_version" />
-      <nestedChildShapes>
-        <elementListCompartment Id="431a10c9-da1f-4adf-b65d-58dde77536d8" absoluteBounds="6.265, 3.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="d787a12c-c80f-4f50-9c97-b3df7ee02b04" absoluteBounds="9, 0.75, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/rating" />
-      <nestedChildShapes>
-        <elementListCompartment Id="2b76730d-211c-461b-b289-954b36e2a1ae" absoluteBounds="9.015, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="17ac1708-5fc5-47bb-970e-b66e8ea06e2e" absoluteBounds="0.75, 7.625, 2, 1.1939925130208353">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/role" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7680d0f7-39f0-4ae8-8c3f-fe55142f1003" absoluteBounds="0.765, 8.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="80abc20d-b6f3-4647-8868-e9f98c121afe" absoluteBounds="0.75, 11, 2, 5.6169254557291666">
-      <DataClassMoniker Name="/CellPhoneDBDataContext/spec" />
-      <nestedChildShapes>
-        <elementListCompartment Id="835674f5-aea0-4349-997e-f6e0751958e3" absoluteBounds="0.765, 11.46, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
->>>>>>> Admin-UI
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(5.5 : 8.16429768880208); (6.25 : 8.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/account/account_customer" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="ce544d9c-5d52-4248-8c8a-126dbdeedf6f" />
         <classShapeMoniker Id="e0d320b1-e55c-408b-a947-2ed865c09f35" />
-=======
-        <classShapeMoniker Id="9945249c-4f6d-45c9-8f47-04f9135edf4f" />
-        <classShapeMoniker Id="26547a21-2953-47a0-b6c0-b0b72f7268c3" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 8.13544840494792); (8.54166666666667 : 8.13544840494792 : JumpStart); (8.70833333333333 : 8.13544840494792 : JumpEnd); (9 : 8.13544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer/customer_customer_comment" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="e0d320b1-e55c-408b-a947-2ed865c09f35" />
         <classShapeMoniker Id="43eb8b28-af41-4010-9e65-3d6574de49c2" />
-=======
-        <classShapeMoniker Id="26547a21-2953-47a0-b6c0-b0b72f7268c3" />
-        <classShapeMoniker Id="0b115759-e6bc-4c01-a826-233be13a9fb9" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(4.5 : 8.95359537760417); (4.5 : 14.9912019856771); (6.25 : 14.9912019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/account/account_employee" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="ce544d9c-5d52-4248-8c8a-126dbdeedf6f" />
         <classShapeMoniker Id="bf77f69e-c5be-4721-8089-f9b1fb41dc4e" />
-=======
-        <classShapeMoniker Id="9945249c-4f6d-45c9-8f47-04f9135edf4f" />
-        <classShapeMoniker Id="9653c39f-a815-428e-bcfa-5a8bd39412fe" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(10 : 9.02089680989583); (10 : 11.7604484049479); (11.75 : 11.7604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer_comment/customer_comment_employee_comment" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="43eb8b28-af41-4010-9e65-3d6574de49c2" />
         <classShapeMoniker Id="8a854aa4-8c92-436e-a896-cd49c1eaa847" />
-=======
-        <classShapeMoniker Id="0b115759-e6bc-4c01-a826-233be13a9fb9" />
-        <classShapeMoniker Id="80ae994f-c10f-4a3f-be58-77fa79bd71cd" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 14.9912019856771); (12.75 : 14.9912019856771); (12.75 : 12.6458968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/employee/employee_employee_comment" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="bf77f69e-c5be-4721-8089-f9b1fb41dc4e" />
         <classShapeMoniker Id="8a854aa4-8c92-436e-a896-cd49c1eaa847" />
-=======
-        <classShapeMoniker Id="9653c39f-a815-428e-bcfa-5a8bd39412fe" />
-        <classShapeMoniker Id="80ae994f-c10f-4a3f-be58-77fa79bd71cd" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(7.25 : 9.4151025390625); (7.25 : 10.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer/customer_invoice" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="e0d320b1-e55c-408b-a947-2ed865c09f35" />
         <classShapeMoniker Id="af834935-0a11-4af4-ba0c-6de91b139553" />
-=======
-        <classShapeMoniker Id="26547a21-2953-47a0-b6c0-b0b72f7268c3" />
-        <classShapeMoniker Id="49018bee-f22a-498d-883f-78eef5a8f0e1" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 10.5); (8.625 : 10.125); (8.625 : 4.66429768880208); (8.72916666666667 : 4.66429768880208 : JumpStart); (8.89583333333333 : 4.66429768880208 : JumpEnd); (9 : 4.66429768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/invoice/invoice_invoice_detail" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="af834935-0a11-4af4-ba0c-6de91b139553" />
         <classShapeMoniker Id="6577ac36-6e2a-44dc-ba94-a5aab44ffd47" />
-=======
-        <classShapeMoniker Id="49018bee-f22a-498d-883f-78eef5a8f0e1" />
-        <classShapeMoniker Id="fa583ee7-5854-4b24-a3be-e7676ad8f656" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.59699625651042); (3.5 : 4.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/CellPhoneDBDataContext/phone_brand/phone_brand_product" />
-      <nodes>
-        <classShapeMoniker Id="5b39d708-87cd-46dc-8f1f-ac1b36a9cf09" />
-        <classShapeMoniker Id="81bdbced-5430-40f8-bee9-b62d9103984a" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 4.20714884440104); (8.72916666666667 : 4.20714884440104 : JumpStart); (8.89583333333333 : 4.20714884440104 : JumpEnd); (9 : 4.20714884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/product_version/product_version_invoice_detail" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="09b4f458-af73-4049-bf70-d8cd8ad92697" />
         <classShapeMoniker Id="6577ac36-6e2a-44dc-ba94-a5aab44ffd47" />
-=======
-        <classShapeMoniker Id="edff0ef3-a3f5-4ee1-828d-cc899662abe3" />
-        <classShapeMoniker Id="fa583ee7-5854-4b24-a3be-e7676ad8f656" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 1.69314697265625); (7.25 : 1.69314697265625); (7.25 : 3.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/color/color_product_version" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="a07e09e0-4f5a-4b5a-9fd3-7703458a67bd" />
         <classShapeMoniker Id="09b4f458-af73-4049-bf70-d8cd8ad92697" />
-=======
-        <classShapeMoniker Id="16d3dc67-ac87-44a9-897e-fcf66f43b69b" />
-        <classShapeMoniker Id="edff0ef3-a3f5-4ee1-828d-cc899662abe3" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 4.63544840494792); (6.25 : 4.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/product/product_product_version" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="82e5a774-200e-4af1-a318-690a2a5e1d19" />
         <classShapeMoniker Id="09b4f458-af73-4049-bf70-d8cd8ad92697" />
       </nodes>
@@ -299,58 +161,34 @@
       <nodes>
         <classShapeMoniker Id="ae3127a9-cf84-4d42-b942-2ceb7d2b0179" />
         <classShapeMoniker Id="82e5a774-200e-4af1-a318-690a2a5e1d19" />
-=======
-        <classShapeMoniker Id="81bdbced-5430-40f8-bee9-b62d9103984a" />
-        <classShapeMoniker Id="edff0ef3-a3f5-4ee1-828d-cc899662abe3" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 6.93653746153846); (8.56607443490112 : 6.62046302663734 : JumpStart); (8.68392556509888 : 6.50261189643958 : JumpEnd); (8.8125 : 6.37403746153846); (8.8125 : 1.63544840494792); (9 : 1.63544840494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer/customer_rating" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="e0d320b1-e55c-408b-a947-2ed865c09f35" />
         <classShapeMoniker Id="33bb745b-89a9-4ae9-bd9f-5f75a782a087" />
-=======
-        <classShapeMoniker Id="26547a21-2953-47a0-b6c0-b0b72f7268c3" />
-        <classShapeMoniker Id="d787a12c-c80f-4f50-9c97-b3df7ee02b04" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(7.7812525 : 3.375); (7.7812525 : 2.10702189127604); (8.72916666666667 : 2.10702189127604 : JumpStart); (8.89583333333333 : 2.10702189127604 : JumpEnd); (9 : 2.10702189127604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/product_version/product_version_rating" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="09b4f458-af73-4049-bf70-d8cd8ad92697" />
         <classShapeMoniker Id="33bb745b-89a9-4ae9-bd9f-5f75a782a087" />
-=======
-        <classShapeMoniker Id="edff0ef3-a3f5-4ee1-828d-cc899662abe3" />
-        <classShapeMoniker Id="d787a12c-c80f-4f50-9c97-b3df7ee02b04" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 8.22199625651042); (3.04166666666667 : 8.22199625651042 : JumpStart); (3.20833333333333 : 8.22199625651042 : JumpEnd); (3.5 : 8.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/role/role_account" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="bb2fe7d2-32c6-4d1a-bffa-99a513efe457" />
         <classShapeMoniker Id="ce544d9c-5d52-4248-8c8a-126dbdeedf6f" />
-=======
-        <classShapeMoniker Id="17ac1708-5fc5-47bb-970e-b66e8ea06e2e" />
-        <classShapeMoniker Id="9945249c-4f6d-45c9-8f47-04f9135edf4f" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 11.0015374615385); (3.125 : 10.6265374615385); (3.125 : 5.09019853320313); (3.5 : 5.09019853320313)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/spec/spec_product" />
       <nodes>
-<<<<<<< HEAD
         <classShapeMoniker Id="40fdd55b-de3c-43f5-bb85-36ee4fc3911e" />
         <classShapeMoniker Id="82e5a774-200e-4af1-a318-690a2a5e1d19" />
-=======
-        <classShapeMoniker Id="80abc20d-b6f3-4647-8868-e9f98c121afe" />
-        <classShapeMoniker Id="81bdbced-5430-40f8-bee9-b62d9103984a" />
->>>>>>> Admin-UI
       </nodes>
     </associationConnector>
   </nestedChildShapes>
