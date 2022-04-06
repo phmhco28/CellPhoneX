@@ -6,6 +6,16 @@ img {
     border: 0;
     vertical-align: top;
 }
+.box-product .list-product .item-product .item-product__sticker-percent p {
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 0;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+}
 .header-overlay {
     visibility: hidden;
     position: fixed;
@@ -425,6 +435,8 @@ section.cps-section .block-sliding-home .block-sliding-home__box-left .gallery-t
             top: 0px;
             position: absolute;
             left: -4px;
+            border-bottom-right-radius: 30px;
+            border-top-right-radius: 4px;
         }
 .box-product .list-product .item-product .item-product__box-name a {
     color: #444444;
@@ -593,4 +605,9 @@ section.cps-section .block-banner-sis .block-list-banner-sis .list-banner-sis .i
     section.cps-section .block-banner-sis .block-list-banner-sis .list-banner-sis .item-banner-sis img {
         width: 100%;
         height: 100%;
+    }
+    section.cps-section .block-detail-product .box-detail-product .detail-product__box-center {
+        width: calc(100% - 420px);
+        float: left;
+        padding-left: 20px;
     }

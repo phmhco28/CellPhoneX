@@ -13,10 +13,17 @@ namespace CellPhoneX.Controllers
         // GET: Product
         public ActionResult ListProduct()
         {
-            var all_pro = from ss in data.product_versions select ss;
+            var all_pro = data.product_versions.ToList();
+           
             return View(all_pro);
+            
         }
-
+        public ActionResult Detail(string id)
+        {   
+            var D_Phone = data.product_versions.Where(m => m.product_id == id).First();
+            return View(D_Phone);            
+        }
+      
 
         [HttpPost]
         public JsonResult SearchPhone(String keyword)

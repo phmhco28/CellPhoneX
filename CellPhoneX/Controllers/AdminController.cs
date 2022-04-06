@@ -17,10 +17,5 @@ namespace CellPhoneX.Controllers
         {
             return View();
         }
-
-        public ActionResult ProductAdmin()
-        {
-            return View();
-        }
     }
 }
