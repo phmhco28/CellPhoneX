@@ -61,21 +61,14 @@ namespace CellPhoneX.Controllers
                 customer.phone_number = phone;
                 UpdateModel(customer);
                 data.SubmitChanges();
-<<<<<<< HEAD
                 return RedirectToAction("Index","User");
-=======
-                return RedirectToAction("Index", "User");
->>>>>>> Validation
             }
             return this.Edit(id);
         }
 
         public ActionResult SignIn()
         {
-<<<<<<< HEAD
             Session["TaiKhoan"] = null;
-=======
->>>>>>> Validation
             return View();
         }
 
@@ -98,11 +91,8 @@ namespace CellPhoneX.Controllers
                 }
             }
             ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng !!!";
-<<<<<<< HEAD
             return this.SignIn();
-=======
-            return RedirectToAction("SignIn", "User");
->>>>>>> Validation
+
         }
 
         public ActionResult SignUp()
@@ -186,13 +176,10 @@ namespace CellPhoneX.Controllers
             return RedirectToAction("Index", "User");
         }
 
-<<<<<<< HEAD
         public ActionResult Logout()
         {
 
             return RedirectToAction("SignIn", "User");
         }
-=======
->>>>>>> Validation
     }
 }
