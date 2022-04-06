@@ -47,6 +47,7 @@ namespace CellPhoneX.Controllers
                     var resultPhone_version = data.product_versions.Where(p => p.product_id == item.product_id)
                                                                                    .OrderByDescending(p => p.amount)
                                                                                    .Take(1).Select(a => new {
+                                                                                       /*id = a.version_id,*/
                                                                                        phone_name = a.product.product_name,
                                                                                        rom = a.memory_internal,
                                                                                        price = string.Format("{0:0.00}", a.price),

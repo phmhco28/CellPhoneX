@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿@model CellPhoneX.Models.account
+=======
+﻿
+@model CellPhoneX.Models.account
+>>>>>>> Validation
 @{
     ViewBag.Title = "SignIn";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,9 +42,14 @@
                         @using (Html.BeginForm())
                         {
                             @Html.ValidationSummary(true)
+<<<<<<< HEAD
                             
                             <form action="#" class="signin-form">
                                 <p style="color:red; font-weight: bold">@ViewBag.Notify</p>
+=======
+                            @ViewBag.Notify
+                            <form action="#" class="signin-form">
+>>>>>>> Validation
                                 <div class="form-group mb-3">
                                     <label class="label" for="name">Username</label>
                                     <input type="text" name="username" class="form-control" placeholder="Username" required>
@@ -77,3 +87,8 @@
 <script src="~/Scripts/Login_js/popper.js"></script>
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> Validation
