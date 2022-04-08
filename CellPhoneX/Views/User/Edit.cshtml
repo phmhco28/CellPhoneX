@@ -1,0 +1,106 @@
+﻿@model CellPhoneX.Models.customer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/EditUser.css" rel="stylesheet" type="text/css" />
+
+@*@using (Html.BeginForm())*@
+
+@Html.AntiForgeryToken()
+
+@* <div class="form-horizontal">
+        <h4>customer</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.customer_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.customer_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.customer_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.customer_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.date_of_birth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.date_of_birth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.date_of_birth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sex, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.phone_number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+<div     style="background: bisque;">
+    <form id="msform">
+        <!-- progressbar -->
+        <ul id="progressbar">
+            @* <li class="active">Account Setup</li>
+                <li>Social Profiles</li>
+                <li>Personal Details</li>*@
+        </ul>
+        <!-- fieldsets -->
+        <fieldset>
+            <h2 class="fs-title">Edit your account</h2>
+            <input placeholder="Name" name="name" @Html.EditorFor(model => model.customer_name)
+            <input type="date" name="Date of birth" placeholder="Password" @Html.EditorFor(model => model.date_of_birth)
+            <div style="display: flex; padding: 10px 75px; display: flex; margin-left: -5rem">
+                <input style="cursor:pointer" type="radio" name="Male" id="sexer" @Html.EditorFor(model => model.sex) Male
+                <input style="cursor:pointer" type="radio" name="Female" id="sexer" @Html.EditorFor(model => model.sex) Female
+            </div>
+            <input type="text" name="Address" placeholder="Address" @Html.EditorFor(model => model.address)
+            <input type="email" name="email" placeholder="Mail" @Html.EditorFor(model => model.mail)
+            <input type="text" name="Phone" placeholder="Phone" @Html.EditorFor(model => model.phone_number)
+            <input type="submit" name="submit" class="submit action-button" value="Save" style="text-align:center" />
+
+        </fieldset>
+
+    </form>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

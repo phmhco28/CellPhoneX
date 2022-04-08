@@ -1,0 +1,86 @@
+﻿.container-fluid {
+    position: relative;
+    display: block;
+    width: 80%;
+    margin: 50px auto;
+    border: 0.5px solid #999;
+    border-radius: 10px;
+    padding: 2em;
+    .form-container
+
+{
+    border-right: 0.5px solid #999;
+    padding: 2em;
+    .section-header
+
+{
+    font-weight: bold;
+    margin-bottom: 2em;
+    font-size: 1.25em;
+}
+
+.inline-form {
+    display: inline-block;
+    width: 44%;
+    margin-right: 2em;
+    margin-bottom: 2em;
+}
+
+.sex-form {
+    display: block
+}
+
+.radio-inline {
+    margin-left: 0.5em;
+    margin-right: 1.5em;
+}
+
+}
+.btn-submit {
+    position: relative;
+    top: 2em;
+    left: 75%;
+    padding: 1em 2em;
+    background-color: #4990E2;
+    color: #fff;
+}
+
+}
+
+.helper-container {
+    padding: 2em;
+    .page
+
+{
+    display: inline-block;
+    list-style-image: none;
+    font-size: 1.5em;
+    margin-right: 1.25em;
+    color: #555;
+}
+
+.active {
+    color: #4990E2;
+    border: 3px solid #4990E2;
+    border-radius: 50%;
+    padding: 0.5em 1em;
+}
+
+.helper-details {
+    margin: 35% auto;
+    text-align: center;
+    .helper-header
+
+{
+    font-size: 1.25em;
+    margin-bottom: 1.25em;
+}
+
+.helper-text {
+    border-top: 0.5px solid #555;
+    padding: 0.5em;
+}
+
+}
+}
+}

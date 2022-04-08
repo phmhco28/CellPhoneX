@@ -4,11 +4,53 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/UserIndex.css" rel="stylesheet" type="text/css"/>
+<div class="container-fluid" style="background: linear-gradient(50deg, #f3c680, hsla(179,54%,76%,1));">
+    <div class="row">
+        <div class="form-container col-sm-8">
+            <h2 class="section-header">Personal Information @Html.DisplayFor(model => model.customer_name)</h2>
+            <form>
+                <div class="form-group inline-form">
+                    <strong for="Name">Họ và Tên:</strong> @Html.DisplayFor(model => model.customer_name)
+                </div>
+                <div class="form-group inline-form">
+                    <strong for="dob">Ngày sinh: </strong>@Html.DisplayFor(model => model.date_of_birth)
+                </div>
+                <div class="form-group inline-form">
+                    <strong for="Address">Địa chủ: </strong> @Html.DisplayFor(model => model.address)
+                </div>
+                <div class="form-group inline-form select-gender">
+                    <strong class="sex-form" for="sex">Giới tính: </strong> @Html.DisplayFor(model => model.sex)
+                </div>
+                <div class="form-group inline-form">
+                    <strong for="email">Email: </strong> @Html.DisplayFor(model => model.mail)
+                </div>
+                <div class="form-group inline-form">
+                    <strong for="phone">Số điện thoại: </strong> @Html.DisplayFor(model => model.phone_number)
+                </div>
+                
+            </form>
+        </div>
+        <div class="helper-container col-sm-4">
+           @* <nav class="pagination">
+                <ul class="page-nav">
+                    <li class="page active">1</li>
+                    <li class="page">2</li>
+                    <li class="page">3</li>
+                    <li class="page">4</li>
+                    <li class="page">5</li>
+                </ul>
+            </nav>*@
+            <div class="helper-details">
+                <div class="helper-header">Personal Information</div>
+                <p class="helper-text">Thank you for using CellPhoneX.</p>
+            </div>
+        </div>
+    </div>
 
-<h2>THÔNG TIN TÀI KHOẢN</h2>
-
-<div>
-    <h4>@Html.DisplayFor(model => model.customer_name)</h4>
+</div>
+@*<div>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -76,10 +118,10 @@
         </dd>
 
     </dl>
-</div>
+</div>*@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.customer_id }) |
-    @Html.ActionLink("Back to List", "Index")
+     @Html.ActionLink("Back to List", "Index")
 </p>
 
 
