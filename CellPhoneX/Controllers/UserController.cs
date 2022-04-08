@@ -92,7 +92,6 @@ namespace CellPhoneX.Controllers
             }
             ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng !!!";
             return this.SignIn();
-
         }
 
         public ActionResult SignUp()
