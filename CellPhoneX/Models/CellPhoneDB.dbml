@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CellPhoneDB" Class="CellPhoneDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-RO60OD8;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ADMIN\SQLEXPRESS;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.account" Member="accounts">
     <Type Name="account">
       <Column Name="account_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -77,8 +77,8 @@
   <Table Name="dbo.invoice" Member="invoices">
     <Type Name="invoice">
       <Column Name="invoice_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="invoice_status_pay" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Column Name="invoice_confirm" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="invoice_status_pay" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="invoice_confirm" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
       <Column Name="order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="deliver_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
@@ -95,13 +95,6 @@
       <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Association Name="invoice_invoice_detail" Member="invoice" ThisKey="invoice_id" OtherKey="invoice_id" Type="invoice" IsForeignKey="true" />
       <Association Name="product_version_invoice_detail" Member="product_version" ThisKey="version_id" OtherKey="version_id" Type="product_version" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.phone_brand" Member="phone_brands">
-    <Type Name="phone_brand">
-      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
     </Type>
   </Table>
   <Table Name="dbo.product" Member="products">
@@ -123,7 +116,7 @@
       <Column Name="color_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="memory_ram" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
       <Column Name="memory_internal" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
-      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="special_price" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="image" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -131,6 +124,13 @@
       <Association Name="product_version_rating" Member="ratings" ThisKey="version_id" OtherKey="version_id" Type="rating" />
       <Association Name="color_product_version" Member="color" ThisKey="color_id" OtherKey="color_id" Type="color" IsForeignKey="true" />
       <Association Name="product_product_version" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.phone_brand" Member="phone_brands">
+    <Type Name="phone_brand">
+      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
     </Type>
   </Table>
   <Table Name="dbo.rating" Member="ratings">
@@ -178,6 +178,7 @@
       <Column Name="battery_type" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="battery_charging" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="feature_special" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Association Name="spec_product" Member="products" ThisKey="specs_id" OtherKey="specs_id" Type="product" />
     </Type>
   </Table>

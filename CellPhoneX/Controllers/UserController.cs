@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using CellPhoneX.Models;
@@ -61,7 +63,7 @@ namespace CellPhoneX.Controllers
                 customer.phone_number = phone;
                 UpdateModel(customer);
                 data.SubmitChanges();
-                return RedirectToAction("Index","User");
+                return RedirectToAction("Index", "User");
             }
             return this.Edit(id);
         }
@@ -77,21 +79,26 @@ namespace CellPhoneX.Controllers
         {
             var username = collection["username"];
             var pass = collection["password"];
-            account acc = data.accounts.SingleOrDefault(p => p.username == username && p.password == pass);
+            customer acc = data.customers.SingleOrDefault(p => p.account.username == username && p.account.password == pass);
             if (acc != null)
             {
+
                 Session["TaiKhoan"] = acc;
-                if (acc.role_id == 1)
+                if (acc.account.role_id == 1)
                 {
                     return RedirectToAction("Index", "Admin");
                 }
                 else
                 {
+
                     return RedirectToAction("Index", "Home");
+
                 }
             }
             ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng !!!";
+
             return this.SignIn();
+
         }
 
         public ActionResult SignUp()
@@ -168,16 +175,54 @@ namespace CellPhoneX.Controllers
                     customer.account_id = acc.account_id;
                     data.customers.InsertOnSubmit(customer);
                     data.SubmitChanges();
-                    return RedirectToAction("SignIn");
+                    try
+                    {
+                        var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
+                        var receiverEmail = new MailAddress(email, "Receiver");
+                        var password = "NQT290701";
+                        var sub = "Hello";
+                        var body = "Register Success";
+
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderEmail.Address, password)
+                        };
+                        using (var mess = new MailMessage(senderEmail, receiverEmail)
+                        {
+                            Subject = sub,
+                            Body = body,
+
+                        })
+                        {
+                            smtp.Send(mess);
+                        }
+                        return RedirectToAction("ConfirmSignup", "User");
+
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.Error = "Some Error";
+                    }
                 }
+
+                return RedirectToAction("ConfirmSignup", "User");
             }
 
             return RedirectToAction("Index", "User");
         }
+        public ActionResult ConfirmSignup()
+        {
+            return View();
+        }
 
         public ActionResult Logout()
         {
-
+            Session.Clear();
             return RedirectToAction("SignIn", "User");
         }
     }

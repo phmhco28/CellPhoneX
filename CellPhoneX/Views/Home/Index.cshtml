@@ -1,6 +1,7 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model IEnumerable<CellPhoneX.Models.product_version>
+@{ ViewBag.Title = "Home Page";
+                var list = (List<phone_brand>)ViewBag.listPro; }
+@using CellPhoneX.Models
 <link href="~/Content/body.css" rel="stylesheet" />
 <section class="cps-section">
     <div class="std">
@@ -9,6 +10,7 @@
                 <div class="block-sliding-home__box-left">
                     <div class="swiper-container gallery-top swiper-container-initialized swiper-container-horizontal">
                         <div class="swiper-wrapper">
+
                             <div class="swiper-slide">
                                 <a href="#">
                                     <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png" />
@@ -94,128 +96,93 @@
 
                     <div class="box-related-tag">
                         <div class="list-related-tag" style="height: 34px">
-                            <a href="#" class="item-related-tag">Apple</a>
-                            <a href="#" class="item-related-tag">Samsung</a>
-                            <a href="#" class="item-related-tag">Xiaomi</a>
-                            <a href="#" class="item-related-tag">Oppo</a>
-                            <a href="#" class="item-related-tag">Realme</a>
-                            <a href="#" class="item-related-tag">Nokia</a>
-                            <a href="#" class="item-related-tag">Asus</a>
-                            <a href="#" class="item-related-tag">Vivo</a>
+                            @foreach (var br in list)
+                            {
+                <a href="#" class="item-related-tag">@br.phone_brand_name</a>}
+
+                            @*<a href="#" class="item-related-tag">Samsung</a>
+                                <a href="#" class="item-related-tag">Xiaomi</a>
+                                <a href="#" class="item-related-tag">Oppo</a>
+                                <a href="#" class="item-related-tag">Realme</a>
+                                <a href="#" class="item-related-tag">Nokia</a>
+                                <a href="#" class="item-related-tag">Asus</a>
+                                <a href="#" class="item-related-tag">Vivo</a>*@
                             <a href="@Url.Action("ListProduct","Product")" class="item-related-tag">Xem tất cả</a>
                         </div>
                     </div>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div class="item-product">
-                            <div class="item-product__box-img">
-                                <a href="#" class="img-product">
-                                    <img src="" />
-                                </a>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a href="#">
-                                    <p>Name</p>
-                                </a>
-                            </div>
-                            <div class="item-product__more-info text-stock">
-                                <p>Sắp về hàng</p>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price">Giá khuyến mãi</p>
-                            </div>
+                        @foreach (var item in Model)
+                        {
+                            if (item.price == 0)
+                            {
+            <div class="item-product">
+                <div class="item-product__box-img">
+                    <a href="#" class="img-product">
+                        <img src="~/Content/images/@item.image" />
+                    </a>
+                </div>
+                <div class="item-product__box-name">
+                    <a href="#">
+                        <p>@item.product.product_name</p>
+                    </a>
+                </div>
+                <div class="item-product__more-info text-stock">
+                    <p>Sắp về hàng</p>
+                </div>
+                <div class="item-product__box-price">
+                    <p class="special-price">@item.special_price</p>
+                </div>
+            </div> }
+        else if (item.amount > 0)
+        {
+<div class="item-product">
+    <div class="item-product__box-img">
+        <a href="#" class="img-product">
+            <img src="~/Content/images/@item.image" />
+        </a>
+    </div>
+    <div class="item-product__sticker-percent">
+        <p>
+            Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %
+        </p>
+    </div>
+    <div class="item-product__box-name">
+        <a href="#">
+            <p>@item.product.product_name</p>
+        </a>
+    </div>
+    <div class="item-product__box-price">
+        <p class="special-price">@item.special_price</p>
+        <p class="old-price">@item.price</p>
+    </div>
+</div> } @* else
+    {
+        <div class="item-product">
+            <div class="item-product__box-img">
+                <a href="#" class="img-product">
+                    <img src="~/Content/images/@item.image" />
+                </a>
+            </div>
+            <div class="item-product__sticker-percent">
+                <p>Giảm</p>
+            </div>
+            <div class="item-product__box-name">
+                <a href="#">
+                    <p>Name</p>
+                </a>
+            </div>
+            <div class="item-product__box-price">
+                <p class="special-price">Giá khuyến mãi</p>
+                <p class="old-price">Giá cũ</p>
+            </div>
 
-                        </div>
-                        <div class="item-product">
-                            <div class="item-product__box-img">
-                                <a href="#" class="img-product">
-                                    <img src="" />
-                                </a>
-                            </div>
-                            <div class="item-product__sticker-percent">
-                                <p>Giảm</p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a href="#">
-                                    <p>Name</p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price">Giá khuyến mãi</p>
-                                <p class="old-price">Giá cũ</p>
-                            </div>
+        </div>
+    }*@}
 
-                        </div>
-                        <div class="item-product">
-                            <div class="item-product__box-img">
-                                <a href="#" class="img-product">
-                                    <img src="" />
-                                </a>
-                            </div>
-                            <div class="item-product__sticker-percent">
-                                <p>Giảm</p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a href="#">
-                                    <p>Name</p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price">Giá khuyến mãi</p>
-                                <p class="old-price">Giá cũ</p>
-                            </div>
-                            <div class="promotion">
-                               <p class="gift-cont">
-                                    Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
-                               </p>
-                            </div>
-                        </div>
-                        <div class="item-product">
-                            <div class="item-product__box-img">
-                                <a href="#" class="img-product">
-                                    <img src="" />
-                                </a>
-                            </div>
-                            <div class="item-product__sticker-percent">
-                                <p>Giảm</p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a href="#">
-                                    <p>Name</p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price">Giá khuyến mãi</p>
-                                <p class="old-price">Giá cũ</p>
-                            </div>
 
-                        </div>
-                        <div class="item-product">
-                            <div class="item-product__box-img">
-                                <a href="#" class="img-product">
-                                    <img src="" />
-                                </a>
-                            </div>
-                            <div class="item-product__sticker-percent">
-                                <p>Giảm</p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a href="#">
-                                    <p>Name</p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price">Giá khuyến mãi</p>
-                                <p class="old-price">Giá cũ</p>
-                            </div>
-                            <div class="promotion">
-                                <p class="gift-cont">
-                                    Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
-                                </p>
-                            </div>
-                        </div>
-                        <div class="item-product">
+                        <!--<div class="item-product">
                             <div class="item-product__box-img">
                                 <a href="#" class="img-product">
                                     <img src="" />
@@ -282,7 +249,75 @@
                                     Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
                                 </p>
                             </div>
-                        </div>                       
+                        </div>
+                        <div class="item-product">
+                            <div class="item-product__box-img">
+                                <a href="#" class="img-product">
+                                    <img src="" />
+                                </a>
+                            </div>
+                            <div class="item-product__sticker-percent">
+                                <p>Giảm</p>
+                            </div>
+                            <div class="item-product__box-name">
+                                <a href="#">
+                                    <p>Name</p>
+                                </a>
+                            </div>
+                            <div class="item-product__box-price">
+                                <p class="special-price">Giá khuyến mãi</p>
+                                <p class="old-price">Giá cũ</p>
+                            </div>
+                            <div class="promotion">
+                                <p class="gift-cont">
+                                    Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item-product">
+                            <div class="item-product__box-img">
+                                <a href="#" class="img-product">
+                                    <img src="" />
+                                </a>
+                            </div>
+                            <div class="item-product__sticker-percent">
+                                <p>Giảm</p>
+                            </div>
+                            <div class="item-product__box-name">
+                                <a href="#">
+                                    <p>Name</p>
+                                </a>
+                            </div>
+                            <div class="item-product__box-price">
+                                <p class="special-price">Giá khuyến mãi</p>
+                                <p class="old-price">Giá cũ</p>
+                            </div>
+
+                        </div>
+                        <div class="item-product">
+                            <div class="item-product__box-img">
+                                <a href="#" class="img-product">
+                                    <img src="" />
+                                </a>
+                            </div>
+                            <div class="item-product__sticker-percent">
+                                <p>Giảm</p>
+                            </div>
+                            <div class="item-product__box-name">
+                                <a href="#">
+                                    <p>Name</p>
+                                </a>
+                            </div>
+                            <div class="item-product__box-price">
+                                <p class="special-price">Giá khuyến mãi</p>
+                                <p class="old-price">Giá cũ</p>
+                            </div>
+                            <div class="promotion">
+                                <p class="gift-cont">
+                                    Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
+                                </p>
+                            </div>
+                        </div>
                         <div class="item-product">
                             <div class="item-product__box-img">
                                 <a href="#" class="img-product">
@@ -327,18 +362,18 @@
                                         <li class="pmh-title">PMH</li>
                                         <li class="pmh-content">250.000 ₫</li>
                                     </ul>
-                                </div>
-                                @*<p class="coupon-discount">
-                                    Bảo hành tiêu chuẩn 18 tháng + bảo hành thay thế màn hình 6 tháng
-                                </p>*@
-                            </div>
-                        </div>
+                                </div>-->
+                        @*<p class="coupon-discount">
+                                Bảo hành tiêu chuẩn 18 tháng + bảo hành thay thế màn hình 6 tháng
+                            </p>*@
+                        <!--</div>
+                        </div>-->
                     </div>
                 </div>
             </div>
             <div class="block-banner-sis">
                 <div class="box-title">
-                    <p class="box-title__title"style="font-size: 1.3rem">CHUYÊN TRANG THƯƠNG HIỆU</p>
+                    <p class="box-title__title" style="font-size: 1.3rem">CHUYÊN TRANG THƯƠNG HIỆU</p>
                 </div>
                 <div class="block-list-banner-sis">
                     <div class="list-banner-sis">
@@ -348,7 +383,7 @@
                         <a href="https://cellphones.com.vn/xiaomi" class="item-banner-sis"><img class="cpslazy loaded" alt="Mua Xiaomi chính hãng - Giá tốt nhất tại CellphoneS" data-ll-status="loaded" src="https://cellphones.com.vn/media/icons/banner/banner-sis-xiaomi-homepage.png"></a>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -388,9 +423,9 @@
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex - 1].setAttribute("style", "display: block");
-        
+
         slides[slideIndex - 1].className += " active";
-       
+
         dots[slideIndex - 1].className += " active";
         setTimeout(autoShow, 3000);
     }

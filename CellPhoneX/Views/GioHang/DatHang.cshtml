@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CellPhoneX.Models.Giohang>
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using CellPhoneX.Models
+<h2 style="text-align: center">Thông tin đặt hàng </h2>
+@{
+    customer kh = (customer)Session["TaiKhoan"];
+
+}
+<table align="center">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height:40px">
+            <td>Ho ten khac hang:</td>
+            <td style="font-weight:bold">@kh.customer_name</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Email:</td>
+            <td style="font-weight:bold">@kh.mail</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Dia chi:</td>
+            <td style="font-weight:bold">@kh.address</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Dien thoai:</td>
+            <td style="font-weight:bold">@kh.phone_number</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ngay Dat:</td>
+            <td style="font-weight:bold">@DateTime.Now.ToShortDateString()</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ngay Giao:</td>
+            <td style="font-weight:bold">
+                <input type="date" name="NgayGiao" />
+                <p style="color:red">@ViewBag.messageEx</p>
+            </td>
+
+        </tr>
+        <tr style="height:40px">
+            <td style="font-weight:bold">
+                <input type="submit" value="Xac nhan" class="btn btn-success" />
+            </td>
+        </tr>
+    }
+</table>
