@@ -19,33 +19,301 @@
                     <div class="list-product">
                         @foreach (var item in Model)
                         {
-            <div class="item-product">
-                <div class="item-product__box-img">
-                    <a href="@Url.Action("Detail","Product", new { id = item.product_id })" class="img-product">
-                        <img src="~/Content/images/@item.image" style="width: 100%; height:100%" />
-                    </a>
-                </div>
-                <div class="item-product__sticker-percent">
-                    @if (item.amount == 0)
-                    {
-                        <p>Hết hàng</p>
-                    }
-                    else if (item.price > 0)
-                    {
-    <p> Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %</p>}
 
-                </div>
-                <div class="item-product__box-name">
-                    <a href="#">
-                        <p>@item.product.product_name</p>
-                    </a>
-                </div>
-                <div class="item-product__box-price">
-                    <p class="special-price">@item.special_price đ</p>
-                    <p class="old-price">@item.price đ</p>
-                </div>
+                            if (item.price == 0 && item.special_price == 0)
+                            {
+                    <div class="item-product">
+                        <div class="item-product__box-img">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
+                                <img src="~/Content/images/@item.image" />
+                            </a>
+                        </div>
+                        <div class="item-product__box-name">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
+                                <p>@item.product.product_name</p>
+                            </a>
+                        </div>
+                        <div class="item-product__more-info text-stock">
+                            <p>Hàng mới</p>
+                        </div>
 
-            </div>}
+                    </div> }
+                else if (item.price == 0)
+                {
+                    <div class="item-product">
+                        <div class="item-product__box-img">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
+                                <img src="~/Content/images/@item.image" />
+                            </a>
+                        </div>
+                        <div class="item-product__box-name">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
+                                <p>@item.product.product_name</p>
+                            </a>
+                        </div>
+                        <div class="item-product__more-info text-stock">
+                            <p>Sắp về hàng</p>
+                        </div>
+                        <div class="item-product__box-price">
+                            <p class="special-price">@item.special_price</p>
+                        </div>
+                    </div> }
+                else if (item.amount > 0)
+                {
+                    <div class="item-product">
+                        <div class="item-product__box-img">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
+                                <img src="~/Content/images/@item.image" />
+                            </a>
+                        </div>
+                        <div class="item-product__sticker-percent">
+                            <p>
+                                Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %
+                            </p>
+                        </div>
+                        <div class="item-product__box-name">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
+                                <p>@item.product.product_name</p>
+                            </a>
+                        </div>
+                        <div class="item-product__box-price">
+                            <p class="special-price">@item.special_price</p>
+                            <p class="old-price">@item.price</p>
+                        </div>
+                    </div> }
+                else if (item.amount == 0)
+                {
+                    <div class="item-product">
+                        <div class="item-product__box-img">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
+                                <img src="~/Content/images/@item.image" />
+                            </a>
+                        </div>
+                        <div class="item-product__sticker-percent">
+                            <p>
+                                Hết hàng
+                            </p>
+                        </div>
+                        <div class="item-product__box-name">
+                            <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
+                                <p>@item.product.product_name</p>
+                            </a>
+                        </div>
+                        <div class="item-product__box-price">
+                            <p class="special-price">@item.special_price</p>
+                            <p class="old-price">@item.price</p>
+                        </div>
+                    </div> } @* else
+    {
+        <div class="item-product">
+            <div class="item-product__box-img">
+                <a href="#" class="img-product">
+                    <img src="~/Content/images/@item.image" />
+                </a>
+            </div>
+            <div class="item-product__sticker-percent">
+                <p>Giảm</p>
+            </div>
+            <div class="item-product__box-name">
+                <a href="#">
+                    <p>Name</p>
+                </a>
+            </div>
+            <div class="item-product__box-price">
+                <p class="special-price">Giá khuyến mãi</p>
+                <p class="old-price">Giá cũ</p>
+            </div>
+
+        </div>
+    }*@}
+
+
+                        <!--<div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+        <div class="promotion">
+            <p class="gift-cont">
+                Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
+            </p>
+        </div>
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+        <div class="promotion">
+            <p class="gift-cont">
+                Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
+            </p>
+        </div>
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+        <div class="promotion">
+            <p class="gift-cont">
+                Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
+            </p>
+        </div>
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+        <div class="promotion">
+            <p class="gift-cont">
+                Gói dịch vụ ưu tiên cao cấp và phòng chờ hạng thương gia
+            </p>
+        </div>
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+
+    </div>
+    <div class="item-product">
+        <div class="item-product__box-img">
+            <a href="#" class="img-product">
+                <img src="" />
+            </a>
+        </div>
+        <div class="item-product__sticker-percent">
+            <p>Giảm</p>
+        </div>
+        <div class="item-product__box-name">
+            <a href="#">
+                <p>Name</p>
+            </a>
+        </div>
+        <div class="item-product__box-price">
+            <p class="special-price">Giá khuyến mãi</p>
+            <p class="old-price">Giá cũ</p>
+        </div>
+        <div class="promotion">
+            <div class="promo-list">
+                <ul>
+                    <li class="pmh-title">PMH</li>
+                    <li class="pmh-content">250.000 ₫</li>
+                </ul>
+            </div>-->
+                        @*<p class="coupon-discount">
+            Bảo hành tiêu chuẩn 18 tháng + bảo hành thay thế màn hình 6 tháng
+        </p>*@
+                        <!--</div>
+    </div>-->
                     </div>
                 </div>
 

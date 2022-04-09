@@ -119,12 +119,12 @@
                             {
             <div class="item-product">
                 <div class="item-product__box-img">
-                    <a href="#" class="img-product">
+                    <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
                         <img src="~/Content/images/@item.image" />
                     </a>
                 </div>
                 <div class="item-product__box-name">
-                    <a href="#">
+                    <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
                         <p>@item.product.product_name</p>
                     </a>
                 </div>
@@ -139,7 +139,7 @@
         {
 <div class="item-product">
     <div class="item-product__box-img">
-        <a href="#" class="img-product">
+        <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
             <img src="~/Content/images/@item.image" />
         </a>
     </div>
@@ -149,7 +149,7 @@
         </p>
     </div>
     <div class="item-product__box-name">
-        <a href="#">
+        <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
             <p>@item.product.product_name</p>
         </a>
     </div>

@@ -289,7 +289,6 @@ section.cps-section .block-detail-product .box-detail-product .detail-product__b
     padding: 5px 3px;
     border-radius: 1rem;
     background: #ffffff;
-    border: 1px solid #D1D5DB;
     text-align: center;
     font-size: 10px;
     overflow: hidden;
@@ -360,3 +359,6 @@ section.cps-section .block-detail-product .box-detail-product .detail-product__b
         section.cps-section .block-detail-product .box-detail-product .detail-product__box-center .box-action-button .action-button strong {
             font-size: 16px;
         }
+.swiper-slide-visible.active{
+    border: 1px solid #D70018;
+}

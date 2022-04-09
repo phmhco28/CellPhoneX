@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<CellPhoneX.Models.Giohang>
 @{ ViewBag.Title = "GioHang";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+@using CellPhoneX.Models
 <link href="~/Content/cart.css" rel="stylesheet" />
 <div id="__layout">
     <div class="mb-3">
@@ -16,7 +17,7 @@
         @*Lap*@
         @foreach (var item in Model)
         {
-<div class="container mt-3 mb-2">
+<div class="container mt-3 mb-2 productitem" data-idPro="@item.proId">
     <div class="product-item mb-3 block-box">
         <div class="product-item__info d-flex">
             <div class="product-item__image">
@@ -34,10 +35,10 @@
                         <p>Chọn số lượng</p>
                         <div class="number d-flex">
                             <span class="minus d-flex justify-content-center align-items-center">-</span>
-                            <input id="amount" name="amount" type="text" min="1" value="@item.amount">
+                            <input id="amount" name="amount" type="text" min="1" value="@item.amount" data-idhh="@item.proId">
                             <span class="plus d-flex justify-content-center align-items-center">+</span>
                         </div>
-                        <p>Số lượng còn: </p>
+                        <p>Số lượng còn: @ViewBag.amountIn </p>
                     </div>
                 </div>
             </div>
@@ -68,24 +69,65 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script language='javascript' type='text/javascript'>
    $(document).ready(function () {
 
-
        $("#btn-delete").click(function () {
-            var versionId = $(".detailProduct").attr("data-idPro");
+           var versionId = $(".productitem").attr("data-idPro");
+           $.ajax({
+               type: "Get",
+               url: "/GioHang/XoaGiohang",
+               data: { id: versionId },
+               success: function (value) {
+                   location.reload();
+               }
+           })
+       });
+       $(".minus").click(function () {
+           if ($('#amount').val() != "1") {
+               var $n = $("#amount");
+               $n.val(Number($n.val()) - 1);
+               var value = $n.val();
+               $("#amount").val(value);
+                $.ajax({
+                   url: 'GioHang/CapNhatgiohang',
+                   type: 'POST',
+                   data: {
+                       id: $(this).attr('data-idhh'),
+                       amount: value
+                   },
+                    success: function () {
+                        location.reload();
+                            
+                           
+                   }
+               });
+       }
+       });
 
-            $.ajax({
-                type: "POST",
-                url: "/GioHang/AddProductAjax",
-                data: { id: versionId },
-                success: function (value) {
-
-                    $('#items-in-cart').text(value);
-
-                }
-            })
-        })
+       $(".plus").click(function () {
+           if ($('#amount').val() != "max") {
+               var $n = $("#amount");
+               $n.val(Number($n.val()) + 1);
+               var value = $n.val();
+               $("#amount").val(value);
+               $.ajax({
+                   url: 'GioHang/CapNhatgiohang',
+                   type: 'POST',
+                   data: {
+                       id: $("#amount").attr('data-idhh'),
+                       amount: parseInt($(value))
+                   },
+                   success: function () {
+                       location.reload();
+                       
+                   }
+               });
+           }
+       });
     });
 </script>
+
+
 

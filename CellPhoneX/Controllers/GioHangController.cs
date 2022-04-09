@@ -55,9 +55,10 @@ namespace CellPhoneX.Controllers
             if (sanpham != null)
             {
                 lst.RemoveAll(n => n.proId == id);
-                return RedirectToAction("Giohang");
+                /*return RedirectToAction("Giohang");*/
             }
-            return RedirectToAction("Giohang");
+            Session["count"] = TongSOluong();
+            return Content(Session["count"].ToString());
         }
         public ActionResult CapNhatgiohang(string id, FormCollection collection)
         {
@@ -67,16 +68,21 @@ namespace CellPhoneX.Controllers
             if (sanpham != null)
             {
                 product_version pro = dt.product_versions.FirstOrDefault(n => n.product_id == id);
+                ViewBag.amountIn = pro.amount;
                 int amount = int.Parse(collection["amount"].ToString());
                 if (amount > pro.amount)
                 {
                     Session["Message"] = "Không đủ số lượng";
-                    return RedirectToAction("Giohang");
+                    
                 }
-                sanpham.amount = amount;
+                else
+                {
+                    sanpham.amount = amount;
+                }
+                
             }
 
-            return RedirectToAction("Giohang");
+            return Content("123");
         }
         [HttpGet]
         public ActionResult DatHang()
@@ -141,7 +147,7 @@ namespace CellPhoneX.Controllers
             {
                 var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
                 var receiverEmail = new MailAddress(kh.mail, "Receiver");
-                var password = "NQT290701";
+                var password = "";
                 var sub = "Hello";
                 var body = "Đơn hàng đã được xác nhận";
                 var smtp = new SmtpClient

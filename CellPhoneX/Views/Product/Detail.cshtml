@@ -23,7 +23,7 @@
                 <div class="box-gallery">
                     <div class="swiper-container gallery-main swiper-container-initialized swiper-container-horizontal">
                         @*<img src="~/Content/images/@Model.image" />*@
-                        <div id="product-mob-images" class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-840px, 0px, 0px);">
+                        <div id="product-mob-images" class="swiper-wrapper" >
                             @foreach (var item in listI)
                             {
                 <div class="swiper-slide item-gallery swiper-slide-duplicate" data-swiper-slide-index="26" style="width: 400px; margin-right: 20px;">
@@ -41,11 +41,12 @@
                     </div>
                     <div class="swiper-container gallery-thumbs swiper-container-initialized swiper-container-horizontal swiper-container-free-mode swiper-container-thumbs">
                         <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+
                             @foreach (var itim in listI)
                             {
-                <div class="swiper-slide item-thumb main-thumb disable swiper-slide-visible " style="margin-right: 10px;">
-                    <img class="swiper-lazy swiper-lazy-loaded" alt="" title="iPhone 11 64GB I Chính hãng VN/A " src="~/Content/images/@itim.image">
-                </div>}
+                                <div class="swiper-slide item-thumb main-thumb disable swiper-slide-visible" style="margin-right: 10px;" onclick="currentSlide(@listI.IndexOf(itim))">
+                                    <img class="swiper-lazy swiper-lazy-loaded" src="~/Content/images/@itim.image">
+                                </div>}
 
 
                         </div>
@@ -64,7 +65,7 @@
                     <div class="list-linked">
                         @foreach (var item in listI)
                         {
-            <a href="#" class="item-linked linked-1">
+            <a href="@Url.Action("Detail","Product", new {id = item.version_id })" class="item-linked linked-1">
                 <strong>@item.memory_internal </strong>
                 <span>@item.special_price</span>
             </a>}
@@ -80,17 +81,17 @@
                             <div class="box-content">
                                 @*lay list để truyền các màu có cùng id product*@
                                 <ul class="list-colors">
-                                  @*  @foreach (var itm in listI)
+                                    @foreach (var itm in listI)
                                     {
                         <li class="item-color" data-id="@itm.version_id">
-                            <a href="#" class="swatch-link ">
+                            <a href="@Url.Action("Detail","Product", new { id = itm.version_id })" class="swatch-link ">
                                 <img src="~/Content/images/@itm.image" class="cpslazy loaded" />
                                 <p>
                                     <strong>@itm.color.color_name</strong>
                                     <span>@itm.special_price</span>
                                 </p>
                             </a>
-                        </li>}*@
+                        </li>}
 
                                 </ul>
                             </div>
@@ -133,17 +134,17 @@
                 }
             })
         })
-       @* $(".item-color").click(function () {
-            var versionId = $(".block-detail").attr("data-idDetail");
+      @* $(".item-color").click(function () {
+            var versionId = $(this).attr("data-id");
             
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/Product/Detail",
                 data: { id: versionId },
                 success: function (value) {
-
-                    alert('oke');
-
+                    location.reload();*@
+                    
+@*
                 }
             })
         })*@
@@ -152,11 +153,14 @@
     
 </script>
 
-@*<script>
+<script>
+
+</script>
+@**@<script>
         var slideIndex = 0;
         // showSlides(slideIndex);
 
-        autoShow();
+       
 
         // // Next/previous controls
         function prevSlide(n) {
@@ -164,52 +168,30 @@
         }
 
         // //auto show
-        function autoShow() {
-            var i;
-            var slides = document.getElementsByClassName("swiper-slide");
-            var dots = document.getElementsByClassName("swiper-dot");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].className = slides[i].className.replace(" active", "");
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].setAttribute("style", "display: block");
-
-            slides[slideIndex - 1].className += " active";
-
-            dots[slideIndex - 1].className += " active";
-
-        }
+        
 
         // // Thumbnail image controls
         function currentSlide(n) {
             showSlides(slideIndex = n);
-        }
+    }
+    
 
 
         function showSlides(n) {
             var i;
-            var slides = document.getElementsByClassName("swiper-slide");
-            var dots = document.getElementsByClassName("swiper-dot");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
+            var slides = document.getElementsByClassName("swiper-slide-duplicate");
+            var dots = document.getElementsByClassName("swiper-slide-visible");
+            if (n > slides.length) { slideIndex = 0 }
+            if (n < 0) { slideIndex = slides.length }
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
-            slides[slideIndex - 1].setAttribute("style", "display: block");
-            slides[slideIndex - 1].className += " active";
-            dots[slideIndex - 1].className += " active";
+            slides[slideIndex ].setAttribute("style", "display: flex");
+            slides[slideIndex ].className += " active";
+            dots[slideIndex ].className += " active";
         }
 
-    </script>*@
+    </script>

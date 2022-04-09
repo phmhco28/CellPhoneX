@@ -179,7 +179,7 @@ namespace CellPhoneX.Controllers
                     {
                         var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
                         var receiverEmail = new MailAddress(email, "Receiver");
-                        var password = "NQT290701";
+                        var password = "";
                         var sub = "Hello";
                         var body = "Register Success";
 

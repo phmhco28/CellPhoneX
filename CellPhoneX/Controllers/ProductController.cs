@@ -20,10 +20,8 @@ namespace CellPhoneX.Controllers
         }
         public ActionResult Detail(string id)
         {
-            var D_Phone = data.product_versions.Where(m => m.product_id == id).First();
-            var list = data.product_versions.GroupBy(m=>m.memory_internal,
-                                                    (key,p) => new { name = key,
-                                                     AVGPrice = p.Max(n=>n.price)}).ToList();
+            var D_Phone = data.product_versions.Where(m => m.version_id == id).First();
+            var list = data.product_versions.Where(p=>p.product_id == D_Phone.product_id).ToList();
             
             ViewBag.listProDetail = list;
             return View(D_Phone);
