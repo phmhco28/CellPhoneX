@@ -56,15 +56,8 @@
                             <span id="items-in-cart">@Session["count"]</span>
                         </div>
                     </a>
-                    <a href="@Url.Action("Index","User")" class="item-about about-3 about-delivery-tracking tai-khoan">
-                        @if (Session["TaiKhoan"] != null)
-                        {
-            <div class="about__box-content">
-
-                <a href="@Url.Action("Logout","User")">Log off</a>
-            </div> }
-                        else
-                        {
+                    <a href="@Url.Action("SignIn","User")" class="item-about about-3 about-delivery-tracking tai-khoan">
+                        
             <div class="about__box-icon">
                 <img />
                 <svg xmlns="http://www.w3.org/2000/svg" color="white" width="30" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -77,7 +70,7 @@
                                     <br />
                                     Khoản
                                 </p>
-                            </div>}
+                            </div>
 
                     </a>
                 </div>

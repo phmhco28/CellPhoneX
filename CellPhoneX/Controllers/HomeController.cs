@@ -18,6 +18,11 @@ namespace CellPhoneX.Controllers
             return View(phone);
 
         }
+        public ActionResult Member()
+        {
+            
+            return View();
+        }
 
 
     }

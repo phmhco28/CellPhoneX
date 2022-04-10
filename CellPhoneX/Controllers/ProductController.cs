@@ -22,6 +22,8 @@ namespace CellPhoneX.Controllers
         {
             var D_Phone = data.product_versions.Where(m => m.version_id == id).First();
             var list = data.product_versions.Where(p=>p.product_id == D_Phone.product_id).ToList();
+            var list2 = data.customer_comments.Where(p => p.version_id == id).ToList();
+            ViewBag.listCom = list2;
             
             ViewBag.listProDetail = list;
             return View(D_Phone);
@@ -192,6 +194,24 @@ namespace CellPhoneX.Controllers
         {
             var colorPhone = data.product_versions.FirstOrDefault(p => p.color_id == id);
             return Content("");
+        }
+        public ActionResult AddComment(string comment, string vsId)
+        {
+            customer kh = (customer)Session["TaiKhoan"];
+            if (kh == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            customer_comment cm = new customer_comment();
+            cm.customer_comment_id = Nanoid.Nanoid.Generate(size: 10);
+            cm.version_id = vsId;
+            cm.customer_id = kh.customer_id;
+
+            cm.content = comment;
+            cm.comment_date = DateTime.Now;
+            data.customer_comments.InsertOnSubmit(cm);
+            data.SubmitChanges();
+            return RedirectToAction("Detail", new { id = vsId });
         }
     }
 }

@@ -16,10 +16,12 @@ namespace CellPhoneX.Controllers
         public ActionResult Index()
         {
             account acc = (account)Session["TaiKhoan"];
-            if (acc == null || acc.role_id != 2)
+           
+           if (acc == null || acc.role_id != 2)
             {
                 return RedirectToAction("SignIn", "User");
             }
+           
             customer customer = data.customers.SingleOrDefault(p => p.account_id == acc.account_id);
             return View(customer);
         }
@@ -27,11 +29,11 @@ namespace CellPhoneX.Controllers
         //EDIT thông tin khách hàng
         public ActionResult Edit(string id)
         {
-            account acc = (account)Session["TaiKhoan"];
+           /* account acc = (account)Session["TaiKhoan"];
             if (acc == null || acc.role_id != 2)
             {
                 return RedirectToAction("SignIn", "User");
-            }
+            }*/
             customer customer = data.customers.SingleOrDefault(p => p.customer_id == id);
             return View(customer);
         }
@@ -91,7 +93,7 @@ namespace CellPhoneX.Controllers
                 else
                 {
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Member", "Home");
 
                 }
             }

@@ -227,6 +227,7 @@
     <Content Include="Content\images\ip13pro-128gb-xanhduong.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\member.css" />
     <Content Include="Content\Product.css" />
     <Content Include="Content\Signup.css" />
     <Content Include="Content\UserIndex.css" />
@@ -298,6 +299,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\GioHang\DatHang.cshtml" />
     <Content Include="Views\GioHang\XacnhanDonhang.cshtml" />
+    <Content Include="Views\Home\Member.cshtml" />
+    <Content Include="Views\Shared\_CusLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

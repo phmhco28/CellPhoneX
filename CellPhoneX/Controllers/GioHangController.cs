@@ -37,6 +37,7 @@ namespace CellPhoneX.Controllers
         public ActionResult GioHang()
         {
             List<Giohang> lst = Laygiohang();
+            ViewBag.Amount = lst;
             ViewBag.Tongtien = Tongtien();
 
             return View(lst);
@@ -60,29 +61,29 @@ namespace CellPhoneX.Controllers
             Session["count"] = TongSOluong();
             return Content(Session["count"].ToString());
         }
-        public ActionResult CapNhatgiohang(string id, FormCollection collection)
+        public ActionResult CapNhatgiohang(string id, string amount)
         {
             List<Giohang> lst = Laygiohang();
-            Giohang sanpham = lst.SingleOrDefault(n => n.proId == id);
+            Giohang sanpham = lst.FirstOrDefault(n => n.proId == id);
 
             if (sanpham != null)
             {
-                product_version pro = dt.product_versions.FirstOrDefault(n => n.product_id == id);
-                ViewBag.amountIn = pro.amount;
-                int amount = int.Parse(collection["amount"].ToString());
-                if (amount > pro.amount)
+                product_version pro = dt.product_versions.FirstOrDefault(n => n.version_id == id);
+                                
+                if (int.Parse(amount) > pro.amount)
                 {
+                    
                     Session["Message"] = "Không đủ số lượng";
                     
                 }
                 else
                 {
-                    sanpham.amount = amount;
+                    sanpham.amount = int.Parse(amount);
                 }
                 
             }
 
-            return Content("123");
+            return RedirectToAction("GioHang");
         }
         [HttpGet]
         public ActionResult DatHang()

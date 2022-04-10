@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Member";
+    Layout = "~/Views/Shared/_CusLayout.cshtml";
+}
+<link href="~/Content/body.css" rel="stylesheet" />
+<link href="~/Content/member.css" rel="stylesheet" />
+<section class="cps-section">
+    <div class="cps-container">
+        <div class="cps-left-col">
+            <div class="block-menu">
+                <div class="block-menu__item-menu">
+                    <a href="@Url.Action("Edit","User")">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Thông tin</p>
+                    </a>
+                </div>
+                <div class="block-menu__item-menu">
+                    <a href="#">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Lịch sử mua hàng</p>
+                    </a>
+                </div>
+                <div class="block-menu__item-menu">
+                    <a href="#">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Đăng xuất</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cps-right-col">
+            <div class="content">
+
+            </div>
+        </div>
+    </div>
+
+</section>
