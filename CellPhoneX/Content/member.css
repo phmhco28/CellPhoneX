@@ -38,6 +38,7 @@ section.cps-section .cps-container .cps-right-col {
     width: calc(80% - 7.5px);
     float: right;
     margin-bottom: 20px;
+    padding-top: 18px;
     height: 600px;
 }
 section.cps-section .cps-container .cps-right-col .content {

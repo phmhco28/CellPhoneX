@@ -301,6 +301,10 @@
     <Content Include="Views\GioHang\XacnhanDonhang.cshtml" />
     <Content Include="Views\Home\Member.cshtml" />
     <Content Include="Views\Shared\_CusLayout.cshtml" />
+    <Content Include="Views\Home\Cus.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\History.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

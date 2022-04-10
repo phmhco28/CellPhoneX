@@ -1,8 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Member";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_CusLayout.cshtml";
+    var listDetail = (List<invoice_detail>)ViewBag.listDetails;
 }
+
+@using CellPhoneX.Models
 <link href="~/Content/body.css" rel="stylesheet" />
 <link href="~/Content/member.css" rel="stylesheet" />
 <section class="cps-section">
@@ -18,7 +21,7 @@
                     </a>
                 </div>
                 <div class="block-menu__item-menu">
-                    <a href="#">
+                    <a href="@Url.Action("History","Home")">
                         <div class="box-icon">
 
                         </div>
@@ -37,7 +40,34 @@
         </div>
         <div class="cps-right-col">
             <div class="content">
+                <table class="table">
+                    <tr>
+                        <th> Mã Sản phẩm </th>
+                        <th> Số lượng</th>
+                        <th> Giá</th>
+                        <th> Thành Tiền</th>
 
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in listDetail)
+                    {
+                        <tr>
+                            <td>@item.version_id</td>
+                            <td>@item.amount</td>
+                            <td>@item.price</td>
+                            <td id="total">@(item.price * item.amount) </td>
+                        </tr>
+                     }
+                    <tr>
+                        <td >
+                            Tổng tiền:
+                        </td>
+                    </tr>
+
+                       
+
+                    </table>
             </div>
         </div>
     </div>

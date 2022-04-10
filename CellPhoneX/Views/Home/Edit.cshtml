@@ -1,0 +1,118 @@
+﻿@model CellPhoneX.Models.customer
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CusLayout.cshtml";
+}
+
+<link href="~/Content/member.css" rel="stylesheet" />
+<section class="cps-section">
+    <div class="cps-container">
+        <div class="cps-left-col">
+            <div class="block-menu">
+                <div class="block-menu__item-menu">
+                    <a href="@Url.Action("Cus","Home")">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Thông tin</p>
+                    </a>
+                </div>
+                <div class="block-menu__item-menu">
+                    <a href="#">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Lịch sử mua hàng</p>
+                    </a>
+                </div>
+                <div class="block-menu__item-menu">
+                    <a href="@Url.Action("Logout","User")">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Đăng xuất</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cps-right-col">
+            <div class="content">
+                @using (@Html.BeginForm("Edit", "Home", FormMethod.Post, new { @id = "formRes", @class = "form-css" }))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form style="background-color:whitesmoke" id="checkForm" method="get">
+
+                        <div class="form-group">
+                            <input type="text" name="customerName" class="form-control item" id="name" value="@Model.customer_name">
+                            @Html.ValidationMessageFor(model => model.customer_name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="PhoneNumber" class="form-control item" id="phone" value="@Model.phone_number">
+                            @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger", @id = "phoneer" })
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="text" name="mail" class="form-control item" id="email" value="@Model.mail">
+                            @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger", @id = "mailer" })
+
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="sex" class="form-control item" id="sex" value="@Model.sex">
+                            @Html.ValidationMessageFor(model => model.sex, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="date" name="birthday" class="form-control item" id="birthdate" value="@Model.date_of_birth">
+                            @Html.ValidationMessageFor(model => model.date_of_birth, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="address" class="form-control item" id="address" value="@Model.address">
+                            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" action=@Url.Action("Edit","Home", new {id = Model.account_id }) class="btn btn-info">Save</button>
+                        </div>
+                    </form>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+<script src="~/Scripts/js/validate.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#phone').blur(function (e) {
+            if (validatePhone('phone')) {
+                $('#phoneer').html('');
+                $('#phoneer').css('color', 'green');
+            }
+            else {
+                $('#phoneer').html('Vui lòng nhập đúng định dạng');
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#email').blur(function (e) {
+            if (validateMail('email')) {
+                $('#mailer').html('');
+                $('#mailer').css('color', 'green');
+            }
+            else {
+                $('#mailer').html('Email sai định dạng (ví dụ: abcd@efgh.iklm) ');
+            }
+        });
+    });
+</script>

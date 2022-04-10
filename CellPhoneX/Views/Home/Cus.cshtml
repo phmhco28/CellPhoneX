@@ -1,9 +1,8 @@
-﻿
+﻿@model CellPhoneX.Models.customer
 @{
-    ViewBag.Title = "Member";
+    ViewBag.Title = "Cus";
     Layout = "~/Views/Shared/_CusLayout.cshtml";
 }
-<link href="~/Content/body.css" rel="stylesheet" />
 <link href="~/Content/member.css" rel="stylesheet" />
 <section class="cps-section">
     <div class="cps-container">
@@ -18,7 +17,7 @@
                     </a>
                 </div>
                 <div class="block-menu__item-menu">
-                    <a href="#">
+                    <a href="@Url.Action("History","Home")">
                         <div class="box-icon">
 
                         </div>
@@ -37,9 +36,15 @@
         </div>
         <div class="cps-right-col">
             <div class="content">
-
+                <p>Họ và tên : @Model.customer_name</p>
+                <p>Số Điện Thoại : @Model.phone_number</p>
+                <p>Email : @Model.mail</p>
+                <p>Giới tính: @Model.sex</p>
+                <p>Ngày Sinh: @String.Format("{0:dd,MM,yyyy}",Model.date_of_birth)</p>
+                <p>Địa chỉ : @Model.address</p>
+                @Html.ActionLink("Edit", "Edit","Home",new {id = Model.account_id})
+                
             </div>
         </div>
     </div>
-
-</section>
+    </section>

@@ -93,7 +93,7 @@ namespace CellPhoneX.Controllers
                 else
                 {
 
-                    return RedirectToAction("Member", "Home");
+                    return RedirectToAction("Cus", "Home");
 
                 }
             }
