@@ -1,8 +1,8 @@
 ﻿@model CellPhoneX.Models.product_version
 @{ ViewBag.Title = "Detail";
-                Layout = "~/Views/Shared/_Layout.cshtml";
-                var listI = (List<product_version>)ViewBag.listProDetail; 
-    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listI = (List<product_version>)ViewBag.listProDetail;
+}
 @using CellPhoneX.Models
 <link href="~/Content/DetailProduct.css" rel="stylesheet" />
 <link href="~/Content/body.css" rel="stylesheet" />
@@ -23,12 +23,12 @@
                 <div class="box-gallery">
                     <div class="swiper-container gallery-main swiper-container-initialized swiper-container-horizontal">
                         @*<img src="~/Content/images/@Model.image" />*@
-                        <div id="product-mob-images" class="swiper-wrapper" >
+                        <div id="product-mob-images" class="swiper-wrapper">
                             @foreach (var item in listI)
                             {
-                <div class="swiper-slide item-gallery swiper-slide-duplicate" data-swiper-slide-index="26" style="width: 400px; margin-right: 20px;">
-                    <img class="swiper-lazy swiper-lazy-loaded" alt="" title="" src="~/Content/images/@item.image">
-                </div>}
+                                <div class="swiper-slide item-gallery swiper-slide-duplicate" data-swiper-slide-index="26" style="width: 400px; margin-right: 20px;">
+                                    <img class="swiper-lazy swiper-lazy-loaded" alt="" title="" src="~/Content/images/@item.image">
+                                </div>}
 
 
                         </div>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="detail-product__box-center" >
+            <div class="detail-product__box-center">
                 <div class="box-info">
                     <div class="box-info__box-price">
                         <p class="special-price">@String.Format("{0:0,0}", Model.special_price) đ </p>
@@ -65,10 +65,10 @@
                     <div class="list-linked">
                         @foreach (var item in listI)
                         {
-            <a href="@Url.Action("Detail","Product", new {id = item.version_id })" class="item-linked linked-1">
-                <strong>@item.memory_internal </strong>
-                <span>@item.special_price</span>
-            </a>}
+                            <a href="@Url.Action("Detail","Product", new {id = item.version_id })" class="item-linked linked-1">
+                                <strong>@item.memory_internal </strong>
+                                <span>@item.special_price</span>
+                            </a>}
                     </div>
 
                 </div>
@@ -83,15 +83,16 @@
                                 <ul class="list-colors">
                                     @foreach (var itm in listI)
                                     {
-                        <li class="item-color" data-id="@itm.version_id">
-                            <a href="@Url.Action("Detail","Product", new { id = itm.version_id })" class="swatch-link ">
-                                <img src="~/Content/images/@itm.image" class="cpslazy loaded" />
-                                <p>
-                                    <strong>@itm.color.color_name</strong>
-                                    <span>@itm.special_price</span>
-                                </p>
-                            </a>
-                        </li>}
+                                        <li class="item-color" data-id="@itm.version_id">
+                                            <a href="@Url.Action("Detail","Product", new { id = itm.version_id })" class="swatch-link ">
+                                                <img src="~/Content/images/@itm.image" class="cpslazy loaded" />
+                                                <p>
+                                                    <strong>@itm.color.color_name</strong>
+                                                    <span>@itm.special_price</span>
+                                                </p>
+                                            </a>
+                                        </li>
+}
 
                                 </ul>
                             </div>
@@ -106,19 +107,67 @@
                             NGAY
                         </strong><span>(Giao tận nơi hoặc lấy tại cửa hàng)</span>
                     </a>
-                    
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+@*danhgia*@
+<div style="padding:3rem">
+    <div class="ant-row" style="margin-top:1rem;row-gap:0px">
+        <div align="start" class="ant-col ant-col-18 ant-col-xs-24 ant-col-sm-24 ant-col-md-18">
+            <div class="danhgia">
+                <p class="name" style="font-weight: bold; font-size: 15px;">Dang Khang</p>
+                <div class="cmt" style="display: flex;">
+                    <ul class="ant-rate ant-rate-disabled" tabindex="-1" role="radiogroup" style="color: orange; font-size: 14px;">
+                        <li class="ant-rate-star ant-rate-star-full">
+                            <div role="radio" aria-checked="true" aria-posinset="1" aria-setsize="5" tabindex="-1" style="display:flex">
+                                <div class="ant-rate-star-first">
+                                    <span role="img" aria-label="star" class="anticon anticon-star">
+                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                            <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
+                                        </svg>
+                                    </span>
+                                </div><div class="ant-rate-star-second"><span role="img" aria-label="star" class="anticon anticon-star"><svg viewBox="64 64 896 896" focusable="false" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path></svg></span></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="cmt" style="margin-left: 1rem;">ngon</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Comment*@
+    <div align="start" class="ant-col ant-col-18 ant-col-xs-24 ant-col-sm-24 ant-col-md-18" style="align-items: center;">
+        <div class="comment-area" style="display: flex; align-items: center;">
+            <textarea placeholder="Xin mời để lại câu hỏi, CellphoneS sẽ trả lời trong 1h từ 8h - 22h mỗi ngày." rows="10" cols="3"></textarea>
+        </div>
+        <div class="comment-send"><button>Gửi</button></div>
+    </div>
+
+    <div class="all-comment">
+        <div class="ant-col ant-col-18 ant-col-xs-24 ant-col-sm-24 ant-col-md-18" style="margin-top:1rem">
+            <div class="all-comment-info">
+                <div style="display:flex">
+                    <div class="all-comment-info-name"> DK</div>
+                    <strong>Dang Khang</strong>
+                </div>
+            </div>
+            <div class="all-comment-content">quá đẹp 😍😘</div>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>
 
 
-    
+
     $(document).ready(function () {
-        
+
 
         $(".cta-mua-ngay").click(function () {
             var versionId = $(".detailProduct").attr("data-idPro");
@@ -128,7 +177,7 @@
                 url: "/GioHang/AddProductAjax",
                 data: { id: versionId },
                 success: function (value) {
-                    
+
                     $('#items-in-cart').text(value);
 
                 }
@@ -136,62 +185,63 @@
         })
       @* $(".item-color").click(function () {
             var versionId = $(this).attr("data-id");
-            
+
             $.ajax({
                 type: "GET",
                 url: "/Product/Detail",
                 data: { id: versionId },
                 success: function (value) {
                     location.reload();*@
-                    
+
 @*
                 }
             })
         })*@
     });
 
-    
+
 </script>
 
 <script>
 
 </script>
-@**@<script>
-        var slideIndex = 0;
-        // showSlides(slideIndex);
+@**@
+<script>
+    var slideIndex = 0;
+    // showSlides(slideIndex);
 
-       
 
-        // // Next/previous controls
-        function prevSlide(n) {
-            showSlides(slideIndex += n);
-        }
 
-        // //auto show
-        
-
-        // // Thumbnail image controls
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
+    // // Next/previous controls
+    function prevSlide(n) {
+        showSlides(slideIndex += n);
     }
-    
+
+    // //auto show
 
 
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("swiper-slide-duplicate");
-            var dots = document.getElementsByClassName("swiper-slide-visible");
-            if (n > slides.length) { slideIndex = 0 }
-            if (n < 0) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex ].setAttribute("style", "display: flex");
-            slides[slideIndex ].className += " active";
-            dots[slideIndex ].className += " active";
+    // // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("swiper-slide-duplicate");
+        var dots = document.getElementsByClassName("swiper-slide-visible");
+        if (n > slides.length) { slideIndex = 0 }
+        if (n < 0) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex].setAttribute("style", "display: flex");
+        slides[slideIndex].className += " active";
+        dots[slideIndex].className += " active";
+    }
 
-    </script>
+</script>
