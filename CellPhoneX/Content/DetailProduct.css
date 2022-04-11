@@ -488,3 +488,9 @@ section.cps-section .block-detail-product .box-detail-product .detail-product__b
     .all-comment-rep-list-item:nth-child(1) {
         padding-top: 0;
     }
+section.cps-section .block-detail-product .box-detail-product .detail-product__box-center .box-details {
+    width: 100%;
+    border: 1px solid #FEE2E2;
+    border-radius: 10px;
+    overflow: hidden;
+}

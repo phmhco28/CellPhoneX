@@ -23,6 +23,7 @@ namespace CellPhoneX.Controllers
             var D_Phone = data.product_versions.Where(m => m.version_id == id).First();
             var list = data.product_versions.Where(p=>p.product_id == D_Phone.product_id).ToList();
             var list2 = data.customer_comments.Where(p => p.version_id == id).ToList();
+            
             ViewBag.listCom = list2;
             
             ViewBag.listProDetail = list;

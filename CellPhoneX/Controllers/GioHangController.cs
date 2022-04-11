@@ -37,7 +37,7 @@ namespace CellPhoneX.Controllers
         public ActionResult GioHang()
         {
             List<Giohang> lst = Laygiohang();
-            ViewBag.Amount = lst;
+            ViewBag.soluong = Session["soluong"];
             ViewBag.Tongtien = Tongtien();
 
             return View(lst);
@@ -63,18 +63,19 @@ namespace CellPhoneX.Controllers
         }
         public ActionResult CapNhatgiohang(string id, string amount)
         {
+            
             List<Giohang> lst = Laygiohang();
             Giohang sanpham = lst.FirstOrDefault(n => n.proId == id);
-
+            
+            
+               
             if (sanpham != null)
             {
                 product_version pro = dt.product_versions.FirstOrDefault(n => n.version_id == id);
-                                
+                Session["soluong"] = pro.amount;                
                 if (int.Parse(amount) > pro.amount)
                 {
-                    
                     Session["Message"] = "Không đủ số lượng";
-                    
                 }
                 else
                 {

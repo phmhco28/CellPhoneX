@@ -19,6 +19,11 @@ namespace CellPhoneX.Controllers
             return View(phone);
 
         }
+        public ActionResult BrandIndex(string id)
+        {
+            var phone = context.product_versions.Where(p => p.product.phone_brand_id == id).ToList();
+            return View(phone);
+        }
         public ActionResult Member()
         {
             return View();
