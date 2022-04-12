@@ -125,17 +125,22 @@ namespace CellPhoneX.Controllers
                 ViewBag.ThongBao = "LINK XÁC NHẬN ĐÃ HẾT HẠN";
             return View(inv);
         }
-        [HttpPost]
-        public ActionResult ConfirmSignUp(string account, string Token)
+
+        public ActionResult ConfirmSignUp(string id, string Token)
         {
             token tokenConfirm = context.tokens.SingleOrDefault(p => p.Token1 == Token && DateTime.Now >= p.time1 && DateTime.Now <= p.time2);
-            account acc = context.accounts.SingleOrDefault(p => p.account_id == account);
+            account acc = context.accounts.SingleOrDefault(p => p.account_id == id);
             if (tokenConfirm != null && acc != null)
             {
-                acc.confirm = "Đã xác nhận";
+                acc.confirm = "XN";
                 UpdateModel(acc);
                 context.SubmitChanges();
+                context.tokens.DeleteOnSubmit(tokenConfirm);
+                context.SubmitChanges();
+                return View(acc);
             }
+            else
+                ViewBag.ThongBao = "LINK XÁC NHẬN ĐÃ HẾT HẠN";
             return View(acc);
         }
 

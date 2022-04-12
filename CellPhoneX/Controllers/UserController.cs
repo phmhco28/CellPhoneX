@@ -17,7 +17,7 @@ namespace CellPhoneX.Controllers
         {
             account acc = (account)Session["TaiKhoan"];
            
-           if (acc == null || acc.role_id != 2)
+           if (acc == null || acc.role_id != 2 || acc.confirm == null)
             {
                 return RedirectToAction("SignIn", "User");
             }
@@ -29,11 +29,17 @@ namespace CellPhoneX.Controllers
         //EDIT thông tin khách hàng
         public ActionResult Edit(string id)
         {
-           /* account acc = (account)Session["TaiKhoan"];
-            if (acc == null || acc.role_id != 2)
+            account acc = (account)Session["TaiKhoan"];
+
+            if (acc == null || acc.role_id != 2 || acc.confirm == null)
             {
                 return RedirectToAction("SignIn", "User");
-            }*/
+            }
+            /* account acc = (account)Session["TaiKhoan"];
+             if (acc == null || acc.role_id != 2)
+             {
+                 return RedirectToAction("SignIn", "User");
+             }*/
             customer customer = data.customers.SingleOrDefault(p => p.customer_id == id);
             return View(customer);
         }
@@ -137,7 +143,7 @@ namespace CellPhoneX.Controllers
                         data.SubmitChanges();
                         var link = string.Format("{0}", Url.Action("ConfirmResetMail", "Home", new { Token = token.Token1, AccID = cus.account_id }, Request.Url.Scheme));
                         var body = "Xin chào: " + cus.customer_name + "\n" +
-                                    "Vui lòng nhấn vào link này để XÁC NHẬN ĐỔI MẬT KHẨU:" + link + "\n" +
+                                    "Vui lòng nhấn vào link này để XÁC NHẬN ĐỔI MẬT KHẨU: " + link + "\n" +
                                     "link này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2);
                         var smtp = new SmtpClient
                         {
@@ -240,18 +246,18 @@ namespace CellPhoneX.Controllers
                     {
                         try
                         {
-                            var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
+                            var senderEmail = new MailAddress("store.confirmmail@gmail.com", "BookStore");
                             var receiverEmail = new MailAddress(email, "Receiver");
-                            var password = "NQT290701";
-                            var sub = "Hello";
+                            var password = "x1lahcbhnbdvn";
+                            var sub = "XAC_THUC_TAI_KHOAN";
                             token tk = new token();
                             tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
                             tk.time1 = DateTime.Now;
                             tk.time2 = DateTime.Now.AddMinutes(2);
                             data.tokens.InsertOnSubmit(tk);
                             data.SubmitChanges();
-                            var link = string.Format("{0}", Url.Action("ConfirmSignUp", "Home", new { Token = tk.Token1, id = acc.account_id}, Request.Url.Scheme));
-                            var body = "Vui lòng click vào link để xác nhận " +link;
+                            var link = string.Format("{0}", Url.Action("ConfirmSignUp", "Home", new { Token = tk.Token1, id = acc.account_id }, Request.Url.Scheme));
+                            var body = "Vui lòng click vào link để xác nhận tài khoản: " +link;
 
                             var smtp = new SmtpClient
                             {

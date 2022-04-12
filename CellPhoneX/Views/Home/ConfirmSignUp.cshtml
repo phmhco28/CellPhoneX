@@ -4,5 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Oke</h2>
+<br />
+<div style="text-align:center">
+    @if (ViewBag.ThongBao == null)
+    {
+        <h2>XÁC NHẬN TÀI KHOẢN THÀNH CÔNG</h2>
+        <hr />  
+    }
+    else
+    {
+        <h2>@ViewBag.ThongBao</h2>
+        <hr />
+    }
+</div>
 
