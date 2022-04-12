@@ -41,7 +41,8 @@
                                         <input id="amount" name="amount" type="text" data-idAmount="@item.proId" min="1" value="@item.amount">
                                         <span class="plus d-flex justify-content-center align-items-center">+</span>
                                     </div>
-                                    <p>Số lượng còn: @ViewBag.soluong</p>
+                                    <p>Số lượng còn: @ViewBag.slton</p>
+                                    <p>@ViewBag.message</p>
                                 </div>
                             </div>
                         </div>
@@ -113,15 +114,15 @@
                idpro = $(".productitem").attr('data-idPro');
                console.log(idpro);
            }
-               $.ajax({
-                   url: "GioHang/CapNhatgiohang",
+           $.ajax({
                    type: 'POST',
+                   url: "/GioHang/CapNhatgiohang",
                    data: {
                        id: idpro,
                        amount: value
                    },
-                   success: function () {
-                       console.log("ok");
+               success: function () {
+                   location.reload();
                    }
                });
            
@@ -129,7 +130,9 @@
        });
 
        $(".plus").click(function () {
+           console.log("sua cai int value")
            if ($('#amount').val() != "3") {
+               
                var $n = $("#amount");
                $n.val(Number($n.val()) + 1);
                var value = $n.val();
@@ -139,14 +142,14 @@
                console.log(idpro);
                
                $.ajax({
-                   url: "GioHang/CapNhatgiohang",
+                   url: "/GioHang/CapNhatgiohang",
                    type: 'POST',
                    data: {
                        id: idpro,
                        amount: value
                    },
                    success: function () {
-                       console.log("ok");
+                       location.reload();
                    }
                });
            }

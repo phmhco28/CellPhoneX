@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CellPhoneDB" Class="CellPhoneDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-RO60OD8;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ADMIN\SQLEXPRESS;Initial Catalog=CellPhoneDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CellPhoneDBConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.account" Member="accounts">
     <Type Name="account">
       <Column Name="account_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="username" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[confirm]" Member="confirm" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
       <Association Name="account_customer" Member="customers" ThisKey="account_id" OtherKey="account_id" Type="customer" />
       <Association Name="account_employee" Member="employees" ThisKey="account_id" OtherKey="account_id" Type="employee" />
       <Association Name="role_account" Member="role" ThisKey="role_id" OtherKey="role_id" Type="role" IsForeignKey="true" />
@@ -112,14 +113,6 @@
       <Association Name="product_version_invoice_detail" Member="product_version" ThisKey="version_id" OtherKey="version_id" Type="product_version" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.phone_brand" Member="phone_brands">
-    <Type Name="phone_brand">
-      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
-    </Type>
-  </Table>
   <Table Name="dbo.product" Member="products">
     <Type Name="product">
       <Column Name="product_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -131,8 +124,8 @@
       <Column Name="promotion_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="product_product_version" Member="product_versions" ThisKey="product_id" OtherKey="product_id" Type="product_version" />
-      <Association Name="phone_brand_product" Member="phone_brand" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="phone_brand" IsForeignKey="true" />
       <Association Name="promotion_product" Member="promotion" ThisKey="promotion_id" OtherKey="promotion_id" Type="promotion" IsForeignKey="true" />
+      <Association Name="phone_brand_product" Member="phone_brand" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="phone_brand" IsForeignKey="true" />
       <Association Name="spec_product" Member="spec" ThisKey="specs_id" OtherKey="specs_id" Type="spec" IsForeignKey="true" />
     </Type>
   </Table>
@@ -168,6 +161,14 @@
       <Association Name="promotion_product_version" Member="product_versions" ThisKey="promotion_id" OtherKey="promotion_id" Type="product_version" />
     </Type>
   </Table>
+  <Table Name="dbo.phone_brand" Member="phone_brands">
+    <Type Name="phone_brand">
+      <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
+    </Type>
+  </Table>
   <Table Name="dbo.rating" Member="ratings">
     <Type Name="rating">
       <Column Name="rating_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -194,11 +195,11 @@
       <Column Name="display_resolution" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="display_feature" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="main_camera" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="main_camera_video" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="selfie_camera" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="main_camera_video" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="selfie_camera" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="camera_feature" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="platform_os" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="platform_chipset" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="platform_os" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="platform_chipset" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="platform_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="platform_gpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="comms_wlan" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
@@ -206,7 +207,7 @@
       <Column Name="comms_bluetooth" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="comms_usb" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="comms_gps" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="body_size" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="body_size" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="body_weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="body_sim" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="body_build" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

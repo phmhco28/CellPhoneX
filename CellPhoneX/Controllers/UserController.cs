@@ -177,39 +177,50 @@ namespace CellPhoneX.Controllers
                     customer.account_id = acc.account_id;
                     data.customers.InsertOnSubmit(customer);
                     data.SubmitChanges();
-                    try
+                    if (ModelState.IsValid)
                     {
-                        var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
-                        var receiverEmail = new MailAddress(email, "Receiver");
-                        var password = "";
-                        var sub = "Hello";
-                        var body = "Register Success";
+                        try
+                        {
+                            var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
+                            var receiverEmail = new MailAddress(email, "Receiver");
+                            var password = "NQT290701";
+                            var sub = "Hello";
+                            token tk = new token();
+                            tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
+                            tk.time1 = DateTime.Now;
+                            tk.time2 = DateTime.Now.AddMinutes(2);
+                            data.tokens.InsertOnSubmit(tk);
+                            data.SubmitChanges();
+                            var link = string.Format("{0}", Url.Action("ConfirmSignUp", "Home", new { Token = tk.Token1, id = acc.account_id}, Request.Url.Scheme));
+                            var body = "Vui lòng click vào link để xác nhận " +link;
 
-                        var smtp = new SmtpClient
-                        {
-                            Host = "smtp.gmail.com",
-                            Port = 587,
-                            EnableSsl = true,
-                            DeliveryMethod = SmtpDeliveryMethod.Network,
-                            UseDefaultCredentials = false,
-                            Credentials = new NetworkCredential(senderEmail.Address, password)
-                        };
-                        using (var mess = new MailMessage(senderEmail, receiverEmail)
-                        {
-                            Subject = sub,
-                            Body = body,
+                            var smtp = new SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                EnableSsl = true,
+                                DeliveryMethod = SmtpDeliveryMethod.Network,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential(senderEmail.Address, password)
+                            };
+                            using (var mess = new MailMessage(senderEmail, receiverEmail)
+                            {
+                                Subject = sub,
+                                Body = body,
 
-                        })
-                        {
-                            smtp.Send(mess);
+                            })
+                            {
+                                smtp.Send(mess);
+                            }
+                            return RedirectToAction("ConfirmSignup", "User");
+
                         }
-                        return RedirectToAction("ConfirmSignup", "User");
-
+                        catch (Exception)
+                        {
+                            ViewBag.Error = "Some Error";
+                        }
                     }
-                    catch (Exception)
-                    {
-                        ViewBag.Error = "Some Error";
-                    }
+                        
                 }
 
                 return RedirectToAction("ConfirmSignup", "User");

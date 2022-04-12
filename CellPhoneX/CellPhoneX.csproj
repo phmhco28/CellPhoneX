@@ -2202,6 +2202,8 @@
     <Content Include="Views\Home\History.cshtml" />
     <Content Include="Views\Home\Member.cshtml" />
     <Content Include="Views\Shared\_CusLayout.cshtml" />
+    <Content Include="Views\User\ConfirmSignup.cshtml" />
+    <Content Include="Views\Home\ConfirmSignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
