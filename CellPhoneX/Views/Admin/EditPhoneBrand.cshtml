@@ -24,7 +24,8 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="phone_brand_name">Thương hiệu </label>
             <div class="col-md-10">
-                @Html.DropDownList("phoneBrand")
+                @Html.EditorFor(model => model.phone_brand_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_brand_name, "", new { @class = "text-danger" })
             </div>
         </div>
 

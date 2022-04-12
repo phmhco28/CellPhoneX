@@ -994,7 +994,7 @@ namespace CellPhoneX.Controllers
                 total += item.amount * item.price;
             }
             customer cus = data.customers.FirstOrDefault(p => p.customer_id == inv.customer_id);
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
                 var senderEmail = new MailAddress("store.confirmmail@gmail.com", "BookStore");
                 var receiverEmail = new MailAddress(cus.mail, "Receiver");
