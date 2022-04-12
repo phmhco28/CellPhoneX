@@ -133,6 +133,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Models\CellPhoneDB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CellPhoneDB.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cryptography.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -140,11 +145,6 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CellPhoneDB.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CellPhoneDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Giohang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1916,6 +1916,7 @@
     <Content Include="Content\images\ip13pro-128gb-xanhduong.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\member.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Product.css" />
     <Content Include="Content\Signup.css" />
@@ -1925,11 +1926,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Models\CellPhoneDB.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>CellPhoneDB.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="bin\CellPhoneX.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -2113,6 +2109,11 @@
     <Content Include="Content\Admin\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Content\Admin\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Models\CellPhoneDB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CellPhoneDB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Models\CellPhoneDB.dbml.layout">
       <DependentUpon>CellPhoneDB.dbml</DependentUpon>
     </None>
@@ -2194,6 +2195,13 @@
     <Content Include="Views\Admin\DeleteSpec.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Admin\FogotPass.cshtml" />
+    <Content Include="Views\Home\BrandIndex.cshtml" />
+    <Content Include="Views\Home\Cus.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\History.cshtml" />
+    <Content Include="Views\Home\Member.cshtml" />
+    <Content Include="Views\Shared\_CusLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

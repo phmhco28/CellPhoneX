@@ -110,13 +110,13 @@ namespace CellPhoneX.Controllers
 
         public ActionResult Confirm(string invoice, string Token)
         {
-            token tokenConfirm = data.tokens.SingleOrDefault(p => p.Token1 == Token && DateTime.Now >= p.time1 && DateTime.Now <= p.time2);
-            var inv = data.invoices.SingleOrDefault(p => p.invoice_id == invoice);
+            token tokenConfirm = context.tokens.SingleOrDefault(p => p.Token1 == Token && DateTime.Now >= p.time1 && DateTime.Now <= p.time2);
+            var inv = context.invoices.SingleOrDefault(p => p.invoice_id == invoice);
             if (tokenConfirm != null && inv != null)
             {
                 inv.invoice_confirm = "Đã xác nhận";
                 UpdateModel(inv);
-                data.SubmitChanges();
+                context.SubmitChanges();
             }
             return View(inv);
         }

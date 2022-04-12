@@ -417,7 +417,7 @@ namespace CellPhoneX.Controllers
             product.product_id = Nanoid.Nanoid.Generate(size: 10);
             product.product_name = collection["product_name"];
             product.release_date = DateTime.Parse(collection["release_date"]);
-            product.specs_id = "Detamdaythoi";
+            product.specs_id = collection["specs_id"];
             product.phone_brand_id = collection["phoneBrand"];
             product.description = collection["description"];
             product.promotion_id = collection["promotion_id"];
@@ -696,7 +696,7 @@ namespace CellPhoneX.Controllers
             sp.comms_usb = collection["comms_usb"];
             sp.comms_gps = collection["comms_gps"];
             sp.body_size = collection["body_size"];
-            sp.body_weight = collection["body_size"];
+            sp.body_weight = collection["body_weight"];
             sp.body_sim = collection["body_sim"];
             sp.body_build = collection["body_build"];
             sp.battery_type = collection["battery_type"];
@@ -764,7 +764,7 @@ namespace CellPhoneX.Controllers
             sp.comms_usb = collection["comms_usb"];
             sp.comms_gps = collection["comms_gps"];
             sp.body_size = collection["body_size"];
-            sp.body_weight = collection["body_size"];
+            sp.body_weight = collection["body_weight"];
             sp.body_sim = collection["body_sim"];
             sp.body_build = collection["body_build"];
             sp.battery_type = collection["battery_type"];
