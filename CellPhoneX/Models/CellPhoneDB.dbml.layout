@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 20.5" name="CellPhoneDB">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 24.125" name="CellPhoneDB">
   <DataContextMoniker Name="/CellPhoneDBDataContext" />
   <nestedChildShapes>
     <classShape Id="2028bd91-593c-45cd-97d4-1215f042f257" absoluteBounds="3.5, 16.25, 2, 1.5785953776041666">
@@ -104,49 +104,49 @@
         <elementListCompartment Id="8bf0805e-3df1-4d2f-8612-dded690f0b51" absoluteBounds="8.765, 6.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 17.2892976888021); (6.25 : 17.2892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 19.2123527018229); (6.25 : 19.2123527018229)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/account/account_customer" />
       <nodes>
         <classShapeMoniker Id="2028bd91-593c-45cd-97d4-1215f042f257" />
         <classShapeMoniker Id="f03fe998-c55b-48ce-af9c-11c44ec8f5fe" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 18.2604484049479); (9 : 18.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 18.3854484049479); (9 : 18.3854484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer/customer_customer_comment" />
       <nodes>
         <classShapeMoniker Id="f03fe998-c55b-48ce-af9c-11c44ec8f5fe" />
         <classShapeMoniker Id="9bac458c-c3e9-4bdb-8fb0-d35bab0bedbc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 19.1498527018229); (6.25 : 19.1498527018229)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 17.3517976888021); (6.25 : 17.3517976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer_vip/customer_vip_customer" />
       <nodes>
         <classShapeMoniker Id="77173825-33c3-40e8-8ae2-5c5f5b819369" />
         <classShapeMoniker Id="f03fe998-c55b-48ce-af9c-11c44ec8f5fe" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.5 : 16.25); (4.5 : 14.0873527018229); (5.79166666666667 : 14.0873527018229 : JumpStart); (5.95833333333333 : 14.0873527018229 : JumpEnd); (6.25 : 14.0873527018229)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.5 : 20.3958968098958); (4.5 : 22.4623527018229); (6.25 : 22.4623527018229)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/account/account_employee" />
       <nodes>
         <classShapeMoniker Id="2028bd91-593c-45cd-97d4-1215f042f257" />
         <classShapeMoniker Id="ccc7dff7-edae-4247-927d-a83733a1eb1f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 18.2604484049479); (12.75 : 18.2604484049479); (12.75 : 16.7708968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 18.3854484049479); (12.75 : 18.3854484049479); (12.75 : 19.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer_comment/customer_comment_employee_comment" />
       <nodes>
         <classShapeMoniker Id="9bac458c-c3e9-4bdb-8fb0-d35bab0bedbc" />
         <classShapeMoniker Id="a59c6e47-be32-4b1d-aded-077d956782b6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 15.2748527018229); (8.41666666666667 : 15.2748527018229 : JumpStart); (8.58333333333333 : 15.2748527018229 : JumpEnd); (11.75 : 15.2748527018229)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 21.3229484049479); (11.75 : 21.3229484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/employee/employee_employee_comment" />
       <nodes>
         <classShapeMoniker Id="ccc7dff7-edae-4247-927d-a83733a1eb1f" />
         <classShapeMoniker Id="a59c6e47-be32-4b1d-aded-077d956782b6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.25 : 16.75); (5.875 : 16.375); (5.875 : 11.2228011067708); (6.25 : 10.8478011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.25 : 16.875); (7.25 : 10.8478011067708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer/customer_invoice" />
       <nodes>
         <classShapeMoniker Id="f03fe998-c55b-48ce-af9c-11c44ec8f5fe" />
@@ -202,7 +202,7 @@
         <classShapeMoniker Id="095a9dfd-6299-478d-b0e1-bb7b8283eb72" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.281252 : 16.75); (7.281252 : 15.7997054036458); (8.5 : 15.7997054036458); (8.5 : 1.63544840494792); (9 : 1.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.781252 : 16.875); (7.781252 : 11.0978011067708); (8.5 : 11.0978011067708); (8.5 : 1.63544840494792); (9 : 1.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/customer/customer_rating" />
       <nodes>
         <classShapeMoniker Id="f03fe998-c55b-48ce-af9c-11c44ec8f5fe" />
@@ -216,14 +216,14 @@
         <classShapeMoniker Id="9748a254-ddd6-4fb7-8aab-e9ab80903d21" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 17.0969962565104); (3.5 : 17.0969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 19.4719962565104); (3.5 : 19.4719962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/role/role_account" />
       <nodes>
         <classShapeMoniker Id="40b87546-94e0-4ed4-a480-62b60f78fbb4" />
         <classShapeMoniker Id="2028bd91-593c-45cd-97d4-1215f042f257" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 11.4811763509115); (3.9687475 : 11.4811763509115); (3.9687475 : 5.84780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 11.7796134440104); (3.9687475 : 11.7796134440104); (3.9687475 : 5.84780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CellPhoneDBDataContext/spec/spec_product" />
       <nodes>
         <classShapeMoniker Id="e1c752d0-941d-4472-8599-a432460a891c" />

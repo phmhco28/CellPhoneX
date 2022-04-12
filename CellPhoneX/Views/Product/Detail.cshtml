@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listI = (List<product_version>)ViewBag.listProDetail;
     var listI2 = (List<customer_comment>)ViewBag.listCom;
+    var listI3 = (List<product_version>)ViewBag.listSl;
     }
 @using CellPhoneX.Models
 <link href="~/Content/DetailProduct.css" rel="stylesheet" />
@@ -69,6 +70,7 @@
                             <a href="@Url.Action("Detail","Product", new {id = item.version_id })" class="item-linked linked-1">
                                 <strong>@item.memory_internal </strong>
                                 <span>@item.special_price</span>
+
                             </a>}
                     </div>
 
@@ -93,7 +95,7 @@
                                                 </p>
                                             </a>
                                         </li>
-}
+                                    }
 
                                 </ul>
                             </div>
@@ -101,21 +103,31 @@
 
                     </div>
                 </div>
-                <div class="box-action-button">
-                    <a class="action-button button-red cta-mua-ngay" href="">
-                        <strong>
-                            MUA
-                            NGAY
-                        </strong><span>(Giao tận nơi hoặc lấy tại cửa hàng)</span>
-                    </a>
+                @foreach (var item in listI3)
+                {
+                    if (item.amount != 0)
+                    {
 
-                </div>
+                        <div class="box-action-button">
+                            <a class="action-button button-red cta-mua-ngay" href="">
+                                <strong>
+                                    MUA
+                                    NGAY
+                                </strong><span>(Giao tận nơi hoặc lấy tại cửa hàng)</span>
+                            </a>
+                        </div>
+                    }
+
+                }
+
+
+
                 <div class="box-details">
                     <div class="box-title">
                         <div style="text-align: center; background: navajowhite" class="box-title__title">
                             <p style="margin-top: 4px">Chi tiết</p>
                         </div>
-                        
+
                     </div>
                     <div class="box-content" style="margin-left:10px">
                         <p>Màn hình: @Model.product.spec.display_size</p>
@@ -123,12 +135,258 @@
                         <p>Thông số: @Model.product.spec.display_feature</p>
                         <p>Độ phân giải: @Model.product.spec.display_resolution</p>
                         <p>Camera: @Model.product.spec.main_camera - @Model.product.spec.main_camera_video</p>
-
+                        <button style="border-radius: 4px; background: navajowhite" data-target="#Modaldetails" data-toggle="modal">Chi tiết</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @*thong so kỹ thuật*@
+    <div class="modal fade" id="Modaldetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Thông số kỹ thuật</h4>
+                    <button type="button" class="close" data-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path id="cross" d="M11.89,9.64h0L8.249,6l3.64-3.64h0a.376.376,0,0,0,0-.53L10.17.109a.376.376,0,0,0-.53,0h0L6,3.749,2.359.109h0a.376.376,0,0,0-.53,0L.109,1.829a.376.376,0,0,0,0,.53h0L3.75,6,.109,9.64h0a.38.38,0,0,0-.086.134.374.374,0,0,0,.086.4l1.72,1.72a.376.376,0,0,0,.53,0h0L6,8.249l3.64,3.64h0a.376.376,0,0,0,.53,0l1.72-1.72a.376.376,0,0,0,0-.53Z" transform="translate(0 0)" fill="#fff"></path></svg>&nbsp;Đóng</button>
+                </div>
+                <div class="modal-body">
+                    <div class="box-table">
+                        <div class="item-box-table Màn hình">
+                            <div class="box-title"><p class="box-title__title">Màn hình</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Kích thước màn hình</th>
+                                            <th>@Model.product.spec.display_size</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Công nghệ màn hình</th>
+                                            <th>@Model.product.spec.display_type</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Độ phân giải màn hình</th>
+                                            <th>@Model.product.spec.display_resolution</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Tính năng màn hình</th>
+                                            <th>@Model.product.spec.display_feature</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Tần số quét</th>
+                                            <th>@Model.product.spec.display_feature</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Camera sau">
+                            <div class="box-title"><p class="box-title__title">Camera sau</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Camera sau</th>
+                                            <th>@Model.product.spec.main_camera</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Quay video</th>
+                                            <th>@Model.product.spec.main_camera_video</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Tính năng camera</th>
+                                            <th>@Model.product.spec.camera_feature</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Camera trước">
+                            <div class="box-title"><p class="box-title__title">Camera trước</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Camera trước</th>
+                                            <th>@Model.product.spec.selfie_camera</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Quay video trước</th>
+                                            <th>@Model.product.spec.main_camera_video</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Vi xử lý &amp; đồ họa">
+                            <div class="box-title"><p class="box-title__title">Vi xử lý &amp; đồ họa</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Chipset</th>
+                                            <th>@Model.product.spec.platform_chipset</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại CPU</th>
+                                            <th>@Model.product.spec.platform_cpu</th>
+                                        </tr>
+                                        <tr>
+                                            <th>GPU</th>
+                                            <th>@Model.product.spec.platform_gpu</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table RAM &amp; lưu trữ">
+                            <div class="box-title"><p class="box-title__title">RAM &amp; lưu trữ</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Dung lượng RAM</th>
+                                            <th>@Model.memory_ram</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Bộ nhớ trong</th>
+                                            <th>@Model.memory_internal</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Khe cắm thẻ nhớ</th>
+                                            <th>@Model.product.spec.comms_sound_jack</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Thông số kỹ thuật">
+                            <div class="box-title"><p class="box-title__title">Thông số kỹ thuật</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Pin</th>
+                                            <th>@Model.product.spec.battery_charging</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Giao tiếp &amp; kết nối">
+                            <div class="box-title"><p class="box-title__title">Giao tiếp &amp; kết nối</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Thẻ SIM</th>
+                                            <th>@Model.product.spec.body_sim</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Hệ điều hành</th>
+                                            <th>@Model.product.spec.platform_os</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Jack tai nghe 3.5</th>
+                                            <th>@Model.product.spec.comms_sound_jack</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Wi-Fi</th>
+                                            <th>@Model.product.spec.comms_wlan</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Bluetooth</th>
+                                            <th>@Model.product.spec.comms_bluetooth</th>
+                                        </tr>
+                                        <tr>
+                                            <th>GPS</th>
+                                            <th>@Model.product.spec.comms_gps</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Thiết kế &amp; Trọng lượng">
+                            <div class="box-title"><p class="box-title__title">Thiết kế &amp; Trọng lượng</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Kích thước</th>
+                                            <th>@Model.product.spec.body_size</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Trọng lượng</th>
+                                            <th>@Model.product.spec.body_weight</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Chất liệu </th>
+                                            <th>@Model.product.spec.body_build</th>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Pin &amp; công nghệ sạc">
+                            <div class="box-title"><p class="box-title__title">Pin &amp; công nghệ sạc</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Công nghệ sạc</th>
+                                            <th>@Model.product.spec.battery_charging</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Cổng sạc</th>
+                                            <th>@Model.product.spec.comms_usb</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="item-box-table Tiện ích khác">
+                            <div class="box-title"><p class="box-title__title">Tiện ích khác</p></div>
+                            <div class="box-content">
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <th>Các loại cảm biến</th>
+                                            <th>@Model.product.spec.feature_special</th>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn-close" data-dismiss="modal">Đóng</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+   
+
+
+
+
     @*danhgia*@
     <div style="padding:3rem">
         <div class="ant-row" style="margin-top:1rem;row-gap:0px">
@@ -153,7 +411,7 @@
             <div class="comment-send"><button>Gửi</button></div>
         </div>
 
-        
+
     </div>
 </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

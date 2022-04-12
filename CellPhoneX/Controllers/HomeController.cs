@@ -14,12 +14,12 @@ namespace CellPhoneX.Controllers
         public ActionResult Index()
         {
             
-            var phone = (from ss in context.product_versions select ss).OrderBy(m => m.amount);
+            var phone = (from ss in context.product_versions select ss).Take(10).OrderBy(m => m.amount);
             var phone2 = (from ss in context.phone_brands select ss).ToList();
             ViewBag.listPro = phone2;
             return View(phone);
 
-        }
+        }   
         public ActionResult BrandIndex(string id)
         {
             var phone = context.product_versions.Where(p => p.product.phone_brand_id == id).ToList();
@@ -124,6 +124,19 @@ namespace CellPhoneX.Controllers
             else
                 ViewBag.ThongBao = "LINK XÁC NHẬN ĐÃ HẾT HẠN";
             return View(inv);
+        }
+        [HttpPost]
+        public ActionResult ConfirmSignUp(string account, string Token)
+        {
+            token tokenConfirm = context.tokens.SingleOrDefault(p => p.Token1 == Token && DateTime.Now >= p.time1 && DateTime.Now <= p.time2);
+            account acc = context.accounts.SingleOrDefault(p => p.account_id == account);
+            if (tokenConfirm != null && acc != null)
+            {
+                acc.confirm = "Đã xác nhận";
+                UpdateModel(acc);
+                context.SubmitChanges();
+            }
+            return View(acc);
         }
 
         public ActionResult ConfirmResetMail(string Token, string AccID)

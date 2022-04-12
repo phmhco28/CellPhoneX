@@ -2206,6 +2206,8 @@
     <Content Include="Views\Shared\_CusLayout.cshtml" />
     <Content Include="Views\User\ForgotPass.cshtml" />
     <Content Include="Views\Home\ConfirmResetMail.cshtml" />
+    <Content Include="Views\User\ConfirmSignup.cshtml" />
+    <Content Include="Views\Home\ConfirmSignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

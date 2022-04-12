@@ -37,10 +37,27 @@ namespace CellPhoneX.Controllers
         public ActionResult GioHang()
         {
             List<Giohang> lst = Laygiohang();
-            ViewBag.soluong = Session["soluong"];
+            string id;
+            foreach( var item in lst)
+            {
+                id = item.proId;
+                ViewBag.slton = soluongton(id);
+            }
+
+            ViewBag.message = Session["Message"];
             ViewBag.Tongtien = Tongtien();
 
             return View(lst);
+        }
+        private int soluongton(string id)
+        {
+             int sl = 0;
+            List<Giohang> lst = Laygiohang();
+            Giohang sanpham = lst.Find(n => n.proId == id);
+            product_version pro = dt.product_versions.FirstOrDefault(p => p.version_id == sanpham.proId);
+            sl = pro.amount.Value;
+            
+            return sl;
         }
         public ActionResult GioHangPartial()
         {
@@ -61,7 +78,8 @@ namespace CellPhoneX.Controllers
             Session["count"] = TongSOluong();
             return Content(Session["count"].ToString());
         }
-        public ActionResult CapNhatgiohang(string id, string amount)
+        [HttpPost]
+        public ActionResult CapNhatgiohang(string id, int amount)
         {
             
             List<Giohang> lst = Laygiohang();
@@ -72,14 +90,14 @@ namespace CellPhoneX.Controllers
             if (sanpham != null)
             {
                 product_version pro = dt.product_versions.FirstOrDefault(n => n.version_id == id);
-                Session["soluong"] = pro.amount;                
-                if (int.Parse(amount) > pro.amount)
+                              
+                if (amount > pro.amount)
                 {
                     Session["Message"] = "Không đủ số lượng";
                 }
                 else
                 {
-                    sanpham.amount = int.Parse(amount);
+                    sanpham.amount = amount;
                 }
                 
             }
@@ -99,7 +117,7 @@ namespace CellPhoneX.Controllers
             }
             List<Giohang> lst = Laygiohang();
             ViewBag.Tongtien = Tongtien();
-            ViewBag.messageEx = Session["MessageEx"];
+            
             return View(lst);
         }
         [HttpPost]
