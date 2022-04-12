@@ -1904,6 +1904,7 @@
     <Content Include="Content\DetailProduct.css" />
     <Content Include="Content\EditUser.css" />
     <Content Include="Content\footer.css" />
+    <Content Include="Content\forgot.jpg" />
     <Content Include="Content\header.css" />
     <Content Include="Content\images\ip13-128gb-den.jpg" />
     <Content Include="Content\images\ip13-128gb-do.jpg" />
@@ -1915,6 +1916,7 @@
     <Content Include="Content\images\ip13pro-128gb-xam.jpg" />
     <Content Include="Content\images\ip13pro-128gb-xanhduong.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\xiaomi-redmi-note11-xam.png" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\member.css" />
     <Content Include="Content\PagedList.css" />
@@ -2202,6 +2204,8 @@
     <Content Include="Views\Home\History.cshtml" />
     <Content Include="Views\Home\Member.cshtml" />
     <Content Include="Views\Shared\_CusLayout.cshtml" />
+    <Content Include="Views\User\ForgotPass.cshtml" />
+    <Content Include="Views\Home\ConfirmResetMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

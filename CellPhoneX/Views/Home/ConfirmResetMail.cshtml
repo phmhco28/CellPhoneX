@@ -1,0 +1,21 @@
+﻿@model CellPhoneX.Models.account
+@{
+    ViewBag.Title = "ConfirmResetMail";
+    Layout = "~/Views/Shared/_CusLayout.cshtml";
+}
+
+<br />
+<div style="text-align:center">
+    @if (ViewBag.ThongBao == null)
+    {
+        <h2>XÁC NHẬN ĐỔI MẬT KHẨU THÀNH CÔNG</h2>
+        <hr />
+        <div>
+            <p>Mật khẩu mới: <strong>@Model.password</strong></p>
+        </div>
+    }
+    else { 
+        <h2>@ViewBag.ThongBao</h2>
+        <hr />
+    }
+</div>

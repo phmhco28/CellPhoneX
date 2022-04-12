@@ -119,9 +119,12 @@
 </div>
 <p>
     <div class="form-group" style="margin: 0 3rem 0 10rem">
-        <div style="padding-left: 3.5rem; float: left; margin-right: 4.5rem">
-            <a class="btn btn-success" href="@Url.Action("EditEmployee","Admin", new { id = Model.employee_id})"> Chỉnh sửa </a>
-        </div>
+        @if (Model.active_status == null || Model.active_status == true)
+        {
+            <div style="padding-left: 3.5rem; float: left; margin-right: 4.5rem">
+                <a class="btn btn-success" href="@Url.Action("EditEmployee","Admin", new { id = Model.employee_id})"> Chỉnh sửa </a>
+            </div>
+        }
         <div style="padding-left: 3.5rem;">
             <a class="btn btn-primary" href="@Url.Action("Employee","Admin")"><   Quay lại</a>
         </div>

@@ -36,7 +36,7 @@
                         <td>@Html.DisplayFor(modelItem => item.customer.customer_name)</td>
                         <td>@Html.DisplayFor(modelItem => item.note)</td>
                         <td>
-                            @if (item.invoice_confirm == null || item.invoice_confirm =="")
+                            @if (item.invoice_confirm == null || item.invoice_confirm =="" || item.invoice_confirm == "Chưa xác nhận")
                             {
                                 @Html.DisplayName("Chưa xác nhận");
                             }
@@ -46,7 +46,7 @@
                             }
                         </td>
                         <td>
-                            @if (item.invoice_status_pay == null || item.invoice_status_pay == "")
+                            @if (item.invoice_status_pay == null || item.invoice_status_pay == "" || item.invoice_status_pay == "Chưa thanh toán")
                             {
                                 @Html.DisplayName("Chưa thanh toán");
                             }
@@ -68,15 +68,15 @@
                         <td>
                             <a class="btn btn-info" href="@Url.Action("DetailInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white">  Chi tiết  </a>
 
-                            @if (item.invoice_confirm == null || item.invoice_confirm == "")
-                            {
-                                <a class="btn btn-success" href="@Url.Action("ConfirmInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white"> Gửi xác nhận</a>
-
-
-                            }
 
                             @if (item.active_status == null || item.active_status == true)
                             {
+
+                                if (item.invoice_confirm == null || item.invoice_confirm == "")
+                                {
+                                    <a class="btn btn-success" href="@Url.Action("ConfirmInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white"> Gửi xác nhận</a>
+
+                                }
 
                                 <a class="btn btn-primary" href="@Url.Action("EditInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white">Sửa</a>
 

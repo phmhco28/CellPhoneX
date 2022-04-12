@@ -194,11 +194,11 @@
       <Column Name="display_resolution" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="display_feature" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="main_camera" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="main_camera_video" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="selfie_camera" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="main_camera_video" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="selfie_camera" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="camera_feature" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="platform_os" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="platform_chipset" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="platform_os" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="platform_chipset" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="platform_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="platform_gpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="comms_wlan" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
@@ -206,7 +206,7 @@
       <Column Name="comms_bluetooth" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="comms_usb" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="comms_gps" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="body_size" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="body_size" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="body_weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="body_sim" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="body_build" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

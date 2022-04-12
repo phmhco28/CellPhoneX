@@ -8,13 +8,21 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Đã xác nhận</title>
+    <title>Xác nhận đơn hàng</title>
 </head>
 <body>
-    <div> 
-        <p>CellPhoneX đã xác nhận đơn hàng @Model.invoice_id của bạn vào lúc @DateTime.Now!!!</p>
-        <hr />
-        <p>Cảm ơn quý khách !!! Hẹn gặp lại !!!</p>
+    <div>
+        @if (ViewBag.ThongBao == null)
+        {
+            <p>CellPhoneX đã xác nhận đơn hàng @Model.invoice_id của bạn vào lúc @DateTime.Now!!!</p>
+            <hr />
+            <p>Cảm ơn quý khách !!! Hẹn gặp lại !!!</p>
+        }
+        else
+        {
+            <h2>@ViewBag.ThongBao</h2>
+            <hr />
+        }
     </div>
 </body>
 </html>

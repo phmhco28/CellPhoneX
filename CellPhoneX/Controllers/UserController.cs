@@ -103,6 +103,65 @@ namespace CellPhoneX.Controllers
 
         }
 
+        public ActionResult ForgotPass()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPass(FormCollection collection)
+        {
+            var mail = collection["mail"];            
+            if (mail != null || mail != "")
+            {
+                customer cus = data.customers.SingleOrDefault(p => p.mail == mail);
+                if (cus == null)
+                {
+                    ViewBag.Thongbao = "Không tìm thấy tài khoản của bạn !!!";
+                    return this.ForgotPass();
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        var senderEmail = new MailAddress("store.confirmmail@gmail.com", "BookStore");
+                        var receiverEmail = new MailAddress(mail, "Receiver");
+                        var password = "x1lahcbhnbdvn"; //lahcbhn
+                        var sub = "XAC_NHAN_DOI_MAT_KHAU";
+                        token token = new token();
+                        token.Token1 = Nanoid.Nanoid.Generate(size: 10);
+                        token.time1 = DateTime.Now;
+                        token.time2 = DateTime.Now.AddMinutes(2);
+                        data.tokens.InsertOnSubmit(token);
+                        data.SubmitChanges();
+                        var link = string.Format("{0}", Url.Action("ConfirmResetMail", "Home", new { Token = token.Token1, AccID = cus.account_id }, Request.Url.Scheme));
+                        var body = "Xin chào: " + cus.customer_name + "\n" +
+                                    "Vui lòng nhấn vào link này để XÁC NHẬN ĐỔI MẬT KHẨU:" + link + "\n" +
+                                    "link này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2);
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderEmail.Address, password)
+                        };
+                        using (var mess = new MailMessage(senderEmail, receiverEmail)
+                        {
+                            Subject = sub,
+                            Body = body
+                        })
+                        {
+                            smtp.Send(mess);
+                        }
+                    }
+                }
+            }
+            return RedirectToAction("SignIn","User");
+        }
+
         public ActionResult SignUp()
         {
             return View();

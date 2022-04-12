@@ -4462,7 +4462,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_main_camera_video", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_main_camera_video", DbType="NVarChar(MAX)")]
 		public string main_camera_video
 		{
 			get
@@ -4482,7 +4482,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_selfie_camera", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_selfie_camera", DbType="NVarChar(200)")]
 		public string selfie_camera
 		{
 			get
@@ -4522,7 +4522,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_platform_os", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_platform_os", DbType="NVarChar(100)")]
 		public string platform_os
 		{
 			get
@@ -4542,7 +4542,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_platform_chipset", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_platform_chipset", DbType="VarChar(50)")]
 		public string platform_chipset
 		{
 			get
@@ -4702,7 +4702,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_body_size", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_body_size", DbType="NVarChar(200)")]
 		public string body_size
 		{
 			get

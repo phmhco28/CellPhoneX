@@ -44,7 +44,7 @@
                             <td>@Html.DisplayFor(modelItem => item.product_version.memory_internal)</td>
                             <td>@Html.DisplayFor(modelItem => item.product_version.color.color_name)</td>
                             <td>@Html.DisplayFor(modelItem => item.amount)</td>
-                            <td>@Html.DisplayFor(modelItem => item.price)</td>                          
+                            <td>@String.Format("{0:000,000}", item.price)</td>                          
                         </tr>
                     }
                 </tbody>

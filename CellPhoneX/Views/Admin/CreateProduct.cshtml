@@ -60,8 +60,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="promotion_id">Mã khuyến mãi </label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.promotion_id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.promotion_id, "", new { @class = "text-danger" })
+            @Html.DropDownList("promotion")
         </div>
     </div>
     <hr />

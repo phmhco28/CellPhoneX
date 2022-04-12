@@ -117,8 +117,32 @@ namespace CellPhoneX.Controllers
                 inv.invoice_confirm = "Đã xác nhận";
                 UpdateModel(inv);
                 context.SubmitChanges();
+                context.tokens.DeleteOnSubmit(tokenConfirm);
+                context.SubmitChanges();
+                return View(inv);
             }
+            else
+                ViewBag.ThongBao = "LINK XÁC NHẬN ĐÃ HẾT HẠN";
             return View(inv);
+        }
+
+        public ActionResult ConfirmResetMail(string Token, string AccID)
+        {
+            token tokenConfirm = context.tokens.SingleOrDefault(p => p.Token1 == Token && DateTime.Now >= p.time1 && DateTime.Now <= p.time2);
+            account acc= context.accounts.SingleOrDefault(p => p.account_id == AccID);
+
+            if (tokenConfirm != null && acc != null)
+            {
+                acc.password = Nanoid.Nanoid.Generate(size: 10);
+                UpdateModel(acc);
+                context.SubmitChanges();
+                context.tokens.DeleteOnSubmit(tokenConfirm);
+                context.SubmitChanges();
+                return View(acc);
+            }
+            else
+                ViewBag.ThongBao = "LINK XÁC NHẬN ĐÃ HẾT HẠN";
+            return View(acc);
         }
     }
 }

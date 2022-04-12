@@ -49,17 +49,16 @@
                             }
                         </td>
                         <td>
-                            <button type="button" class="btn btn-info">
-                                <a href="@Url.Action("DetailSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Chi tiết</a>
-                            </button>
 
-                            <button type="button" class="btn btn-primary">
-                                <a href="@Url.Action("EditSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Sửa</a>
-                            </button>
+                            <a class="btn btn-info" href="@Url.Action("DetailSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Chi tiết</a>
 
-                            <button type="button" class="btn btn-danger">
-                                <a href="@Url.Action("DeleteSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Xóa</a>
-                            </button>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                <a class="btn btn-primary" href="@Url.Action("EditSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Sửa</a>
+
+                                <a class="btn btn-danger" href="@Url.Action("DeleteSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Xóa</a>
+                            }
+
                         </td>
                     </tr>
                     }

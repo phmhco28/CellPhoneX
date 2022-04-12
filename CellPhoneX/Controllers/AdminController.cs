@@ -24,20 +24,31 @@ namespace CellPhoneX.Controllers
                 return RedirectToAction("SignIn", "Admin");
             }
             employee employee = data.employees.SingleOrDefault(p => p.account_id == acc.account_id);
-            var get_all_invoice = data.invoices.Where(p => p.invoice_confirm == null || p.invoice_confirm == "").ToList().OrderBy(p => p.order_date);
+            var get_all_invoice = data.invoices.Where(p => p.active_status == null || p.active_status == true).Where(p => p.invoice_confirm == null || p.invoice_confirm == "" || p.invoice_confirm == "Chưa xác nhận").ToList().OrderBy(p => p.order_date);
             ViewBag.AdminName = employee.name;
             decimal totalDay = 0;
             decimal totalMonth = 0;
-            foreach (var item in data.invoices.Where(p => (p.active_status == null && p.order_date == DateTime.Now && p.invoice_status_pay != null) || (p.active_status == true && p.order_date == DateTime.Now && p.invoice_status_pay != null)).ToList())
+            var invList = data.invoices.Where(p => p.active_status == null || p.active_status == true ).Where(p => p.invoice_status_pay == "Đã thanh toán").ToList();
+            DateTime date = DateTime.Now;
+            foreach (var item in invList)
             {
-                totalDay += data.invoice_details.Sum(p => p.amount * p.price);
+                string day = item.order_date.ToShortDateString();
+                if (day == date.ToShortDateString())
+                {
+                    totalDay += data.invoice_details.Where(p => p.invoice_id == item.invoice_id).Sum(s => s.price * s.amount);
+                }
             }
-            foreach (var item in data.invoices.Where(p => (p.active_status == null && p.order_date.Month == DateTime.Now.Month && p.order_date.Year == DateTime.Now.Year && p.invoice_status_pay != null) || (p.active_status == true && p.order_date == DateTime.Now && p.order_date.Year == DateTime.Now.Year && p.invoice_status_pay != null)).ToList())
+
+            foreach(var item in invList)
             {
-                totalMonth += data.invoice_details.Sum(p => p.amount * p.price);
+                string day = string.Format("{0:MM-yyyy}", item.order_date);
+                if (day == string.Format("{0:MM-yyyy}", date))
+                {
+                    totalMonth += data.invoice_details.Where(p => p.invoice_id == item.invoice_id).Sum(s => s.price * s.amount);
+                }
             }
-            ViewBag.DoanhThuNgay = totalDay.ToString();
-            ViewBag.DoanhThuThang = totalMonth.ToString();
+            ViewBag.DoanhThuNgay = string.Format("{0:000,000}",totalDay);
+            ViewBag.DoanhThuThang = string.Format("{0:000,000}", totalMonth);
             return View(get_all_invoice);
         }
         public ActionResult SignIn()
@@ -77,11 +88,6 @@ namespace CellPhoneX.Controllers
                 }
             }
             return this.SignIn();
-        }
-
-        public ActionResult FogotPass()
-        {
-            return View();
         }
 
         //DONE-------------------------------Quản lý Tài khoản -------------------------------------------------------------------
@@ -137,8 +143,12 @@ namespace CellPhoneX.Controllers
         {
             account acc = data.accounts.SingleOrDefault(p => p.account_id == id);
             employee employeeAdmin = data.employees.SingleOrDefault(p => p.account_id == id);
-            employeeAdmin.account_id = null;
-            UpdateModel(employeeAdmin);
+            if (employeeAdmin != null)
+            {
+                employeeAdmin.account_id = null;
+                UpdateModel(employeeAdmin);
+                data.SubmitChanges();
+            }
             data.accounts.DeleteOnSubmit(acc);
             data.SubmitChanges();
             return RedirectToAction("Account", "Admin");
@@ -174,7 +184,7 @@ namespace CellPhoneX.Controllers
             {
                 return RedirectToAction("SignIn", "Admin");
             }
-            var get_all_brand = data.phone_brands.ToList().OrderBy(p => p.phone_brand_name);
+            var get_all_brand = data.phone_brands.ToList().OrderBy(p => p.active_status);
             return View(get_all_brand);
         }
 
@@ -308,7 +318,8 @@ namespace CellPhoneX.Controllers
             emp.phone_number = collection["phone_number"];
             emp.registration_date = DateTime.Now;
             var accountID = collection["account_id"];
-            if (accountID == null || accountID == "")
+            var checkL = data.accounts.Where(p => p.account_id == accountID).ToList();
+            if (accountID == null || accountID == "" || checkL.Count == 0)
             {
                 emp.account_id = null;
             }
@@ -394,7 +405,7 @@ namespace CellPhoneX.Controllers
             {
                 return RedirectToAction("SignIn", "Admin");
             }
-            var get_all_product = data.products.ToList();
+            var get_all_product = data.products.ToList().OrderBy(p => p.active_status);
             return View(get_all_product);
         }
 
@@ -413,6 +424,8 @@ namespace CellPhoneX.Controllers
         [HttpPost]
         public ActionResult CreateProduct(FormCollection collection)
         {
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             product product = new product();
             product.product_id = Nanoid.Nanoid.Generate(size: 10);
             product.product_name = collection["product_name"];
@@ -420,7 +433,14 @@ namespace CellPhoneX.Controllers
             product.specs_id = collection["specs_id"];
             product.phone_brand_id = collection["phoneBrand"];
             product.description = collection["description"];
-            product.promotion_id = collection["promotion_id"];
+            var promotionID = collection["promotion"];
+            var check = data.promotions.Where(p => p.promotion_id == promotionID).ToList();
+            if (check.Count == 0)
+            {
+                product.promotion_id = null;
+            }
+            else
+                product.promotion_id = promotionID;
             data.products.InsertOnSubmit(product);
             data.SubmitChanges();
             return RedirectToAction("Product", "Admin");
@@ -441,13 +461,16 @@ namespace CellPhoneX.Controllers
         public ActionResult DeleteProduct(string id, FormCollection collection)
         {
             product product = data.products.SingleOrDefault(p => p.product_id == id);
-            data.products.DeleteOnSubmit(product);
+            product.active_status = false;
+            UpdateModel(product);
             data.SubmitChanges();
             return RedirectToAction("Product", "Admin");
         }
 
         public ActionResult EditProduct(string id)
         {
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             account acc = (account)Session["TaiKhoanAdmin"];
             if (acc == null || acc.role_id != 1)
             {
@@ -461,12 +484,21 @@ namespace CellPhoneX.Controllers
         [HttpPost]
         public ActionResult EditProduct(string id, FormCollection collection)
         {
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             product product = data.products.SingleOrDefault(p => p.product_id == id);
             product.product_name = collection["product_name"];
             product.specs_id = collection["specs_id"];
-            product.phone_brand_id = collection["phone_brand_id"];
+            product.phone_brand_id = collection["phoneBrand"];
             product.description = collection["description"];
-            product.promotion_id = collection["promotion_id"];
+            var promotionID = collection["promotion"];
+            var check = data.promotions.Where(p => p.promotion_id == promotionID).ToList();
+            if (check.Count == 0)
+            {
+                product.promotion_id = null;
+            }
+            else
+                product.promotion_id = promotionID;
             UpdateModel(product);
             data.SubmitChanges();
             return RedirectToAction("Product", "Admin");
@@ -494,14 +526,19 @@ namespace CellPhoneX.Controllers
             {
                 return RedirectToAction("SignIn", "Admin");
             }
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             ViewBag.product = new SelectList(data.products.Where(p => (p.active_status == true || p.active_status == null)).ToList().OrderBy(p => p.product_name), "product_id", "product_name");
             ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).Where(p => (p.active_status == true || p.active_status == null)).ToList(), "color_id", "color_name");
             return View();
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult CreateProductVersion(FormCollection collection, HttpPostedFileBase file)
         {
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
+            ViewBag.product = new SelectList(data.products.Where(p => (p.active_status == true || p.active_status == null)).ToList().OrderBy(p => p.product_name), "product_id", "product_name");
+            ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).Where(p => (p.active_status == true || p.active_status == null)).ToList(), "color_id", "color_name");
             if (file == null)
             {
                 ViewBag.Thongbao = "Vui lòng chọn ảnh !!!";
@@ -527,12 +564,34 @@ namespace CellPhoneX.Controllers
                     version.color_id = collection["color"];
                     version.memory_ram = collection["memory_ram"];
                     version.memory_internal = collection["memory_internal"];
-                    version.price = decimal.Parse(collection["price"]);
-                    version.special_price = decimal.Parse(collection["special_price"]);
+                    if (collection["price"] == null || collection["price"] == "")
+                    {
+                        version.price = 0;
+                    }
+                    else
+                        version.price = decimal.Parse(collection["price"]);
+                    if (collection["special_price"] == null || collection["special_price"] == "")
+                    {
+                        version.special_price = 0;
+                    }
+                    else
+                        version.special_price = decimal.Parse(collection["special_price"]);
                     version.image = fileName;
-                    version.amount = int.Parse(collection["amount"]);
+                    if (collection["amount"] == null || collection["amount"] == "")
+                    {
+                        version.amount = 0;
+                    }
+                    else
+                        version.amount = int.Parse(collection["amount"]);
                     version.active_status = true;
-                    version.promotion_id = collection["promotion_id"];
+                    var promotionID = collection["promotion_id"];
+                    var check = data.promotions.Where(p => p.promotion_id == promotionID).ToList();
+                    if (check.Count == 0)
+                    {
+                        version.promotion_id = null;
+                    }
+                    else
+                        version.promotion_id = promotionID;
                     data.product_versions.InsertOnSubmit(version);
                     data.SubmitChanges();
 
@@ -564,81 +623,53 @@ namespace CellPhoneX.Controllers
 
         public ActionResult EditProductVersion(FormCollection collection, HttpPostedFileBase file, string id)
         {
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
+            ViewBag.product = new SelectList(data.products.ToList().OrderBy(p => p.product_name), "product_id", "product_name");
+            ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).ToList(), "color_id", "color_name");
             account acc = (account)Session["TaiKhoanAdmin"];
             if (acc == null || acc.role_id != 1)
             {
                 return RedirectToAction("SignIn", "Admin");
             }
             product_version version = data.product_versions.SingleOrDefault(p => p.version_id == id);
-            if (ModelState.IsValid)
-            {
-                if (file != null)
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                    if (System.IO.File.Exists(path))
-                    {
-                        ViewBag.Thongbao = "Hình đã tồn tại";
-                    }
-                    else
-                    {
-                        file.SaveAs(path);
-
-                    }
-                    version.image = fileName;
-                }
-                version.version_id = Nanoid.Nanoid.Generate(size: 10);
-                version.product_id = collection["product"];
-                version.color_id = collection["color"];
-                version.memory_ram = collection["memory_ram"];
-                version.memory_internal = collection["memory_internal"];
-                version.price = decimal.Parse(collection["price"]);
-                version.special_price = decimal.Parse(collection["special_price"]);
-                version.amount = int.Parse(collection["amount"]);
-                version.active_status = true;
-                version.promotion_id = collection["promotion_id"];
-                UpdateModel(version);
-                data.SubmitChanges();
-            }
-            return RedirectToAction("ProductVersion", "Admin");
+            return View(version);
         }
 
         [HttpPost]
-        public ActionResult EditProductVersion(string id, FormCollection collection, HttpPostedFileBase file)
+        public ActionResult EditProductVersion(string id, FormCollection collection)
         {
+            ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             ViewBag.product = new SelectList(data.products.ToList().OrderBy(p => p.product_name), "product_id", "product_name");
             ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).ToList(), "color_id", "color_name");
             product_version version = data.product_versions.SingleOrDefault(p => p.version_id == id);
-
-            if (ModelState.IsValid)
-            {
-                if (file != null)
+            if (collection["price"] == null || collection["price"] == "")
                 {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                    if (System.IO.File.Exists(path))
-                    {
-                        ViewBag.Thongbao = "Hình đã tồn tại";
-                    }
-                    else
-                    {
-                        file.SaveAs(path);
-                    }
-                    version.image = fileName;
+                    version.price = 0;
                 }
-                version.version_id = Nanoid.Nanoid.Generate(size: 10);
-                version.product_id = collection["product"];
-                version.color_id = collection["color"];
-                version.memory_ram = collection["memory_ram"];
-                version.memory_internal = collection["memory_internal"];
-                version.price = decimal.Parse(collection["price"]);
-                version.special_price = decimal.Parse(collection["special_price"]);
-                version.amount = int.Parse(collection["amount"]);
-                version.active_status = true;
-                version.promotion_id = collection["promotion_id"];
+                else
+                    version.price = decimal.Parse(collection["price"]);
+                if (collection["special_price"] == null || collection["special_price"] == "")
+                {
+                    version.special_price = 0;
+                }
+                else
+                    version.special_price = decimal.Parse(collection["special_price"]);
+                if (collection["amount"] == null || collection["amount"] == "")
+                {
+                    version.amount = 0;
+                }
+                else
+                    version.amount = int.Parse(collection["amount"]);
+                var promotionID = collection["promotion_id"];
+                var check = data.promotions.Where(p => p.promotion_id == promotionID).ToList();
+                if (check.Count == 0)
+                {
+                    version.promotion_id = null;
+                }
+                else
+                    version.promotion_id = promotionID;
                 UpdateModel(version);
                 data.SubmitChanges();
-            }
             return RedirectToAction("ProductVersion", "Admin");
         }
         //DONE-----------------------------Ket thuc Quan ly các phien ban san pham ----------------------
@@ -724,7 +755,8 @@ namespace CellPhoneX.Controllers
         public ActionResult DeleteSpec(string id, FormCollection collection)
         {
             spec sp = data.specs.SingleOrDefault(p => p.specs_id == id);
-            data.specs.DeleteOnSubmit(sp);
+            sp.active_status = false;
+            UpdateModel(sp);
             data.SubmitChanges();
             return RedirectToAction("Spec", "Admin");
         }
@@ -772,7 +804,7 @@ namespace CellPhoneX.Controllers
             sp.feature_special = collection["feature_special"];
             UpdateModel(sp);
             data.SubmitChanges();
-            return RedirectToAction("Product", "Admin");
+            return RedirectToAction("Spec", "Admin");
         }
         //DONE----------------------------------------Ket thuc quan ly thong so ky thuat -----------------------------
 
@@ -1004,18 +1036,6 @@ namespace CellPhoneX.Controllers
             return RedirectToAction("Invoice","Admin");
         }
 
-        /*[HttpPost, ActionName("ConfirmInvoice")]
-        public ActionResult ConfirmInvoice(string token, string id)
-        {
-            var inv = data.invoices.SingleOrDefault(p => p.invoice_id == id);
-            if (token == this.token && inv != null)
-            {
-                inv.invoice_confirm = "Đã xác nhận";
-                UpdateModel(inv);
-                data.SubmitChanges();
-            }
-            return RedirectToAction("Confirm", "Home");
-        }*/
         //DONE------------------------------------Quan ly HOa don-------------------------------------
 
         //DONE-----------------------------------------Quan ly mau sac dien thoai ---------------------------

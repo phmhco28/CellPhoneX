@@ -31,13 +31,11 @@
                             <td>@Html.DisplayFor(modelItem => item.password)</td>
                             <td>@Html.DisplayFor(modelItem => item.role.role_name)</td>
                             <td>
-                                <button type="button" class="btn btn-primary">
-                                    <a href="@Url.Action("EditAccount","Admin", new { id = item.account_id})" style="text-decoration:none; color:white">Sửa</a>
-                                </button>
 
-                                <button type="button" class="btn btn-danger">
-                                    <a href="@Url.Action("DeleteAccount","Admin", new { id = item.account_id})" style="text-decoration:none; color:white">Xóa</a>
-                                </button>                               
+                                <a class="btn btn-primary" href="@Url.Action("EditAccount","Admin", new { id = item.account_id})" style="text-decoration:none; color:white">Sửa</a>
+
+                                <a class="btn btn-danger" href="@Url.Action("DeleteAccount","Admin", new { id = item.account_id})" style="text-decoration:none; color:white">Xóa</a>
+
                             </td>
                         </tr>
                     }

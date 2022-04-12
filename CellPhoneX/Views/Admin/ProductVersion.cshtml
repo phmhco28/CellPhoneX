@@ -55,9 +55,12 @@
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.promotion_id)</td>
                             <td>
-                                <a class="btn btn-primary" href="@Url.Action("EditProductVersion","Admin", new { id = item.version_id})" style="text-decoration:none; color:white">Sửa</a>
+                                @if (item.active_status == null || item.active_status == true)
+                                {
+                                    <a class="btn btn-primary" href="@Url.Action("EditProductVersion","Admin", new { id = item.version_id})" style="text-decoration:none; color:white">Sửa</a>
 
-                                <a class="btn btn-danger" href="@Url.Action("DeleteProductVersion","Admin", new { id = item.version_id})" style="text-decoration:none; color:white">Xóa</a>
+                                    <a class="btn btn-danger" href="@Url.Action("DeleteProductVersion","Admin", new { id = item.version_id})" style="text-decoration:none; color:white">Xóa</a>
+                                }
                             </td>
                         </tr>
                     }

@@ -77,11 +77,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="image">Hình </label>
             <div class="col-md-10">
-                <img src="@Url.Content("~/Content/images/" + Model.image)" width="120" />
-                (Ảnh hiện tại)
-                
-                <input type="file" name="fileUpload" />
-                @ViewBag.Thongbao
+                <img src="~/Content/images/@Model.image" width="120" height="150"/>
             </div>
         </div>
         <hr />
@@ -97,8 +93,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="promotion_id">Mã khuyến mãi </label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.promotion_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.promotion_id, "", new { @class = "text-danger" })
+                @Html.DropDownList("promotion")
             </div>
         </div>
         <hr />
@@ -108,7 +103,7 @@
                 <input type="submit" value="Save" class="btn btn-success" />
             </div>
             <div style="padding-left: 3.5rem">
-                <a class="btn btn-primary" href="@Url.Action("Product","Admin")"><   Quay lại</a>
+                <a class="btn btn-primary" href="@Url.Action("ProductVersion","Admin")"><   Quay lại</a>
             </div>
         </div>
     </div>

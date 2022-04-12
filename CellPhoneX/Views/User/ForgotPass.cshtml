@@ -1,0 +1,80 @@
+﻿@model CellPhoneX.Models.customer
+
+@{
+    ViewBag.Title = "ForgotPass";
+    Layout = "~/Views/Shared/_CusLayout.cshtml";
+}
+
+<link href="~/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-password-image">
+                                <img src="~/Content/forgot.jpg" style="width:100%; height:100%"/>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-2">Quên mật khẩu?</h1>
+                                        <p class="mb-4">Chúng tôi sẽ gửi xác nhận đến mail của bạn. Vui lòng truy cập để xác nhận đổi mật khẩu !!!</p>
+                                    </div>
+                                    <p style="padding-left: 10px;color:red;font-weight:bold">@ViewBag.Thongbao</p>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="mail" name="mail" aria-describedby="emailHelp"
+                                                placeholder="Nhập Email của bạn...">
+                                        </div>
+                                        <input type="submit" value="Đổi mật khẩu" class="btn btn-primary btn-user btn-block" />
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="@Url.Action("SignUp","User")">Tạo tài khoản mới!</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="@Url.Action("SignIn","User")">Bạn đã có tài khoản? Đăng nhập!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+
+<script src="~/Admin/vendor/jquery/jquery.min.js"></script>
+<script src="~/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="~/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="~/Admin/js/sb-admin-2.min.js"></script>

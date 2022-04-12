@@ -37,9 +37,12 @@
                             }
                         </td>
                         <td>
-                            <a class="btn btn-primary" href="@Url.Action("EditPhoneBrand","Admin", new { id = item.phone_brand_id})" style="text-decoration:none; color:white">Sửa</a>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                <a class="btn btn-primary" href="@Url.Action("EditPhoneBrand","Admin", new { id = item.phone_brand_id})" style="text-decoration:none; color:white">Sửa</a>
 
-                            <a class="btn btn-danger" href="@Url.Action("DeletePhoneBrand","Admin", new { id = item.phone_brand_id})" style="text-decoration:none; color:white">Xóa</a>
+                                <a class="btn btn-danger" href="@Url.Action("DeletePhoneBrand","Admin", new { id = item.phone_brand_id})" style="text-decoration:none; color:white">Xóa</a>
+                            }
                         </td>
                     </tr>
                     }
