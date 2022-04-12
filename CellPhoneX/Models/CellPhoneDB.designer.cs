@@ -57,9 +57,6 @@ namespace CellPhoneX.Models
     partial void Insertinvoice_detail(invoice_detail instance);
     partial void Updateinvoice_detail(invoice_detail instance);
     partial void Deleteinvoice_detail(invoice_detail instance);
-    partial void Insertphone_brand(phone_brand instance);
-    partial void Updatephone_brand(phone_brand instance);
-    partial void Deletephone_brand(phone_brand instance);
     partial void Insertproduct(product instance);
     partial void Updateproduct(product instance);
     partial void Deleteproduct(product instance);
@@ -84,7 +81,7 @@ namespace CellPhoneX.Models
     #endregion
 		
 		public CellPhoneDBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CellPhoneDBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CellPhoneDBConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -185,14 +182,6 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<phone_brand> phone_brands
-		{
-			get
-			{
-				return this.GetTable<phone_brand>();
-			}
-		}
-		
 		public System.Data.Linq.Table<product> products
 		{
 			get
@@ -206,6 +195,14 @@ namespace CellPhoneX.Models
 			get
 			{
 				return this.GetTable<product_version>();
+			}
+		}
+		
+		public System.Data.Linq.Table<phone_brand> phone_brands
+		{
+			get
+			{
+				return this.GetTable<phone_brand>();
 			}
 		}
 		
@@ -4858,6 +4855,26 @@ namespace CellPhoneX.Models
 					this._active_status = value;
 					this.SendPropertyChanged("active_status");
 					this.Onactive_statusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(MAX)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
 				}
 			}
 		}

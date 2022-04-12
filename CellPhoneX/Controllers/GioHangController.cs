@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using CellPhoneX.Models;
@@ -21,23 +23,7 @@ namespace CellPhoneX.Controllers
             }
             return lst;
         }
-        public ActionResult ThemGioHang(string id, string strURL)
-        {
-            List<Giohang> lst = Laygiohang();
-            Giohang sanpham = lst.Find(n => n.proId == id);
-            if (sanpham == null)
-            {
-                sanpham = new Giohang(id);
-                lst.Add(sanpham);
-                return RedirectToAction("ListProduct", "Product");
-            }
-            else
-            {
-                sanpham.amount++;
-                return RedirectToAction("ListProduct", "Product");
-            }
-           
-        }
+        
         private double Tongtien()
         {
             double tt = 0;
@@ -51,15 +37,16 @@ namespace CellPhoneX.Controllers
         public ActionResult GioHang()
         {
             List<Giohang> lst = Laygiohang();
+            ViewBag.soluong = Session["soluong"];
             ViewBag.Tongtien = Tongtien();
 
             return View(lst);
         }
         public ActionResult GioHangPartial()
         {
-            
+
             ViewBag.Tongtien = Tongtien();
-            
+
             return PartialView();
         }
         public ActionResult XoaGiohang(string id)
@@ -69,35 +56,42 @@ namespace CellPhoneX.Controllers
             if (sanpham != null)
             {
                 lst.RemoveAll(n => n.proId == id);
-                return RedirectToAction("Giohang");
+                /*return RedirectToAction("Giohang");*/
             }
-            return RedirectToAction("Giohang");
+            Session["count"] = TongSOluong();
+            return Content(Session["count"].ToString());
         }
-        public ActionResult CapNhatgiohang(string id, FormCollection collection)
+        public ActionResult CapNhatgiohang(string id, string amount)
         {
+            
             List<Giohang> lst = Laygiohang();
-            Giohang sanpham = lst.SingleOrDefault(n => n.proId == id);
-
+            Giohang sanpham = lst.FirstOrDefault(n => n.proId == id);
+            
+            
+               
             if (sanpham != null)
             {
-                product_version pro = dt.product_versions.FirstOrDefault(n => n.product_id == id);
-                int amount = int.Parse(collection["txtSolg"].ToString());
-                if (amount > pro.amount)
+                product_version pro = dt.product_versions.FirstOrDefault(n => n.version_id == id);
+                Session["soluong"] = pro.amount;                
+                if (int.Parse(amount) > pro.amount)
                 {
                     Session["Message"] = "Không đủ số lượng";
-                    return RedirectToAction("Giohang");
                 }
-                sanpham.amount = amount;
+                else
+                {
+                    sanpham.amount = int.Parse(amount);
+                }
+                
             }
 
-            return RedirectToAction("Giohang");
+            return RedirectToAction("GioHang");
         }
         [HttpGet]
         public ActionResult DatHang()
         {
             if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
             {
-                return RedirectToAction("DangNhap", "NguoiDung");
+                return RedirectToAction("SignIn", "User");
             }
             if (Session["Giohang"] == null)
             {
@@ -105,46 +99,46 @@ namespace CellPhoneX.Controllers
             }
             List<Giohang> lst = Laygiohang();
             ViewBag.Tongtien = Tongtien();
+            ViewBag.messageEx = Session["MessageEx"];
             return View(lst);
         }
         [HttpPost]
-       /* public ActionResult DatHang(FormCollection collection)
+        public ActionResult DatHang(FormCollection collection)
         {
-            DonHang dh = new DonHang();
-            KhachHang kh = (KhachHang)Session["TaiKhoan"];
-            Sach s = new Sach();
-            List<Giohang> gh = Laygiohang();
-            var ngaygiao = String.Format("{0:dd/MM/yyyy}", collection["NgayGiao"]);
+            invoice dh = new invoice();
+            customer kh = (customer)Session["TaiKhoan"];
 
-            dh.makh = kh.makh;
-            dh.ngaydat = DateTime.Now;
-            dh.ngaygiao = DateTime.Parse(ngaygiao);
-            dh.giaohang = false;
-            dh.thanhtoan = false;
-            if (dh.ngaygiao < dh.ngaydat)
+            product_version s = new product_version();
+            List<Giohang> gh = Laygiohang();
+            var ngaygiao = collection["NgayGiao"];
+            dh.invoice_id = Nanoid.Nanoid.Generate(size: 10);
+            dh.customer_id = kh.customer_id;
+            dh.order_date = DateTime.Now;
+            dh.deliver_date = DateTime.Parse(ngaygiao);
+            if (dh.deliver_date < dh.order_date)
             {
                 Session["MessageEx"] = "Ngay giao phải sau ngày đặt";
                 return RedirectToAction("DatHang");
             }
             else
             {
-                dt.DonHangs.InsertOnSubmit(dh);
+                dt.invoices.InsertOnSubmit(dh);
                 dt.SubmitChanges();
             }
 
             foreach (var item in gh)
             {
-                ChiTietDonHang ctdh = new ChiTietDonHang();
-                ctdh.madon = dh.madon;
-                ctdh.masach = item.Masach;
-                ctdh.soluong = item.soluong;
-                ctdh.gia = (decimal)item.giaban;
-                s = dt.Saches.Single(n => n.masach == item.Masach);
-                s.soluongton -= ctdh.soluong;
+                invoice_detail ctdh = new invoice_detail();
+                ctdh.invoice_id = dh.invoice_id;
+                ctdh.version_id = item.proId;
+                ctdh.amount = item.amount;
+                ctdh.price = (decimal)item.special_price;
+                s = dt.product_versions.Single(n => n.version_id == item.proId);
+                s.amount -= ctdh.amount;
 
                 dt.SubmitChanges();
 
-                dt.ChiTietDonHangs.InsertOnSubmit(ctdh);
+                dt.invoice_details.InsertOnSubmit(ctdh);
             }
             dt.SubmitChanges();
 
@@ -154,8 +148,8 @@ namespace CellPhoneX.Controllers
             try
             {
                 var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
-                var receiverEmail = new MailAddress(kh.email, "Receiver");
-                var password = "QuocTu2907";
+                var receiverEmail = new MailAddress(kh.mail, "Receiver");
+                var password = "";
                 var sub = "Hello";
                 var body = "Đơn hàng đã được xác nhận";
                 var smtp = new SmtpClient
@@ -187,11 +181,45 @@ namespace CellPhoneX.Controllers
         public ActionResult XacnhanDonhang()
         {
             return View();
-        }*/
+        }
 
         public ActionResult Index()
         {
             return View();
+        }
+        private int TongSOluong()
+        {
+            int tsl = 0;
+            List<Giohang> lst = Session["Giohang"] as List<Giohang>;
+            if (lst != null)
+            {
+                tsl = lst.Count();
+            }
+            return tsl;
+        }
+
+        [HttpPost]
+
+        public ActionResult AddProductAjax(string id)
+        {
+            List<Giohang> lst = Laygiohang();
+            Giohang sanpham = lst.Find(n => n.proId == id);
+            
+            
+            if (sanpham == null)
+            {
+                sanpham = new Giohang(id);
+                lst.Add(sanpham);
+                
+            }
+            else
+            {
+                sanpham.amount++;
+               
+            }
+            Session["count"] = TongSOluong();
+            return Content(Session["count"].ToString());
+
         }
     }
 }

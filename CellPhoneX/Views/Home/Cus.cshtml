@@ -1,0 +1,50 @@
+﻿@model CellPhoneX.Models.customer
+@{
+    ViewBag.Title = "Cus";
+    Layout = "~/Views/Shared/_CusLayout.cshtml";
+}
+<link href="~/Content/member.css" rel="stylesheet" />
+<section class="cps-section">
+    <div class="cps-container">
+        <div class="cps-left-col">
+            <div class="block-menu">
+                <div class="block-menu__item-menu">
+                    <a href="@Url.Action("Cus","Home")">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Thông tin</p>
+                    </a>
+                </div>
+                <div class="block-menu__item-menu">
+                    <a href="@Url.Action("History","Home")">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Lịch sử mua hàng</p>
+                    </a>
+                </div>
+                <div class="block-menu__item-menu">
+                    <a href="@Url.Action("Logout","User")">
+                        <div class="box-icon">
+
+                        </div>
+                        <p>Đăng xuất</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cps-right-col">
+            <div class="content">
+                <p>Họ và tên : @Model.customer_name</p>
+                <p>Số Điện Thoại : @Model.phone_number</p>
+                <p>Email : @Model.mail</p>
+                <p>Giới tính: @Model.sex</p>
+                <p>Ngày Sinh: @String.Format("{0:dd,MM,yyyy}",Model.date_of_birth)</p>
+                <p>Địa chỉ : @Model.address</p>
+                @Html.ActionLink("Edit", "Edit","Home",new {id = Model.account_id})
+                
+            </div>
+        </div>
+    </div>
+    </section>

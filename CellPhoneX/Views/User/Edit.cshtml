@@ -4,14 +4,15 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/EditUser.css" rel="stylesheet" type="text/css" />
 
-<h2>Edit</h2>
+@*@using (Html.BeginForm())*@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+@Html.AntiForgeryToken()
+
+@* <div class="form-horizontal">
         <h4>customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -70,9 +71,39 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-    </div>
+    </div>*@
+<div     style="background: bisque;">
+    <form id="msform">
+        <!-- progressbar -->
+        <ul id="progressbar">
+            @* <li class="active">Account Setup</li>
+                <li>Social Profiles</li>
+                <li>Personal Details</li>*@
+        </ul>
+        <!-- fieldsets -->
+        <fieldset>
+            <h2 class="fs-title">Edit your account</h2>
+            <input placeholder="Name" name="name" @Html.EditorFor(model => model.customer_name)
+            <input type="date" name="Date of birth" placeholder="Password" @Html.EditorFor(model => model.date_of_birth)
+            <div style="display: flex; padding: 10px 75px; display: flex; margin-left: -5rem">
+                <input style="cursor:pointer" type="radio" name="Male" id="sexer" @Html.EditorFor(model => model.sex) Male
+                <input style="cursor:pointer" type="radio" name="Female" id="sexer" @Html.EditorFor(model => model.sex) Female
+            </div>
+            <input type="text" name="Address" placeholder="Address" @Html.EditorFor(model => model.address)
+            <input type="email" name="email" placeholder="Mail" @Html.EditorFor(model => model.mail)
+            <input type="text" name="Phone" placeholder="Phone" @Html.EditorFor(model => model.phone_number)
+            <input type="submit" name="submit" class="submit action-button" value="Save" style="text-align:center" />
+
+        </fieldset>
+
+    </form>
+</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

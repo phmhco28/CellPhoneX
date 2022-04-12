@@ -1,121 +1,24 @@
 ﻿@model IEnumerable<CellPhoneX.Models.product_version>
-@{ ViewBag.Title = "Home Page";
-                var list = (List<phone_brand>)ViewBag.listPro; }
-@using CellPhoneX.Models
+@{ ViewBag.Title = "BrandIndex";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 <link href="~/Content/body.css" rel="stylesheet" />
 <section class="cps-section">
+
     <div class="std">
-        <div class="cps-container">
-            <div class="block-sliding-home">
-                <div class="block-sliding-home__box-left">
-                    <div class="swiper-container gallery-top swiper-container-initialized swiper-container-horizontal">
-                        <div class="swiper-wrapper">
-
-                            <div class="swiper-slide">
-                                <a href="#">
-                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Note_11_pro_plus.png" />
-                                </a>
-
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="#">
-                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://artcity.vn/wp-content/uploads/2021/02/Thiet-ke-banner-quang-cao-dien-thoai-3.jpg" />
-                                </a>
-
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="#">
-                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://cdn.tgdd.vn/hoi-dap/1355217/banner-tgdd-800x300.jpg" />
-                                </a>
-
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="#">
-                                    <img class="swiper-lazy swiper-lazy-loaded" src="https://www.duchuymobile.com/images/promo/34/s20-plus-pc-banner.jpg" />
-                                </a>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="swiper-container gallery-thumbs swiper-container-initialized swiper-container-horizontal swiper-container-free-mode swiper-container-thumbs">
-                        <div class="swiper-wrapper">
-
-                            <div class="swiper-dot " onclick="currentSlide(1)">
-                                GALAXY S22 SERIES
-                                <br />
-                                Ưu đãi hấp dẫn
-                            </div>
-                            <div class="swiper-dot" onclick="currentSlide(2)">
-                                GALAXY S20 PLUS
-                                <br />
-                                Ưu đãi bất ngờ
-                            </div>
-                            <div class="swiper-dot" onclick="currentSlide(3)">
-                                CÁC DÒNG IPHONE
-                                <br />
-                                Hỗ trợ mùa dịch
-                            </div>
-                            <div class="swiper-dot" onclick="currentSlide(4)">
-                                VIVO V23E
-                                <br />
-                                Giá siêu tiết kiệm
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="block-sliding-home__box-right">
-                    <a href="#" class="item-banner-right">
-                        <img class="cpslazy loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Xiaomi_buds_3.png" />
-                    </a>
-                    <a href="#" class="item-banner-right">
-                        <img class="cpslazy loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Xiaomi_buds_3.png" />
-                    </a>
-                    <a href="#" class="item-banner-right">
-                        <img class="cpslazy loaded" src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/Xiaomi_buds_3.png" />
-                    </a>
-
-                </div>
-
-            </div>
-        </div>
-        <div class="cps-container">
-            <div class="banner-container">
-                <a href="#" rel="nofollow" target="_blank">
-                    <img alt="#" src="https://cdn.cellphones.com.vn/media/wysiwyg/Banner/1200-75-max.png">
-                </a>
-            </div>
-        </div>
         <div class="cps-container d-flex flex-column">
             <div class="block-products products-home mb-3 san-pham-noi-bat">
                 <div class="box-title">
                     <a href="#" class="box-title__title">
-                        <h2>ĐIỆN THOẠI NỔI BẬT</h2>
+                        <h2>ĐIỆN THOẠI</h2>
                     </a>
-
-                    <div class="box-related-tag">
-                        <div class="list-related-tag" style="height: 34px">
-                            @foreach (var br in list)
-                            {
-                <a href="@Url.Action("BrandIndex", new { id = br.phone_brand_id })" class="item-related-tag">@br.phone_brand_name</a>}
-
-                            @*<a href="#" class="item-related-tag">Samsung</a>
-                                <a href="#" class="item-related-tag">Xiaomi</a>
-                                <a href="#" class="item-related-tag">Oppo</a>
-                                <a href="#" class="item-related-tag">Realme</a>
-                                <a href="#" class="item-related-tag">Nokia</a>
-                                <a href="#" class="item-related-tag">Asus</a>
-                                <a href="#" class="item-related-tag">Vivo</a>*@
-                            <a href="@Url.Action("ListProduct","Product")" class="item-related-tag">Xem tất cả</a>
-                        </div>
-                    </div>
                 </div>
+
                 <div class="box-product">
                     <div class="list-product">
                         @foreach (var item in Model)
                         {
-                            if (item.price == 0  && item.amount == 0)
+
+                            if (item.price == 0 && item.special_price == 0)
                             {
             <div class="item-product">
                 <div class="item-product__box-img">
@@ -129,14 +32,32 @@
                     </a>
                 </div>
                 <div class="item-product__more-info text-stock">
-                    <p>Sắp về hàng</p>
+                    <p>Hàng mới</p>
                 </div>
-                <div class="item-product__box-price">
-                    <p class="special-price">@item.special_price</p>
-                </div>
+
             </div> }
-        else if (item.amount > 0)
+        else if (item.price == 0)
         {
+<div class="item-product">
+    <div class="item-product__box-img">
+        <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
+            <img src="~/Content/images/@item.image" />
+        </a>
+    </div>
+    <div class="item-product__box-name">
+        <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
+            <p>@item.product.product_name</p>
+        </a>
+    </div>
+    <div class="item-product__more-info text-stock">
+        <p>Sắp về hàng</p>
+    </div>
+    <div class="item-product__box-price">
+        <p class="special-price">@item.special_price</p>
+    </div>
+</div> }
+else if (item.amount > 0)
+{
 <div class="item-product">
     <div class="item-product__box-img">
         <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
@@ -146,6 +67,29 @@
     <div class="item-product__sticker-percent">
         <p>
             Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %
+        </p>
+    </div>
+    <div class="item-product__box-name">
+        <a href="@Url.Action("Detail","Product", new { id = item.version_id })">
+            <p>@item.product.product_name</p>
+        </a>
+    </div>
+    <div class="item-product__box-price">
+        <p class="special-price">@item.special_price</p>
+        <p class="old-price">@item.price</p>
+    </div>
+</div> }
+else if (item.amount == 0)
+{
+<div class="item-product">
+    <div class="item-product__box-img">
+        <a href="@Url.Action("Detail","Product", new { id = item.version_id })" class="img-product">
+            <img src="~/Content/images/@item.image" />
+        </a>
+    </div>
+    <div class="item-product__sticker-percent">
+        <p>
+            Hết hàng
         </p>
     </div>
     <div class="item-product__box-name">
@@ -370,6 +314,7 @@
                         </div>-->
                     </div>
                 </div>
+
             </div>
             <div class="block-banner-sis">
                 <div class="box-title">
@@ -389,68 +334,3 @@
     </div>
 </section>
 
-
-
-
-
-<script>
-    var slideIndex = 0;
-    // showSlides(slideIndex);
-
-    autoShow();
-
-    // // Next/previous controls
-    function prevSlide(n) {
-        showSlides(slideIndex += n);
-    }
-
-    // //auto show
-    function autoShow() {
-        var i;
-        var slides = document.getElementsByClassName("swiper-slide");
-        var dots = document.getElementsByClassName("swiper-dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {
-            slideIndex = 1;
-        }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].className = slides[i].className.replace(" active", "");
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].setAttribute("style", "display: block");
-
-        slides[slideIndex - 1].className += " active";
-
-        dots[slideIndex - 1].className += " active";
-        setTimeout(autoShow, 3000);
-    }
-
-    // // Thumbnail image controls
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("swiper-slide");
-        var dots = document.getElementsByClassName("swiper-dot");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].setAttribute("style", "display: block");
-        slides[slideIndex - 1].className += " active";
-        dots[slideIndex - 1].className += " active";
-    }
-
-</script>

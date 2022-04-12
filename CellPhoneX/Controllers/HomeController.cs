@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CellPhoneX.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,24 +10,102 @@ namespace CellPhoneX.Controllers
 {
     public class HomeController : Controller
     {
-        CellPhoneDBDataContext data = new CellPhoneDBDataContext();
+        CellPhoneDBDataContext context = new CellPhoneDBDataContext();
         public ActionResult Index()
         {
+            
+            var phone = (from ss in context.product_versions select ss).OrderBy(m => m.amount);
+            var phone2 = (from ss in context.phone_brands select ss).ToList();
+            ViewBag.listPro = phone2;
+            return View(phone);
+
+        }
+        public ActionResult BrandIndex(string id)
+        {
+            var phone = context.product_versions.Where(p => p.product.phone_brand_id == id).ToList();
+            return View(phone);
+        }
+        public ActionResult Member()
+        {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult Cus()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            //lay id account
+            customer acc = (customer)Session["TaiKhoan"];
+            
+            if ( acc == null )
+            {
+                return RedirectToAction("SignIn", "User");
+            }
+            else
+            {
+                var D_cus = context.customers.FirstOrDefault(p => p.account_id == acc.account_id);
+                return View(D_cus);
+            }    
+           
+            
         }
-
-        public ActionResult Contact()
+        
+        public ActionResult Edit()
         {
-            ViewBag.Message = "Your contact page.";
+            customer acc = (customer)Session["TaiKhoan"];
+            
+            if (acc == null)
+            {
+                return RedirectToAction("SignIn", "User");
+            }
+            else
+            {
+                var D_cus = context.customers.FirstOrDefault(p => p.account_id == acc.account_id);
+                return View(D_cus);
+            }
+        }
+        [HttpPost]
+        public ActionResult Edit(FormCollection collection)
+        {
+            customer acc = (customer)Session["TaiKhoan"];
+           
+            if (acc == null)
+            {
+                return RedirectToAction("SignIn", "User");
+            }
+            else
+            {
+                var E_cus = context.customers.FirstOrDefault(p => p.account_id == acc.account_id);
+                var Hoten = collection["customerName"];
+                var SDT = collection["PhoneNumber"];
+                var mail = collection["mail"];
+                var sex = collection["sex"];
+                var birthday = Convert.ToDateTime(collection["birthday"]);
+                var address = collection["address"];
 
-            return View();
+                E_cus.customer_name = Hoten;
+                E_cus.phone_number = SDT;
+                E_cus.mail = mail;
+                E_cus.sex = sex;
+                E_cus.date_of_birth= birthday;
+                E_cus.address = address;
+
+                UpdateModel(E_cus);
+                context.SubmitChanges();
+
+                return RedirectToAction("Cus","Home", new { id = acc.account_id });
+            }
+            
+        }
+        public ActionResult History()
+        {
+            customer acc = (customer)Session["TaiKhoan"];
+            var list = context.invoices.Where(p => p.customer.account_id == acc.account_id).ToList();
+            ViewBag.listIn = list;
+            return View(list);
+        }
+        public ActionResult Details(string id)
+        {
+            var list = context.invoice_details.Where(p => p.invoice_id == id).ToList();
+            ViewBag.listDetails = list;
+            return View(list);
         }
 
         public ActionResult Confirm(string invoice, string Token)

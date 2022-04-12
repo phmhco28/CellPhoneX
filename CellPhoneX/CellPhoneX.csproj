@@ -1902,6 +1902,7 @@
     <Content Include="Content\body.css" />
     <Content Include="Content\cart.css" />
     <Content Include="Content\DetailProduct.css" />
+    <Content Include="Content\EditUser.css" />
     <Content Include="Content\footer.css" />
     <Content Include="Content\header.css" />
     <Content Include="Content\images\ip13-128gb-den.jpg" />
