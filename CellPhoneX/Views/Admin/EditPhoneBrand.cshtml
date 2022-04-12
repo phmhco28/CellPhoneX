@@ -1,0 +1,47 @@
+﻿@model CellPhoneX.Models.phone_brand
+
+@{
+    ViewBag.Title = "EditPhoneBrand";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem">Chỉnh sửa thông tin thương hiệu <strong>@Model.phone_brand_name</strong></h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="phone_brand_id">Mã thương hiệu </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.phone_brand_id</strong></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="phone_brand_name">Thương hiệu </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.phone_brand_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_brand_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 3rem">
+            <div class="col-md-offset-2 col-md-10" style="padding-right: 20rem;float:right; text-align:right; width:50px">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+            <div style="padding-left: 3.5rem">
+                <a class="btn btn-primary" href="@Url.Action("PhoneBrand","Admin")"><   Quay lại</a>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

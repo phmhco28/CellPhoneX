@@ -1,0 +1,54 @@
+﻿@model CellPhoneX.Models.account
+
+@{
+    ViewBag.Title = "DeleteAccount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 style="margin-bottom: 2rem">Bạn chắc chắn muốn xóa tài khoản <strong>@Model.username</strong> ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Tên tài khoản")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Mật khẩu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Quyền")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.role_id)
+        </dd>
+        <hr />
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a class="btn btn-primary" href="@Url.Action("Account","Admin")"><   Quay lại</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

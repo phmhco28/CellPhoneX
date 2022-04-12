@@ -42,6 +42,9 @@ namespace CellPhoneX.Models
     partial void Insertcustomer_comment(customer_comment instance);
     partial void Updatecustomer_comment(customer_comment instance);
     partial void Deletecustomer_comment(customer_comment instance);
+    partial void Insertcustomer_vip(customer_vip instance);
+    partial void Updatecustomer_vip(customer_vip instance);
+    partial void Deletecustomer_vip(customer_vip instance);
     partial void Insertemployee(employee instance);
     partial void Updateemployee(employee instance);
     partial void Deleteemployee(employee instance);
@@ -63,6 +66,9 @@ namespace CellPhoneX.Models
     partial void Insertproduct_version(product_version instance);
     partial void Updateproduct_version(product_version instance);
     partial void Deleteproduct_version(product_version instance);
+    partial void Insertpromotion(promotion instance);
+    partial void Updatepromotion(promotion instance);
+    partial void Deletepromotion(promotion instance);
     partial void Insertrating(rating instance);
     partial void Updaterating(rating instance);
     partial void Deleterating(rating instance);
@@ -72,6 +78,9 @@ namespace CellPhoneX.Models
     partial void Insertspec(spec instance);
     partial void Updatespec(spec instance);
     partial void Deletespec(spec instance);
+    partial void Inserttoken(token instance);
+    partial void Updatetoken(token instance);
+    partial void Deletetoken(token instance);
     #endregion
 		
 		public CellPhoneDBDataContext() : 
@@ -136,6 +145,14 @@ namespace CellPhoneX.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<customer_vip> customer_vips
+		{
+			get
+			{
+				return this.GetTable<customer_vip>();
+			}
+		}
+		
 		public System.Data.Linq.Table<employee> employees
 		{
 			get
@@ -192,6 +209,14 @@ namespace CellPhoneX.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<promotion> promotions
+		{
+			get
+			{
+				return this.GetTable<promotion>();
+			}
+		}
+		
 		public System.Data.Linq.Table<rating> ratings
 		{
 			get
@@ -213,6 +238,14 @@ namespace CellPhoneX.Models
 			get
 			{
 				return this.GetTable<spec>();
+			}
+		}
+		
+		public System.Data.Linq.Table<token> tokens
+		{
+			get
+			{
+				return this.GetTable<token>();
 			}
 		}
 	}
@@ -460,6 +493,8 @@ namespace CellPhoneX.Models
 		
 		private string _description;
 		
+		private System.Nullable<bool> _active_status;
+		
 		private EntitySet<product_version> _product_versions;
 		
     #region Extensibility Method Definitions
@@ -472,6 +507,8 @@ namespace CellPhoneX.Models
     partial void Oncolor_nameChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public color()
@@ -536,6 +573,26 @@ namespace CellPhoneX.Models
 					this._description = value;
 					this.SendPropertyChanged("description");
 					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
 				}
 			}
 		}
@@ -610,6 +667,10 @@ namespace CellPhoneX.Models
 		
 		private string _account_id;
 		
+		private string _vip_id;
+		
+		private System.Nullable<bool> _active_status;
+		
 		private EntitySet<customer_comment> _customer_comments;
 		
 		private EntitySet<invoice> _invoices;
@@ -617,6 +678,8 @@ namespace CellPhoneX.Models
 		private EntitySet<rating> _ratings;
 		
 		private EntityRef<account> _account;
+		
+		private EntityRef<customer_vip> _customer_vip;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -640,6 +703,10 @@ namespace CellPhoneX.Models
     partial void Onregistration_dateChanged();
     partial void Onaccount_idChanging(string value);
     partial void Onaccount_idChanged();
+    partial void Onvip_idChanging(string value);
+    partial void Onvip_idChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public customer()
@@ -648,6 +715,7 @@ namespace CellPhoneX.Models
 			this._invoices = new EntitySet<invoice>(new Action<invoice>(this.attach_invoices), new Action<invoice>(this.detach_invoices));
 			this._ratings = new EntitySet<rating>(new Action<rating>(this.attach_ratings), new Action<rating>(this.detach_ratings));
 			this._account = default(EntityRef<account>);
+			this._customer_vip = default(EntityRef<customer_vip>);
 			OnCreated();
 		}
 		
@@ -811,7 +879,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account_id", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account_id", DbType="VarChar(20)")]
 		public string account_id
 		{
 			get
@@ -831,6 +899,50 @@ namespace CellPhoneX.Models
 					this._account_id = value;
 					this.SendPropertyChanged("account_id");
 					this.Onaccount_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vip_id", DbType="VarChar(20)")]
+		public string vip_id
+		{
+			get
+			{
+				return this._vip_id;
+			}
+			set
+			{
+				if ((this._vip_id != value))
+				{
+					if (this._customer_vip.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onvip_idChanging(value);
+					this.SendPropertyChanging();
+					this._vip_id = value;
+					this.SendPropertyChanged("vip_id");
+					this.Onvip_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
 				}
 			}
 		}
@@ -904,6 +1016,40 @@ namespace CellPhoneX.Models
 						this._account_id = default(string);
 					}
 					this.SendPropertyChanged("account");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="customer_vip_customer", Storage="_customer_vip", ThisKey="vip_id", OtherKey="vip_id", IsForeignKey=true)]
+		public customer_vip customer_vip
+		{
+			get
+			{
+				return this._customer_vip.Entity;
+			}
+			set
+			{
+				customer_vip previousValue = this._customer_vip.Entity;
+				if (((previousValue != value) 
+							|| (this._customer_vip.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._customer_vip.Entity = null;
+						previousValue.customers.Remove(this);
+					}
+					this._customer_vip.Entity = value;
+					if ((value != null))
+					{
+						value.customers.Add(this);
+						this._vip_id = value.vip_id;
+					}
+					else
+					{
+						this._vip_id = default(string);
+					}
+					this.SendPropertyChanged("customer_vip");
 				}
 			}
 		}
@@ -1192,6 +1338,168 @@ namespace CellPhoneX.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.customer_vip")]
+	public partial class customer_vip : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _vip_id;
+		
+		private System.Nullable<decimal> _accumulate_expenditure;
+		
+		private System.Nullable<int> _discount;
+		
+		private string _note;
+		
+		private EntitySet<customer> _customers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onvip_idChanging(string value);
+    partial void Onvip_idChanged();
+    partial void Onaccumulate_expenditureChanging(System.Nullable<decimal> value);
+    partial void Onaccumulate_expenditureChanged();
+    partial void OndiscountChanging(System.Nullable<int> value);
+    partial void OndiscountChanged();
+    partial void OnnoteChanging(string value);
+    partial void OnnoteChanged();
+    #endregion
+		
+		public customer_vip()
+		{
+			this._customers = new EntitySet<customer>(new Action<customer>(this.attach_customers), new Action<customer>(this.detach_customers));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vip_id", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string vip_id
+		{
+			get
+			{
+				return this._vip_id;
+			}
+			set
+			{
+				if ((this._vip_id != value))
+				{
+					this.Onvip_idChanging(value);
+					this.SendPropertyChanging();
+					this._vip_id = value;
+					this.SendPropertyChanged("vip_id");
+					this.Onvip_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accumulate_expenditure", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> accumulate_expenditure
+		{
+			get
+			{
+				return this._accumulate_expenditure;
+			}
+			set
+			{
+				if ((this._accumulate_expenditure != value))
+				{
+					this.Onaccumulate_expenditureChanging(value);
+					this.SendPropertyChanging();
+					this._accumulate_expenditure = value;
+					this.SendPropertyChanged("accumulate_expenditure");
+					this.Onaccumulate_expenditureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discount", DbType="Int")]
+		public System.Nullable<int> discount
+		{
+			get
+			{
+				return this._discount;
+			}
+			set
+			{
+				if ((this._discount != value))
+				{
+					this.OndiscountChanging(value);
+					this.SendPropertyChanging();
+					this._discount = value;
+					this.SendPropertyChanged("discount");
+					this.OndiscountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(MAX)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="customer_vip_customer", Storage="_customers", ThisKey="vip_id", OtherKey="vip_id")]
+		public EntitySet<customer> customers
+		{
+			get
+			{
+				return this._customers;
+			}
+			set
+			{
+				this._customers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_customers(customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.customer_vip = this;
+		}
+		
+		private void detach_customers(customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.customer_vip = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.employee")]
 	public partial class employee : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1217,6 +1525,8 @@ namespace CellPhoneX.Models
 		private System.DateTime _registration_date;
 		
 		private string _account_id;
+		
+		private System.Nullable<bool> _active_status;
 		
 		private EntitySet<employee_comment> _employee_comments;
 		
@@ -1246,6 +1556,8 @@ namespace CellPhoneX.Models
     partial void Onregistration_dateChanged();
     partial void Onaccount_idChanging(string value);
     partial void Onaccount_idChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public employee()
@@ -1455,6 +1767,26 @@ namespace CellPhoneX.Models
 					this._account_id = value;
 					this.SendPropertyChanged("account_id");
 					this.Onaccount_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
 				}
 			}
 		}
@@ -1799,6 +2131,8 @@ namespace CellPhoneX.Models
 		
 		private string _customer_id;
 		
+		private System.Nullable<bool> _active_status;
+		
 		private EntitySet<invoice_detail> _invoice_details;
 		
 		private EntityRef<customer> _customer;
@@ -1821,6 +2155,8 @@ namespace CellPhoneX.Models
     partial void OnnoteChanged();
     partial void Oncustomer_idChanging(string value);
     partial void Oncustomer_idChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public invoice()
@@ -1850,7 +2186,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_invoice_status_pay", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_invoice_status_pay", DbType="NVarChar(MAX)")]
 		public string invoice_status_pay
 		{
 			get
@@ -1870,7 +2206,7 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_invoice_confirm", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_invoice_confirm", DbType="NVarChar(MAX)")]
 		public string invoice_confirm
 		{
 			get
@@ -1970,6 +2306,26 @@ namespace CellPhoneX.Models
 					this._customer_id = value;
 					this.SendPropertyChanged("customer_id");
 					this.Oncustomer_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
 				}
 			}
 		}
@@ -2280,6 +2636,8 @@ namespace CellPhoneX.Models
 		
 		private string _phone_brand_name;
 		
+		private System.Nullable<bool> _active_status;
+		
 		private EntitySet<product> _products;
 		
     #region Extensibility Method Definitions
@@ -2290,6 +2648,8 @@ namespace CellPhoneX.Models
     partial void Onphone_brand_idChanged();
     partial void Onphone_brand_nameChanging(string value);
     partial void Onphone_brand_nameChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public phone_brand()
@@ -2334,6 +2694,26 @@ namespace CellPhoneX.Models
 					this._phone_brand_name = value;
 					this.SendPropertyChanged("phone_brand_name");
 					this.Onphone_brand_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
 				}
 			}
 		}
@@ -2400,9 +2780,17 @@ namespace CellPhoneX.Models
 		
 		private string _phone_brand_id;
 		
+		private string _description;
+		
+		private string _promotion_id;
+		
+		private System.Nullable<bool> _active_status;
+		
 		private EntitySet<product_version> _product_versions;
 		
 		private EntityRef<phone_brand> _phone_brand;
+		
+		private EntityRef<promotion> _promotion;
 		
 		private EntityRef<spec> _spec;
 		
@@ -2420,12 +2808,19 @@ namespace CellPhoneX.Models
     partial void Onspecs_idChanged();
     partial void Onphone_brand_idChanging(string value);
     partial void Onphone_brand_idChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void Onpromotion_idChanging(string value);
+    partial void Onpromotion_idChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public product()
 		{
 			this._product_versions = new EntitySet<product_version>(new Action<product_version>(this.attach_product_versions), new Action<product_version>(this.detach_product_versions));
 			this._phone_brand = default(EntityRef<phone_brand>);
+			this._promotion = default(EntityRef<promotion>);
 			this._spec = default(EntityRef<spec>);
 			OnCreated();
 		}
@@ -2538,6 +2933,70 @@ namespace CellPhoneX.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promotion_id", DbType="VarChar(20)")]
+		public string promotion_id
+		{
+			get
+			{
+				return this._promotion_id;
+			}
+			set
+			{
+				if ((this._promotion_id != value))
+				{
+					if (this._promotion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onpromotion_idChanging(value);
+					this.SendPropertyChanging();
+					this._promotion_id = value;
+					this.SendPropertyChanged("promotion_id");
+					this.Onpromotion_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_product_version", Storage="_product_versions", ThisKey="product_id", OtherKey="product_id")]
 		public EntitySet<product_version> product_versions
 		{
@@ -2581,6 +3040,40 @@ namespace CellPhoneX.Models
 						this._phone_brand_id = default(string);
 					}
 					this.SendPropertyChanged("phone_brand");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promotion_product", Storage="_promotion", ThisKey="promotion_id", OtherKey="promotion_id", IsForeignKey=true)]
+		public promotion promotion
+		{
+			get
+			{
+				return this._promotion.Entity;
+			}
+			set
+			{
+				promotion previousValue = this._promotion.Entity;
+				if (((previousValue != value) 
+							|| (this._promotion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._promotion.Entity = null;
+						previousValue.products.Remove(this);
+					}
+					this._promotion.Entity = value;
+					if ((value != null))
+					{
+						value.products.Add(this);
+						this._promotion_id = value.promotion_id;
+					}
+					else
+					{
+						this._promotion_id = default(string);
+					}
+					this.SendPropertyChanged("promotion");
 				}
 			}
 		}
@@ -2668,13 +3161,17 @@ namespace CellPhoneX.Models
 		
 		private string _memory_internal;
 		
-		private decimal _price;
+		private System.Nullable<decimal> _price;
 		
 		private System.Nullable<decimal> _special_price;
 		
 		private string _image;
 		
-		private int _amount;
+		private System.Nullable<int> _amount;
+		
+		private string _promotion_id;
+		
+		private System.Nullable<bool> _active_status;
 		
 		private EntitySet<invoice_detail> _invoice_details;
 		
@@ -2683,6 +3180,8 @@ namespace CellPhoneX.Models
 		private EntityRef<color> _color;
 		
 		private EntityRef<product> _product;
+		
+		private EntityRef<promotion> _promotion;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2698,14 +3197,18 @@ namespace CellPhoneX.Models
     partial void Onmemory_ramChanged();
     partial void Onmemory_internalChanging(string value);
     partial void Onmemory_internalChanged();
-    partial void OnpriceChanging(decimal value);
+    partial void OnpriceChanging(System.Nullable<decimal> value);
     partial void OnpriceChanged();
     partial void Onspecial_priceChanging(System.Nullable<decimal> value);
     partial void Onspecial_priceChanged();
     partial void OnimageChanging(string value);
     partial void OnimageChanged();
-    partial void OnamountChanging(int value);
+    partial void OnamountChanging(System.Nullable<int> value);
     partial void OnamountChanged();
+    partial void Onpromotion_idChanging(string value);
+    partial void Onpromotion_idChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public product_version()
@@ -2714,6 +3217,7 @@ namespace CellPhoneX.Models
 			this._ratings = new EntitySet<rating>(new Action<rating>(this.attach_ratings), new Action<rating>(this.detach_ratings));
 			this._color = default(EntityRef<color>);
 			this._product = default(EntityRef<product>);
+			this._promotion = default(EntityRef<promotion>);
 			OnCreated();
 		}
 		
@@ -2825,8 +3329,8 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price", DbType="Decimal(18,0) NOT NULL")]
-		public decimal price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> price
 		{
 			get
 			{
@@ -2885,8 +3389,8 @@ namespace CellPhoneX.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount", DbType="Int NOT NULL")]
-		public int amount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount", DbType="Int")]
+		public System.Nullable<int> amount
 		{
 			get
 			{
@@ -2901,6 +3405,50 @@ namespace CellPhoneX.Models
 					this._amount = value;
 					this.SendPropertyChanged("amount");
 					this.OnamountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promotion_id", DbType="VarChar(20)")]
+		public string promotion_id
+		{
+			get
+			{
+				return this._promotion_id;
+			}
+			set
+			{
+				if ((this._promotion_id != value))
+				{
+					if (this._promotion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onpromotion_idChanging(value);
+					this.SendPropertyChanging();
+					this._promotion_id = value;
+					this.SendPropertyChanged("promotion_id");
+					this.Onpromotion_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
 				}
 			}
 		}
@@ -2999,6 +3547,40 @@ namespace CellPhoneX.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promotion_product_version", Storage="_promotion", ThisKey="promotion_id", OtherKey="promotion_id", IsForeignKey=true)]
+		public promotion promotion
+		{
+			get
+			{
+				return this._promotion.Entity;
+			}
+			set
+			{
+				promotion previousValue = this._promotion.Entity;
+				if (((previousValue != value) 
+							|| (this._promotion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._promotion.Entity = null;
+						previousValue.product_versions.Remove(this);
+					}
+					this._promotion.Entity = value;
+					if ((value != null))
+					{
+						value.product_versions.Add(this);
+						this._promotion_id = value.promotion_id;
+					}
+					else
+					{
+						this._promotion_id = default(string);
+					}
+					this.SendPropertyChanged("promotion");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3041,6 +3623,244 @@ namespace CellPhoneX.Models
 		{
 			this.SendPropertyChanging();
 			entity.product_version = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.promotion")]
+	public partial class promotion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _promotion_id;
+		
+		private int _discount;
+		
+		private System.DateTime _start_date;
+		
+		private System.DateTime _end_date;
+		
+		private string _note;
+		
+		private System.Nullable<bool> _active_status;
+		
+		private EntitySet<product> _products;
+		
+		private EntitySet<product_version> _product_versions;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onpromotion_idChanging(string value);
+    partial void Onpromotion_idChanged();
+    partial void OndiscountChanging(int value);
+    partial void OndiscountChanged();
+    partial void Onstart_dateChanging(System.DateTime value);
+    partial void Onstart_dateChanged();
+    partial void Onend_dateChanging(System.DateTime value);
+    partial void Onend_dateChanged();
+    partial void OnnoteChanging(string value);
+    partial void OnnoteChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
+    #endregion
+		
+		public promotion()
+		{
+			this._products = new EntitySet<product>(new Action<product>(this.attach_products), new Action<product>(this.detach_products));
+			this._product_versions = new EntitySet<product_version>(new Action<product_version>(this.attach_product_versions), new Action<product_version>(this.detach_product_versions));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promotion_id", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string promotion_id
+		{
+			get
+			{
+				return this._promotion_id;
+			}
+			set
+			{
+				if ((this._promotion_id != value))
+				{
+					this.Onpromotion_idChanging(value);
+					this.SendPropertyChanging();
+					this._promotion_id = value;
+					this.SendPropertyChanged("promotion_id");
+					this.Onpromotion_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discount", DbType="Int NOT NULL")]
+		public int discount
+		{
+			get
+			{
+				return this._discount;
+			}
+			set
+			{
+				if ((this._discount != value))
+				{
+					this.OndiscountChanging(value);
+					this.SendPropertyChanging();
+					this._discount = value;
+					this.SendPropertyChanged("discount");
+					this.OndiscountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_date", DbType="DateTime NOT NULL")]
+		public System.DateTime start_date
+		{
+			get
+			{
+				return this._start_date;
+			}
+			set
+			{
+				if ((this._start_date != value))
+				{
+					this.Onstart_dateChanging(value);
+					this.SendPropertyChanging();
+					this._start_date = value;
+					this.SendPropertyChanged("start_date");
+					this.Onstart_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_date", DbType="DateTime NOT NULL")]
+		public System.DateTime end_date
+		{
+			get
+			{
+				return this._end_date;
+			}
+			set
+			{
+				if ((this._end_date != value))
+				{
+					this.Onend_dateChanging(value);
+					this.SendPropertyChanging();
+					this._end_date = value;
+					this.SendPropertyChanged("end_date");
+					this.Onend_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(MAX)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promotion_product", Storage="_products", ThisKey="promotion_id", OtherKey="promotion_id")]
+		public EntitySet<product> products
+		{
+			get
+			{
+				return this._products;
+			}
+			set
+			{
+				this._products.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promotion_product_version", Storage="_product_versions", ThisKey="promotion_id", OtherKey="promotion_id")]
+		public EntitySet<product_version> product_versions
+		{
+			get
+			{
+				return this._product_versions;
+			}
+			set
+			{
+				this._product_versions.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_products(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.promotion = this;
+		}
+		
+		private void detach_products(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.promotion = null;
+		}
+		
+		private void attach_product_versions(product_version entity)
+		{
+			this.SendPropertyChanging();
+			entity.promotion = this;
+		}
+		
+		private void detach_product_versions(product_version entity)
+		{
+			this.SendPropertyChanging();
+			entity.promotion = null;
 		}
 	}
 	
@@ -3454,6 +4274,8 @@ namespace CellPhoneX.Models
 		
 		private string _feature_special;
 		
+		private System.Nullable<bool> _active_status;
+		
 		private EntitySet<product> _products;
 		
     #region Extensibility Method Definitions
@@ -3510,6 +4332,8 @@ namespace CellPhoneX.Models
     partial void Onbattery_chargingChanged();
     partial void Onfeature_specialChanging(string value);
     partial void Onfeature_specialChanged();
+    partial void Onactive_statusChanging(System.Nullable<bool> value);
+    partial void Onactive_statusChanged();
     #endregion
 		
 		public spec()
@@ -4018,6 +4842,26 @@ namespace CellPhoneX.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="Bit")]
+		public System.Nullable<bool> active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="spec_product", Storage="_products", ThisKey="specs_id", OtherKey="specs_id")]
 		public EntitySet<product> products
 		{
@@ -4061,6 +4905,116 @@ namespace CellPhoneX.Models
 		{
 			this.SendPropertyChanging();
 			entity.spec = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.token")]
+	public partial class token : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Token1;
+		
+		private System.DateTime _time1;
+		
+		private System.DateTime _time2;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnToken1Changing(string value);
+    partial void OnToken1Changed();
+    partial void Ontime1Changing(System.DateTime value);
+    partial void Ontime1Changed();
+    partial void Ontime2Changing(System.DateTime value);
+    partial void Ontime2Changed();
+    #endregion
+		
+		public token()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Token", Storage="_Token1", DbType="VarChar(12) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Token1
+		{
+			get
+			{
+				return this._Token1;
+			}
+			set
+			{
+				if ((this._Token1 != value))
+				{
+					this.OnToken1Changing(value);
+					this.SendPropertyChanging();
+					this._Token1 = value;
+					this.SendPropertyChanged("Token1");
+					this.OnToken1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time1", DbType="DateTime NOT NULL")]
+		public System.DateTime time1
+		{
+			get
+			{
+				return this._time1;
+			}
+			set
+			{
+				if ((this._time1 != value))
+				{
+					this.Ontime1Changing(value);
+					this.SendPropertyChanging();
+					this._time1 = value;
+					this.SendPropertyChanged("time1");
+					this.Ontime1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time2", DbType="DateTime NOT NULL")]
+		public System.DateTime time2
+		{
+			get
+			{
+				return this._time2;
+			}
+			set
+			{
+				if ((this._time2 != value))
+				{
+					this.Ontime2Changing(value);
+					this.SendPropertyChanging();
+					this._time2 = value;
+					this.SendPropertyChanged("time2");
+					this.Ontime2Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

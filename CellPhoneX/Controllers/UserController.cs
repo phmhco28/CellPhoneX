@@ -81,14 +81,7 @@ namespace CellPhoneX.Controllers
             if (acc != null)
             {
                 Session["TaiKhoan"] = acc;
-                if (acc.role_id == 1)
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng !!!";
             return this.SignIn();

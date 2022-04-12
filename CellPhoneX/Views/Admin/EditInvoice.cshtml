@@ -1,0 +1,93 @@
+﻿@model CellPhoneX.Models.invoice
+
+@{
+    ViewBag.Title = "EditInvoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem">Chỉnh sửa đơn hàng <strong>@Model.invoice_id</strong> của khách hàng <strong>@Model.customer.customer_name</strong></h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="invoice_id">Mã đơn hàng</label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.invoice_id</strong></div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="invoice_status_pay">Thanh toán </label>
+        <div class="col-md-10">
+            @Html.DropDownList("Pay", "")
+        </div>
+        <p style="color: red; padding-left: 1rem">@ViewBag.Notify</p>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="invoice_confirm">Xác nhận đơn hàng </label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px"> <strong>@ViewBag.InvoiceConfirm</strong></div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="order_date">Ngày đặt hàng </label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.order_date</strong></div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="deliver_date">Ngày giao dự kiến </label>
+        <div class="col-md-10">
+            @Html.TextBox("deliver_date", Model.deliver_date, "{0:yyyy-MM-dd}", new { @style = "width:100%", type = "date" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="note">Ghi chú </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="customer_id">Khách hàng </label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px">
+                <strong>@Model.customer.customer_name</strong>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group" style="margin-top: 3rem">
+        <div class="col-md-offset-2 col-md-10" style="padding-right: 20rem;float:right; text-align:right; width:50px">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+        <div style="padding-left: 3.5rem">
+            <a class="btn btn-primary" href="@Url.Action("Invoice","Admin")"><   Quay lại</a>
+        </div>
+    </div>
+</div>
+}
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

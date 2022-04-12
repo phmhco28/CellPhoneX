@@ -132,23 +132,31 @@
     })
 
     $(".cps-input").blur(function () {
-        $(".suggestBox").remove()
-        $("#search").val("");
+
+        if ($('.atag:hover').length > 0) // cancel the blur event
+        {
+            $('.cps-input').focus();
+        }
+        else   // blur event is okay
+        {
+            $(".suggestBox").remove()
+            $("#search").val("");
+        }
     })
+
+    function GetValue(str, data) {
+        var a = ""
+        $.each(data, function (k, val) {
+            a = val[`${str}`]
+        })
+        return a;
+    }
 
     $(".cps-input").keyup(function () {
         var strKey = $(".cps-input").val();
         GetPhone(strKey);
 
-        function GetPhone(strKey) {
-            function GetValue(str, data) {
-                var a = ""
-                $.each(data, function (k, val) {
-                    a = val[`${str}`]
-                })
-                return a;
-            }
-
+        function GetPhone(strKey) {                        
             $.ajax(
                 {
                     type: "POST",
@@ -162,7 +170,7 @@
                     $("<ul></ul>").addClass("data-box").appendTo(".suggestBox")
                     $.each(data, function (index, item) {
                         $("<li></li>").append(
-                            $("<a></a>").attr("href", "#").append(
+                            $("<a></a>").attr("href", "/Product/Detail/" + GetValue("id", item)).addClass("atag").append(
                                 $("<div></div>").addClass("phone-image").append(
                                     $("<img/>").attr("src", "/Content/images/" + GetValue("image", item))
                                 ),

@@ -52,7 +52,8 @@ namespace CellPhoneX.Controllers
                                                                                        rom = a.memory_internal,
                                                                                        price = string.Format("{0:0.00}", a.price),
                                                                                        special_price = a.special_price,
-                                                                                       image = a.image
+                                                                                       image = a.image,
+                                                                                       id = a.version_id
                                                                                    });
                     /*b.Add(resultPhone_version.product.product_name);*/
                     result.Add(resultPhone_version);

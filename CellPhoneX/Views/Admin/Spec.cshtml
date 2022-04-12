@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CellPhoneX.Models.spec>
+@{
+    ViewBag.Title = "Spec";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thông số kỹ thuật</h2>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("Tạo mới", "CreateSpec", "Admin")</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead style="text-align:center">
+                    <tr>
+                        <th>Mã thông số</th>
+                        <th>Kích thước màn</th>
+                        <th>Độ phân giải</th>
+                        <th>Hệ điều hành</th>
+                        <th>Chip</th>
+                        <th>Kích thước</th>
+                        <th>Dung lượng pin</th>
+                        <th>Trạng thái</th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.specs_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.display_size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.display_resolution)</td>
+                        <td>@Html.DisplayFor(modelItem => item.platform_os)</td>
+                        <td>@Html.DisplayFor(modelItem => item.platform_chipset)</td>
+                        <td>@Html.DisplayFor(modelItem => item.body_size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.battery_type)</td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                @Html.DisplayName("Đang áp dụng");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Đã xóa");
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info">
+                                <a href="@Url.Action("DetailSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Chi tiết</a>
+                            </button>
+
+                            <button type="button" class="btn btn-primary">
+                                <a href="@Url.Action("EditSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Sửa</a>
+                            </button>
+
+                            <button type="button" class="btn btn-danger">
+                                <a href="@Url.Action("DeleteSpec","Admin", new { id = item.specs_id})" style="text-decoration:none; color:white">Xóa</a>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>                
+            </table>
+        </div>
+    </div>
+</div>
+
+

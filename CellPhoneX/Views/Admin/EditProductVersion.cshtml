@@ -1,0 +1,120 @@
+﻿@model CellPhoneX.Models.product_version
+
+@{
+    ViewBag.Title = "EditProductVersion";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem">Chỉnh sửa thông tin phiên bản Bộ nhớ trong<strong> @Model.memory_internal</strong> RAM <strong>@Model.memory_ram</strong> màu <strong>@Model.color.color_name</strong> của sản phẩm <strong>@Model.product.product_name</strong></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            <label class="control-label col-md-2" for="product_id">Mã phiên bản </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.version_id</strong></div>
+            </div>
+        </div>
+        <hr />    
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="product_id">Sản phẩm </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.product.product_name</strong></div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="color_id">Màu </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.color.color_name</strong></div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="memory_ram">RAM </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.memory_ram</strong></div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="memory_internal">Bộ nhớ trong </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.memory_internal</strong></div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="price">Giá </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="special_price">Giá đặc biệt </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.special_price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.special_price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="image">Hình </label>
+            <div class="col-md-10">
+                <img src="@Url.Content("~/Content/images/" + Model.image)" width="120" />
+                (Ảnh hiện tại)
+                
+                <input type="file" name="fileUpload" />
+                @ViewBag.Thongbao
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2" for="amount">Số lượng </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="promotion_id">Mã khuyến mãi </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.promotion_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.promotion_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group" style="margin-top: 3rem">
+            <div class="col-md-offset-2 col-md-10" style="padding-right: 20rem;float:right; text-align:right; width:50px">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+            <div style="padding-left: 3.5rem">
+                <a class="btn btn-primary" href="@Url.Action("Product","Admin")"><   Quay lại</a>
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

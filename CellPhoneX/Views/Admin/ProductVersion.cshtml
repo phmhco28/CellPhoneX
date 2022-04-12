@@ -1,0 +1,78 @@
+﻿@using CellPhoneX.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<CellPhoneX.Models.product_version>
+@{
+    ViewBag.Title = "ProductVersion";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Các phiên bản sản phẩm</h2>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("Tạo mới", "CreateProductVersion", "Admin")</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead style="text-align:center">
+                    <tr>
+                        <th>Mã phiên bản</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Màu</th>
+                        <th>Ảnh</th>
+                        <th>RAM</th>
+                        <th>Bộ nhớ trong</th>
+                        <th>Giá gốc</th>
+                        <th>Giá ưu đãi</th>
+                        <th>Số lượng tồn</th>
+                        <th>Trạng thái sản phẩm</th>
+                        <th>Mã khuyến mãi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.version_id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.product.product_name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.color.color_name)</td>
+                            <td><img src="~/Content/images/@item.image" width="120" height="130" />
+                            <td>@Html.DisplayFor(modelItem => item.memory_ram)</td>
+                            <td>@Html.DisplayFor(modelItem => item.memory_internal)</td>
+                            <td>@String.Format("{0:000,000}", item.price)</td>
+                            <td>@String.Format("{0:000,000}", item.special_price)</td>
+                            <td>@Html.DisplayFor(modelItem => item.amount)</td>
+                            <td>
+                                @if (item.active_status == null || item.active_status == true)
+                                {
+                                    @Html.DisplayName("Kinh doanh");
+                                }
+                                else
+                                {
+                                    @Html.DisplayName("Ngừng kinh doanh");
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.promotion_id)</td>
+                            <td>
+                                <a class="btn btn-primary" href="@Url.Action("EditProductVersion","Admin", new { id = item.version_id})" style="text-decoration:none; color:white">Sửa</a>
+
+                                <a class="btn btn-danger" href="@Url.Action("DeleteProductVersion","Admin", new { id = item.version_id})" style="text-decoration:none; color:white">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 col-md-7 menu">
+    @Html.PagedListPager(Model, page => Url.Action("ProductVersion", new { page = page }))
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .menu li {
+        text-align:center;  
+        display: block;
+    }
+</style>

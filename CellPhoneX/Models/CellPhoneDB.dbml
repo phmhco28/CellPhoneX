@@ -16,6 +16,7 @@
       <Column Name="color_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="color_name" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="color_product_version" Member="product_versions" ThisKey="color_id" OtherKey="color_id" Type="product_version" />
     </Type>
   </Table>
@@ -29,11 +30,14 @@
       <Column Name="mail" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="phone_number" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
       <Column Name="registration_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="account_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="account_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="vip_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="customer_customer_comment" Member="customer_comments" ThisKey="customer_id" OtherKey="customer_id" Type="customer_comment" />
       <Association Name="customer_invoice" Member="invoices" ThisKey="customer_id" OtherKey="customer_id" Type="invoice" />
       <Association Name="customer_rating" Member="ratings" ThisKey="customer_id" OtherKey="customer_id" Type="rating" />
       <Association Name="account_customer" Member="account" ThisKey="account_id" OtherKey="account_id" Type="account" IsForeignKey="true" />
+      <Association Name="customer_vip_customer" Member="customer_vip" ThisKey="vip_id" OtherKey="vip_id" Type="customer_vip" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.customer_comment" Member="customer_comments">
@@ -45,6 +49,15 @@
       <Column Name="version_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="customer_comment_employee_comment" Member="employee_comments" ThisKey="customer_comment_id" OtherKey="customer_comment_id" Type="employee_comment" />
       <Association Name="customer_customer_comment" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.customer_vip" Member="customer_vips">
+    <Type Name="customer_vip">
+      <Column Name="vip_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="accumulate_expenditure" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="discount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="customer_vip_customer" Member="customers" ThisKey="vip_id" OtherKey="vip_id" Type="customer" />
     </Type>
   </Table>
   <Table Name="dbo.employee" Member="employees">
@@ -59,6 +72,7 @@
       <Column Name="phone_number" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
       <Column Name="registration_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="account_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="employee_employee_comment" Member="employee_comments" ThisKey="employee_id" OtherKey="employee_id" Type="employee_comment" />
       <Association Name="account_employee" Member="account" ThisKey="account_id" OtherKey="account_id" Type="account" IsForeignKey="true" />
     </Type>
@@ -77,12 +91,13 @@
   <Table Name="dbo.invoice" Member="invoices">
     <Type Name="invoice">
       <Column Name="invoice_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="invoice_status_pay" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Column Name="invoice_confirm" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="invoice_status_pay" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="invoice_confirm" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="deliver_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="customer_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="invoice_invoice_detail" Member="invoice_details" ThisKey="invoice_id" OtherKey="invoice_id" Type="invoice_detail" />
       <Association Name="customer_invoice" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
     </Type>
@@ -101,6 +116,7 @@
     <Type Name="phone_brand">
       <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="phone_brand_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="phone_brand_product" Member="products" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="product" />
     </Type>
   </Table>
@@ -111,8 +127,12 @@
       <Column Name="release_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="specs_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="phone_brand_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="promotion_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="product_product_version" Member="product_versions" ThisKey="product_id" OtherKey="product_id" Type="product_version" />
       <Association Name="phone_brand_product" Member="phone_brand" ThisKey="phone_brand_id" OtherKey="phone_brand_id" Type="phone_brand" IsForeignKey="true" />
+      <Association Name="promotion_product" Member="promotion" ThisKey="promotion_id" OtherKey="promotion_id" Type="promotion" IsForeignKey="true" />
       <Association Name="spec_product" Member="spec" ThisKey="specs_id" OtherKey="specs_id" Type="spec" IsForeignKey="true" />
     </Type>
   </Table>
@@ -123,14 +143,29 @@
       <Column Name="color_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="memory_ram" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
       <Column Name="memory_internal" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
-      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="special_price" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="image" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promotion_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="product_version_invoice_detail" Member="invoice_details" ThisKey="version_id" OtherKey="version_id" Type="invoice_detail" />
       <Association Name="product_version_rating" Member="ratings" ThisKey="version_id" OtherKey="version_id" Type="rating" />
       <Association Name="color_product_version" Member="color" ThisKey="color_id" OtherKey="color_id" Type="color" IsForeignKey="true" />
       <Association Name="product_product_version" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
+      <Association Name="promotion_product_version" Member="promotion" ThisKey="promotion_id" OtherKey="promotion_id" Type="promotion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promotion" Member="promotions">
+    <Type Name="promotion">
+      <Column Name="promotion_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="discount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="promotion_product" Member="products" ThisKey="promotion_id" OtherKey="promotion_id" Type="product" />
+      <Association Name="promotion_product_version" Member="product_versions" ThisKey="promotion_id" OtherKey="promotion_id" Type="product_version" />
     </Type>
   </Table>
   <Table Name="dbo.rating" Member="ratings">
@@ -178,7 +213,15 @@
       <Column Name="battery_type" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="battery_charging" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="feature_special" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="spec_product" Member="products" ThisKey="specs_id" OtherKey="specs_id" Type="product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.token" Member="tokens">
+    <Type Name="token">
+      <Column Name="Token" Member="Token1" Type="System.String" DbType="VarChar(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="time1" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="time2" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

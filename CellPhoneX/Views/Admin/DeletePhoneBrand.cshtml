@@ -1,0 +1,44 @@
+﻿@model CellPhoneX.Models.phone_brand
+
+@{
+    ViewBag.Title = "DeletePhoneBrand";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 style="margin-bottom: 2rem">Bạn chắc chắn muốn xóa thương hiệu <strong>@Model.phone_brand_name</strong> ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Mã thương hiệu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_brand_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Tên thương hiệu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_brand_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a class="btn btn-primary" href="@Url.Action("Employee","Admin")"><   Quay lại</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

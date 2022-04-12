@@ -1,0 +1,81 @@
+﻿@model CellPhoneX.Models.product
+
+@{
+    ViewBag.Title = "DeleteProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 style="margin-bottom: 2rem">Bạn chắc chắn muốn xóa sản phẩm <strong>@Model.product_name</strong> ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Mã sản phẩm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Sản phẩm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_name)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Ngày ra mắt")
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd-MM-yyyy}", Model.release_date)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Mã thông số")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specs_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Thương hiệu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_brand.phone_brand_name)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Mô tả")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <hr />
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a class="btn btn-primary" href="@Url.Action("Product","Admin")"><   Quay lại</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

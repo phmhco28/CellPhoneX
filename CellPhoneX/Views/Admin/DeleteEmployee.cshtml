@@ -1,0 +1,109 @@
+﻿@model CellPhoneX.Models.employee
+
+@{
+    ViewBag.Title = "DeleteEmployee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 style="margin-bottom: 2rem">Bạn chắc chắn muốn xóa nhân viên <strong>@Model.name</strong> ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Họ tên")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Ngày sinh")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_of_birth)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Giới tính")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sex)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Địa chỉ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("CMND/CCCD")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_card)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("E-Mail")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Số điện thoại")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_number)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Ngày đăng ký")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_date)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Mã tài khoản")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_id)
+        </dd>
+        <hr />
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a class="btn btn-primary" href="@Url.Action("Employee","Admin")"><   Quay lại</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

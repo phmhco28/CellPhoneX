@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CellPhoneX.Models.product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản lý sản phẩm</h2>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("Tạo mới", "CreateProduct", "Admin")</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Ngày ra mắt</th>
+                        <th>Mã thông số</th>
+                        <th>Thương hiệu</th>
+                        <th>Mô tả</th>
+                        <th>Mã khuyến mãi</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.product_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.product_name)</td>
+                        <td>@String.Format("{0:dd-MM-yyyy}", item.release_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.specs_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phone_brand.phone_brand_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.promotion_id)</td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                @Html.DisplayName("Đang kinh doanh");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Ngừng kinh doanh");
+                            }
+                        </td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                <a class="btn btn-primary" href="@Url.Action("EditProduct","Admin", new { id = item.product_id})" style="text-decoration:none; color:white">Sửa</a>
+
+                                <a class="btn btn-danger" href="@Url.Action("DeleteProduct","Admin", new { id = item.product_id})" style="text-decoration:none; color:white">Xóa</a>
+                            }
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

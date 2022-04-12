@@ -1,0 +1,95 @@
+﻿@model IEnumerable<CellPhoneX.Models.invoice>
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Hóa đơn</h2>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+       
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Mã hóa đơn</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Ngày giao (dự kiến)</th>
+                        <th>Người đặt</th>
+                        <th>Ghi chú</th>
+                        <th>Xác nhận đơn hàng</th>
+                        <th>Thanh toán</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.invoice_id)</td>
+                        <td>@String.Format("{0:dd-MM-yyyy}", item.order_date)</td>
+                        <td>@String.Format("{0:dd-MM-yyyy}", item.deliver_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.customer.customer_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.note)</td>
+                        <td>
+                            @if (item.invoice_confirm == null || item.invoice_confirm =="")
+                            {
+                                @Html.DisplayName("Chưa xác nhận");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Đã xác nhận");
+                            }
+                        </td>
+                        <td>
+                            @if (item.invoice_status_pay == null || item.invoice_status_pay == "")
+                            {
+                                @Html.DisplayName("Chưa thanh toán");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Đã thanh toán");
+                            }
+                        </td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                @Html.DisplayName("Có hiệu lực");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Đã xóa");
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="@Url.Action("DetailInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white">  Chi tiết  </a>
+
+                            @if (item.invoice_confirm == null || item.invoice_confirm == "")
+                            {
+                                <a class="btn btn-success" href="@Url.Action("ConfirmInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white"> Gửi xác nhận</a>
+
+
+                            }
+
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+
+                                <a class="btn btn-primary" href="@Url.Action("EditInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white">Sửa</a>
+
+                                <a class="btn btn-danger" href="@Url.Action("DeleteInvoice","Admin", new { id = item.invoice_id})" style="text-decoration:none; color:white">Xóa</a>
+                            }
+
+
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

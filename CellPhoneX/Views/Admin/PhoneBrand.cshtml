@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CellPhoneX.Models.phone_brand>
+@{
+    ViewBag.Title = "PhoneBrand";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Các thương hiệu điện thoại</h2>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("Tạo mới", "CreatePhoneBrand", "Admin")</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Mã thương hiệu</th>
+                        <th>Tên thương hiệu</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.phone_brand_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phone_brand_name)</td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                @Html.DisplayName("Kinh doanh");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Ngừng kinh doanh");
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action("EditPhoneBrand","Admin", new { id = item.phone_brand_id})" style="text-decoration:none; color:white">Sửa</a>
+
+                            <a class="btn btn-danger" href="@Url.Action("DeletePhoneBrand","Admin", new { id = item.phone_brand_id})" style="text-decoration:none; color:white">Xóa</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

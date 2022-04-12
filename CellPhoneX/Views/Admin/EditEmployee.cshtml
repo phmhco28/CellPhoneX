@@ -1,0 +1,119 @@
+﻿@model CellPhoneX.Models.employee
+
+@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem">Chỉnh sửa thông tin nhân viên <strong>@Model.name</strong></h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.employee_id)
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="employee_id">Mã nhân viên </label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.employee_id</strong></div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="name">Họ tên </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="date_of_birth">Ngày sinh </label>
+        <div class="col-md-10">
+            @*<input type="date" value="@Model.date_of_birth" name="date_of_birth" />*@
+            @Html.TextBox("date_of_birth", Model.date_of_birth, "{0:yyyy-MM-dd}", new { @style = "width:100%", type = "date" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="sex">Giới tính </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sex, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sex, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="address">Địa chỉ </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="id_card">CMND/CCCD </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.id_card, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.id_card, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="mail">E-Mail </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="phone_number">Số điện thoại </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="registration_date">Ngày đăng ký </label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px"> <strong>@String.Format("{0:dd-MM-yyyy}", Model.registration_date)</strong></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="account_id">Mã tài khoản </label>
+        <div class="col-md-10">
+            <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.account_id</strong></div>
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 3rem">
+        <div class="col-md-offset-2 col-md-10" style="padding-right: 20rem;float:right; text-align:right; width:50px">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+        <div style="padding-left: 3.5rem">
+            <a class="btn btn-primary" href="@Url.Action("Employee","Admin")"><   Quay lại</a>
+        </div>
+    </div>
+</div>
+}
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

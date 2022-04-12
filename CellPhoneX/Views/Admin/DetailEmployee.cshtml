@@ -1,0 +1,135 @@
+﻿@model CellPhoneX.Models.employee
+
+@{
+    ViewBag.Title = "DetailEmployee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem;">Chi tiết nhân viên <strong>@Model.name</strong></h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Mã nhân viên")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employee_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Họ tên")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Ngày sinh")
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd-MM-yyyy}", Model.date_of_birth)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Giới tính")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sex)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Địa chỉ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("CMND/CCCD")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_card)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("E-Mail")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Số điện thoại")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_number)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Ngày đăng ký")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_date)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Mã tài khoản")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Trạng thái")
+        </dt>
+
+        <dd>
+            @if (Model.active_status == null || Model.active_status == true)
+            {
+                @Html.DisplayName("Kích hoạt");
+            }
+            else
+            {
+                @Html.DisplayName("Vô hiệu hóa");
+            }
+        </dd>
+        <hr />
+    </dl>
+</div>
+<p>
+    <div class="form-group" style="margin: 0 3rem 0 10rem">
+        <div style="padding-left: 3.5rem; float: left; margin-right: 4.5rem">
+            <a class="btn btn-success" href="@Url.Action("EditEmployee","Admin", new { id = Model.employee_id})"> Chỉnh sửa </a>
+        </div>
+        <div style="padding-left: 3.5rem;">
+            <a class="btn btn-primary" href="@Url.Action("Employee","Admin")"><   Quay lại</a>
+        </div>
+    </div>
+</p>
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

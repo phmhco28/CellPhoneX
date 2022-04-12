@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CellPhoneX.Models.customer>
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản lý khách hàng</h2>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Mã khách hàng</th>
+                        <th>Họ tên</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>Địa chỉ</th>
+                        <th>EMail</th>
+                        <th>Số điện thoại</th>
+                        <th>Ngày đăng ký</th>
+                        <th>Mã tài khoản</th>
+                        <th>Mức VIP</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.customer_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.customer_name)</td>
+                        <td>@String.Format("{0:dd-MM-yyyy}", item.date_of_birth)</td>
+                        <td>@Html.DisplayFor(modelItem => item.sex)</td>
+                        <td>@Html.DisplayFor(modelItem => item.address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.mail)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phone_number)</td>
+                        <td>@Html.DisplayFor(modelItem => item.registration_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.account_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.vip_id)</td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                @Html.DisplayName("Kích hoạt");
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Vô hiệu hóa");
+                            }
+                        </td>
+                        <td>
+                            @if (item.active_status == null || item.active_status == true)
+                            {
+                                <a class="btn btn-danger" href="@Url.Action("DeleteCustomer","Admin", new { id = item.customer_id})" style="text-decoration:none; color:white">Xóa</a>
+                            }                            
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

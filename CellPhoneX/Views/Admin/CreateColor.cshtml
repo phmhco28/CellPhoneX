@@ -1,0 +1,49 @@
+﻿@model CellPhoneX.Models.color
+
+@{
+    ViewBag.Title = "CreateColor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem;">Thêm màu mới</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+<hr />
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2" for="color_name">Màu </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.color_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.color_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Ngaycapnhat">Mô tả </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group" style="float:right; padding-right: 10rem">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>
+<div style="padding-left: 2.5rem">
+    <a class="btn btn-primary" href="@Url.Action("Color","Admin")"><   Quay lại</a>
+</div>

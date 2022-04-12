@@ -1,0 +1,105 @@
+﻿@model CellPhoneX.Models.employee
+
+@{
+    ViewBag.Title = "CreateEmployee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem;">Tạo thông tin nhân viên</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="name">Họ tên </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="date_of_birth">Ngày sinh </label>
+            <div class="col-md-10">
+                @Html.TextBox("date_of_birth", "", "{0:yyyy-MM-dd}", new { @style = "width:100%", type = "date" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="sex">Giới tính </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sex, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="address">Địa chỉ </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="id_card">CMND/CCCD </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id_card, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.id_card, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="mail">E-Mail </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="phone_number">Số điện thoại </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="account_id">Mã tài khoản </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.account_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.account_id, "", new { @class = "text-danger" })
+            </div>
+            <p style="margin-left: 8px; color:red; font-weight: bold">@ViewData["Error_not_found_acc"]</p>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="padding-right: 20rem;float:right; text-align:right; width:50px">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+            <div style="padding-left: 3.5rem">
+                <a class="btn btn-primary" href="@Url.Action("Employee","Admin")"><   Quay lại</a>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>
+    

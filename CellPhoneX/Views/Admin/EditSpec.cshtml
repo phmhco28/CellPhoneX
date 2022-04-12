@@ -1,0 +1,258 @@
+﻿@model CellPhoneX.Models.spec
+
+@{
+    ViewBag.Title = "EditSpec";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chỉnh sửa thông số kỹ thuật</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@ViewBag.Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="spec_id">Mã thông số </label>
+            <div class="col-md-10">
+                <div style="font:18px;padding: 5px 0 0 5px"> <strong>@Model.specs_id</strong></div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="display_size">Kích thước màn hình </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.display_size, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.display_size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="display_type">Loại màn hình </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.display_type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.display_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="display_resolution">Độ phân giải màn hình </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.display_resolution, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.display_resolution, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="display_feature">Tính năng màn hình </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.display_feature, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.display_feature, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="main_camera">Camera sau </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.main_camera, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.main_camera, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="main_camera_video">Video Camera sau </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.main_camera_video, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.main_camera_video, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="selfie_camera">Camera trước </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.selfie_camera, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.selfie_camera, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="camera_feature">Tính năng Camera </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.camera_feature, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.camera_feature, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="platform_os">Hệ điều hành </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.platform_os, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.platform_os, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="platform_chipset">Chip </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.platform_chipset, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.platform_chipset, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="platform_cpu">CPU </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.platform_cpu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.platform_cpu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="platform_gpu">GPU </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.platform_gpu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.platform_gpu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="comms_wlan">WIFI </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comms_wlan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comms_wlan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="comms_sound_jack">Jack tai nghe </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comms_sound_jack, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comms_sound_jack, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="comms_bluetooth">Blutooth </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comms_bluetooth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comms_bluetooth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="comms_usb">Cổng USB </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comms_usb, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comms_usb, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="comms_gps">GPS </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comms_gps, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comms_gps, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="body_size">Kích thước sản phẩm</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.body_size, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.body_size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="body_weight">Trọng lượng </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.body_weight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.body_weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="body_sim">SIM </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.body_sim, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.body_sim, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="body_build">Chất liệu </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.body_build, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.body_build, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="battery_type">Loại PIN </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.battery_type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.battery_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="battery_charging">Sạc </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.battery_charging, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.battery_charging, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="feature_special">Tính năng đặc biệt </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.feature_special, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.feature_special, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group" style="margin-top: 3rem">
+            <div class="col-md-offset-2 col-md-10" style="padding-right: 20rem;float:right; text-align:right; width:50px">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+            <div style="padding-left: 3.5rem">
+                <a class="btn btn-primary" href="@Url.Action("Spec","Admin")"><   Quay lại</a>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

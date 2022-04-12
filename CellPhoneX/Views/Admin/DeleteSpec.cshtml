@@ -1,0 +1,253 @@
+﻿@model CellPhoneX.Models.spec
+
+@{
+    ViewBag.Title = "DeleteSpec";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h3>Bạn chắc chắn muốn xóa thông số này ?</h3>
+<h4>Các sản phẩm đang dùng cấu hình này: @ViewBag.Product</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Mã thông số")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specs_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Kích thước màn hình")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.display_size)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Loại màn hình")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.display_type)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Độ phân giải màn hình")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.display_resolution)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Tính năng màn hình")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.display_feature)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Camera sau")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.main_camera)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Video Camera sau")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.main_camera_video)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Camera trước")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.selfie_camera)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Tính năng camera")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.camera_feature)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Hệ điều hành")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.platform_os)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Chip")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.platform_chipset)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("CPU")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.platform_cpu)
+        </dd>
+        <hr/>
+
+        <dt>
+            @Html.DisplayName("GPU")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.platform_gpu)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("WIFI")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comms_wlan)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Jack tai nghe")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comms_sound_jack)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Bluetooth")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comms_bluetooth)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Cổng USB")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comms_usb)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("GPS")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comms_gps)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Kích thước sản phẩm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body_size)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Trọng lượng")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body_weight)
+        </dd>
+        <hr/>
+
+        <dt>
+            @Html.DisplayName("SIM")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body_sim)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Chất liệu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body_build)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Loại PIN")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.battery_type)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Sạc")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.battery_charging)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Các tính năng đặc biệt")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.feature_special)
+        </dd>
+        <hr />
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a class="btn btn-primary" href="@Url.Action("Spec","Admin")"><   Quay lại</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>

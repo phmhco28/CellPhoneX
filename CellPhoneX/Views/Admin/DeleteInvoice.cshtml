@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CellPhoneX.Models.invoice_detail>
+
+@{
+    ViewBag.Title = "DeleteInvoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-bottom: 2rem">Bạn chắc chắn xóa đơn hàng <Strong>@ViewBag.InvoiceID</Strong> của khách hàng <strong>@ViewBag.Customer</strong> ?</h2>
+
+<div>
+    <h4>Hiệu lực đơn hàng: <strong>@ViewBag.ActiveStatus</strong></h4>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div style="display:flex;flex-direction:row;width: 100%; box-sizing: border-box">
+                <div style="width: 50%; padding: 15px 5% 15px 5%; margin: 0 5% 0 5%; background-color: #d1d8e6; border-radius: 1rem; font-weight: bold; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ">
+                    <p>Mã hóa đơn: @ViewBag.InvoiceID</p>
+                    <p>Xác nhận: @ViewBag.InvoiceConfirm</p>
+                    <p>Thanh toán: @ViewBag.InvoicePay</p>
+                </div>
+                <div style="width: 50%; padding: 15px 5% 15px 5%; margin: 0 5% 0 5%; background-color: #d1d8e6; border-radius: 1rem; font-weight: bold; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ">
+                    <p>Ngày đặt: @ViewBag.OrderDate</p>
+                    <p>Ngày giao dự kiến: @ViewBag.DeliverDate</p>
+                    <p>Ghi chú: @ViewBag.Note</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <th>Sản phẩm</th>
+                            <th>Bộ nhớ trong</th>
+                            <th>Màu</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.invoice_id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.product_version.product.product_name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.product_version.memory_internal)</td>
+                                <td>@Html.DisplayFor(modelItem => item.product_version.color.color_name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.amount)</td>
+                                <td>@Html.DisplayFor(modelItem => item.price)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <a class="btn btn-primary" href="@Url.Action("Invoice","Admin")"><   Quay lại</a>
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿@model CellPhoneX.Models.product_version
+
+@{
+    ViewBag.Title = "DeleteProductVersion";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 style="margin-bottom: 2rem">Bạn chắc chắn muốn xóa phiên bản Bộ nhớ trong<strong> @Model.memory_internal</strong> RAM <strong>@Model.memory_ram</strong> màu <strong>@Model.color.color_name</strong> của sản phẩm <strong>@Model.product.product_name</strong>?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Mã phiên bản")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.version_id)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Sản phẩm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.product_name)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Màu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color.color_name)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("RAM")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.memory_ram)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Bộ nhớ trong")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.memory_internal)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Giá")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Giá đặc biệt")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.special_price)
+        </dd>
+        <hr />
+
+        <dt>
+            @Html.DisplayName("Hình")
+        </dt>
+
+        <dd>
+            <img src="~/Content/images/@Model.image" width="120" height="150"/>
+        </dd>
+        <hr />
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a class="btn btn-primary" href="@Url.Action("ProductVersion","Admin")"><   Quay lại</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+<style>
+    .container-fluid {
+        padding: 0 15rem 0 18rem;
+    }
+</style>
