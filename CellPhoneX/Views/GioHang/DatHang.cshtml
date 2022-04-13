@@ -10,10 +10,12 @@
     customer kh = (customer)Session["TaiKhoan"];
 
 }
+<p style="color:red; font-weight:bold;text-align:center">@ViewBag.Mess</p>
 <table align="center">
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
+        
         <tr style="height:40px">
             <td>Ho ten khac hang:</td>
             <td style="font-weight:bold">@kh.customer_name</td>
@@ -35,16 +37,16 @@
             <td style="font-weight:bold">@DateTime.Now.ToShortDateString()</td>
         </tr>
         <tr style="height:40px">
+
             <td>Ngay Giao:</td>
             <td style="font-weight:bold">
                 <input type="date" name="NgayGiao" />
-                <p style="color:red">@ViewBag.messageEx</p>
             </td>
 
         </tr>
         <tr style="height:40px">
             <td style="font-weight:bold">
-                <input type="submit" value="Xac nhan" class="btn btn-success" />
+                <input type="submit" value="Đặt hàng" class="btn btn-success" />
             </td>
         </tr>
     }

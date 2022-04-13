@@ -18,75 +18,76 @@
                 </div>
                 <p class="title m-auto">Giỏ hàng</p>
             </div> @*Lap*@
-                            foreach (var item in Model)
-                            {
-            <div class="container mt-3 mb-2 productitem" data-idPro="@item.proId">
-                <div class="product-item mb-3 block-box">
-                    <div class="product-item__info d-flex">
-                        <div class="product-item__image">
-                            <img src="~/Content/images/@item.image" />
-                        </div>
-                        <div class="product-item__info-detail">
-                            <p class="product-name">@item.namePro</p>
-                            <div class="product-item__price d-flex align-items-end">
-                                <p id="special_price " class="special-price">@item.special_price</p>
-                                <p class="price">@item.price</p>
-                                <span class="onsale">Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %</span>
+            foreach (var item in Model)
+            {
+                <div class="container mt-3 mb-2 productitem" data-idPro="@item.proId">
+                    <div class="product-item mb-3 block-box">
+                        <div class="product-item__info d-flex">
+                            <div class="product-item__image">
+                                <img src="~/Content/images/@item.image" />
                             </div>
-                            <div class="item-action mt-2">
-                                <div class="change-quantity d-flex align-items-end mt-2">
-                                    <p>Chọn số lượng</p>
-                                    <div class="number d-flex">
-                                        <span class="minus d-flex justify-content-center align-items-center">-</span>
-                                        <input id="amount" name="amount" type="text" data-idAmount="@item.proId" min="1" value="@item.amount">
-                                        <span class="plus d-flex justify-content-center align-items-center">+</span>
+                            <div class="product-item__info-detail">
+                                <p class="product-name">@item.namePro</p>
+                                <div class="product-item__price d-flex align-items-end">
+                                    <p id="special_price " class="special-price">@item.special_price</p>
+                                    <p class="price">@item.price</p>
+                                    <span class="onsale">Giảm @String.Format("{0:0,0}", ((item.price - item.special_price) / item.price) * 100) %</span>
+                                </div>
+                                <div class="item-action mt-2">
+                                    <div class="change-quantity d-flex align-items-end mt-2">
+                                        <p>Chọn số lượng</p>
+                                        <div class="number d-flex">
+                                            <span class="minus d-flex justify-content-center align-items-center">-</span>
+                                            <input id="amount" name="amount" type="text" data-idAmount="@item.proId" min="1" value="@item.amount">
+                                            <span class="plus d-flex justify-content-center align-items-center">+</span>
+                                        </div>
+                                        <p>Số lượng còn: @ViewBag.slton</p>
+                                        <p>@ViewBag.message</p>
                                     </div>
-                                    <p>Số lượng còn: @ViewBag.slton</p>
-                                    <p>@ViewBag.message</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="delete-item">
-                        <a href="#" id="btn-delete" class="btn btn-block">X</a>
+                        <div class="delete-item">
+                            <a href="#" id="btn-delete" class="btn btn-block">X</a>
+                        </div>
                     </div>
                 </div>
-            </div>}
+            }
+            <div class="bottom-bar container mt-auto block-box">
+                <div class="total-box d-flex justify-content-between align-items-start">
+                    <p class="title-temp">
+                        Tổng tiền tạm tính:
+                    </p>
+                    <div class="price d-flex flex-column align-items-end">
+                        <span id="total" class="total">@String.Format("{0:0,0}", ViewBag.Tongtien)&nbsp;₫</span>
+                    </div>
+                </div>
+                <div class="btn-submit mt-2">
+                    <button onclick="location.href = '@Url.Action("DatHang","GioHang")'" class="btn btn-danger d-flex flex-column justify-content-center align-items-center w-100 mb-2">
+                        Tiến hành đặt hàng
+                    </button>
+                    <a href="@Url.Action("ListProduct","Product")" class="btn btn-outline-danger d-flex flex-column justify-content-center align-items-center w-100">
+                        Chọn thêm sản phẩm khác
+                    </a>
+                </div>
+            </div>
 
-                                            <div class="bottom-bar container mt-auto block-box">
-                                                <div class="total-box d-flex justify-content-between align-items-start">
-                                                    <p class="title-temp">
-                                                        Tổng tiền tạm tính:
-                                                    </p>
-                                                    <div class="price d-flex flex-column align-items-end">
-                                                        <span id="total" class="total">@String.Format("{0:0,0}", ViewBag.Tongtien)&nbsp;₫</span>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-submit mt-2">
-                                                    <button onclick="location.href = '@Url.Action("DatHang","GioHang")'" class="btn btn-danger d-flex flex-column justify-content-center align-items-center w-100 mb-2">
-                                                        Tiến hành đặt hàng
-                                                    </button>
-                                                    <a href="@Url.Action("ListProduct","Product")" class="btn btn-outline-danger d-flex flex-column justify-content-center align-items-center w-100">
-                                                        Chọn thêm sản phẩm khác
-                                                    </a>
-                                                </div>
-                                            </div>
-                     }
+        }
         else
-            {
-    <div class="cart-header d-flex align-items-center justify-content-center">
-        <div class="go-back">
-            <a class="d-flex align-items-center" href="@Url.Action("ListProduct","Product")">
-                @* icon*@
-                <p style="color:black"> Trở về</p>
-            </a>
-        </div>
-        <p class="title m-auto">Chưa có sản phẩm nào</p>
-    </div>
+        {
+            <div class="cart-header d-flex align-items-center justify-content-center">
+                <div class="go-back">
+                    <a class="d-flex align-items-center" href="@Url.Action("ListProduct","Product")">
+                        @* icon*@
+                        <p style="color:black"> Trở về</p>
+                    </a>
+                </div>
+                <p class="title m-auto">Chưa có sản phẩm nào</p>
+            </div>
         }
 
-    </>
-</div>
+        </div>
+    </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script language='javascript' type='text/javascript'>
    $(document).ready(function () {

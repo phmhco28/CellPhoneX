@@ -21,12 +21,12 @@ namespace CellPhoneX.Controllers
         public ActionResult Detail(string id)
         {
             var D_Phone = data.product_versions.Where(m => m.version_id == id).First();
-            var list = data.product_versions.Where(p=>p.product_id == D_Phone.product_id).ToList();
+            var list = data.product_versions.Where(p => p.product_id == D_Phone.product_id).ToList();
             var list2 = data.customer_comments.Where(p => p.version_id == id).ToList();
             var list3 = data.product_versions.Where(p => p.version_id == D_Phone.version_id).ToList();
             ViewBag.listSl = list3;
             ViewBag.listCom = list2;
-            
+
             ViewBag.listProDetail = list;
             return View(D_Phone);
         }
@@ -165,7 +165,8 @@ namespace CellPhoneX.Controllers
             }
             var result = new List<Object>();
             /*List<string> b = new List<string>();*/
-            var listResult = data.products.Where(p => p.product_name.Contains(keyword.ToLower())).ToList();
+            /*foreach*/
+            var listResult = data.products.Where(s => s.active_status == null || s.active_status == true).Where(p => p.product_name.Contains(keyword.ToLower()) ).ToList();
             if (listResult == null)
             {
                 return Json(null);

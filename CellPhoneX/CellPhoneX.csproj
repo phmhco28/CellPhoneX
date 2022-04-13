@@ -2208,6 +2208,8 @@
     <Content Include="Views\Home\ConfirmResetMail.cshtml" />
     <Content Include="Views\User\ConfirmSignup.cshtml" />
     <Content Include="Views\Home\ConfirmSignUp.cshtml" />
+    <Content Include="Views\GioHang\DatHang.cshtml" />
+    <Content Include="Views\GioHang\XacnhanDonhang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

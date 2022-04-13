@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Configuration;
 using System.Web.Mvc;
 using CellPhoneX.Models;
+
 
 namespace CellPhoneX.Controllers
 {
@@ -96,10 +98,15 @@ namespace CellPhoneX.Controllers
                 {
                     return RedirectToAction("Index", "Admin");
                 }
+                else if (acc.account.confirm == null)
+                {
+                    ViewBag.Notify = "Tài khoản không tồn tại !!!";
+                    return this.SignIn();
+                }
                 else
                 {
 
-                    return RedirectToAction("Cus", "Home");
+                    return RedirectToAction("Index", "Home");
 
                 }
             }
@@ -131,9 +138,9 @@ namespace CellPhoneX.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        var senderEmail = new MailAddress("store.confirmmail@gmail.com", "BookStore");
+                        var senderEmail = new MailAddress(ConfigurationManager.AppSettings["MAILFROM"], "BookStore");
                         var receiverEmail = new MailAddress(mail, "Receiver");
-                        var password = "x1lahcbhnbdvn"; //lahcbhn
+                        var password = ConfigurationManager.AppSettings["PASSWORD"]; //lahcbhn
                         var sub = "XAC_NHAN_DOI_MAT_KHAU";
                         token token = new token();
                         token.Token1 = Nanoid.Nanoid.Generate(size: 10);
@@ -147,8 +154,8 @@ namespace CellPhoneX.Controllers
                                     "link này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2);
                         var smtp = new SmtpClient
                         {
-                            Host = "smtp.gmail.com",
-                            Port = 587,
+                            Host = ConfigurationManager.AppSettings["HOST"],
+                            Port = int.Parse(ConfigurationManager.AppSettings["PORT"]),
                             EnableSsl = true,
                             DeliveryMethod = SmtpDeliveryMethod.Network,
                             UseDefaultCredentials = false,
@@ -195,30 +202,36 @@ namespace CellPhoneX.Controllers
             if (String.IsNullOrEmpty(confirmPass))
             {
                 ViewData["Error_Null_ConfirmPass"] = "Vui lòng nhập mật khẩu xác nhận !!!";
+                return this.SignUp();
             }
             else if (acc_check_mail != null && acc_check_phone != null && acc_check_username != null)
             {
                 ViewData["Error_mail"] = "Email này đã được đăng ký !!!";
                 ViewData["Error_phone"] = "Số điện thoại này đã được đăng ký !!!";
                 ViewData["Error_username"] = "Tên đăng nhập đã tồn tại !!!";
+                return this.SignUp();
             }
             else if (acc_check_mail != null)
             {
                 ViewData["Error_mail"] = "Email này đã được đăng ký !!!";
+                return this.SignUp();
             }
             else if (acc_check_phone != null)
             {
                 ViewData["Error_phone"] = "Số điện thoại này đã được đăng ký !!!";
+                return this.SignUp();
             }
             else if (acc_check_username != null)
             {
                 ViewData["Error_username"] = "Tên đăng nhập đã tồn tại !!!";
+                return this.SignUp();
             }
             else
             {
                 if (!pass.Equals(confirmPass))
                 {
                     ViewData["Error_Not_Same"] = "Mật khẩu không khớp !!!";
+                    return this.SignUp();
                 }
                 else
                 {
@@ -246,9 +259,9 @@ namespace CellPhoneX.Controllers
                     {
                         try
                         {
-                            var senderEmail = new MailAddress("store.confirmmail@gmail.com", "BookStore");
+                            var senderEmail = new MailAddress(ConfigurationManager.AppSettings["MAILFROM"], "BookStore");
                             var receiverEmail = new MailAddress(email, "Receiver");
-                            var password = "x1lahcbhnbdvn";
+                            var password = ConfigurationManager.AppSettings["PASSWORD"];
                             var sub = "XAC_THUC_TAI_KHOAN";
                             token tk = new token();
                             tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
@@ -261,8 +274,8 @@ namespace CellPhoneX.Controllers
 
                             var smtp = new SmtpClient
                             {
-                                Host = "smtp.gmail.com",
-                                Port = 587,
+                                Host = ConfigurationManager.AppSettings["HOST"],
+                                Port = int.Parse(ConfigurationManager.AppSettings["PORT"]),
                                 EnableSsl = true,
                                 DeliveryMethod = SmtpDeliveryMethod.Network,
                                 UseDefaultCredentials = false,

@@ -24,6 +24,7 @@
             <div class="form-group">
                 <input type="text" name="username" class="form-control item" id="username" placeholder="Tên đăng nhập">
                 @Html.ValidationMessageFor(model => model.account.username, "", new { @class = "text-danger" })
+            <p style="padding-left: 5px; color:red; font-weight:bold">@ViewData["Error_username"]</p>
             </div>
             <div class="form-group">
                 <input type="password" name="password" class="form-control item" id="password" placeholder="Mật khẩu">
@@ -33,13 +34,13 @@
             <div class="form-group">
                 <input type="password" name="confirm_password" class="form-control item" id="confirm_password" placeholder="Xác nhận mật khẩu">
                 @Html.ValidationMessageFor(model => model.account.password, "", new { @class = "text-danger" })
-
+                <p style="padding-left: 5px; color:red; font-weight:bold">@ViewData["Error_Not_Same"]</p>
             </div>
 
             <div class="form-group">
                 <input type="text" name="email" class="form-control item" id="email" placeholder="Email">
                 @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger", @id="mailer"})
-
+                <p style="padding-left: 5px; color:red; font-weight:bold">@ViewData["Error_mail"]</p>
             </div>
             <div class="form-group">
                 <div name="sex" id="sex">
@@ -52,8 +53,8 @@
             </div>
             <div class="form-group">
                 <input type="text" name="phone" class="form-control item" id="phone" placeholder="Số điện thoại">
-                @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger", @id="phoneer" })
-
+                @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger", @id = "phoneer" })
+                <p style="padding-left: 5px; color:red; font-weight:bold">@ViewData["Error_phone"]</p>
             </div>
             <div class="form-group">
                 <input type="date" name="birthday" class="form-control item" id="birth_date" placeholder="Ngày sinh">

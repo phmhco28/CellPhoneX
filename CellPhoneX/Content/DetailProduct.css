@@ -368,10 +368,11 @@ section.cps-section .block-detail-product .box-detail-product .detail-product__b
 }
 
 .comment-area textarea {
-    border-radius: 20px;
+    border-radius: 10px;
     width: 100%;
     height: 120px;
     resize: vertical;
+    margin-bottom: 10px;
 }
 }
 

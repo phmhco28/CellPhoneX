@@ -132,11 +132,20 @@ namespace CellPhoneX.Controllers
             dh.invoice_id = Nanoid.Nanoid.Generate(size: 10);
             dh.customer_id = kh.customer_id;
             dh.order_date = DateTime.Now;
-            dh.deliver_date = DateTime.Parse(ngaygiao);
+            
+            if (ngaygiao == null || ngaygiao == "")
+            {
+                ViewBag.Mess = "Vui lòng chọn ngày giao hàng mong muốn !!!";
+                return this.DatHang();
+            }
+            else
+            {
+                dh.deliver_date = DateTime.Parse(ngaygiao);
+            }
             if (dh.deliver_date < dh.order_date)
             {
-                Session["MessageEx"] = "Ngay giao phải sau ngày đặt";
-                return RedirectToAction("DatHang");
+                ViewBag.Mess = "Ngày giao phải sau ngày đặt !!!";
+                return this.DatHang();
             }
             else
             {
@@ -152,7 +161,7 @@ namespace CellPhoneX.Controllers
                 ctdh.amount = item.amount;
                 ctdh.price = (decimal)item.special_price;
                 s = dt.product_versions.Single(n => n.version_id == item.proId);
-                s.amount -= ctdh.amount;
+               /* s.amount -= ctdh.amount;*/
 
                 dt.SubmitChanges();
 
@@ -161,39 +170,8 @@ namespace CellPhoneX.Controllers
             dt.SubmitChanges();
 
             Session["Giohang"] = null;
+            Session["count"] = null;
 
-
-            try
-            {
-                var senderEmail = new MailAddress("quoctupdn@gmail.com", "Nguyễn Quốc Tú");
-                var receiverEmail = new MailAddress(kh.mail, "Receiver");
-                var password = "";
-                var sub = "Hello";
-                var body = "Đơn hàng đã được xác nhận";
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(senderEmail.Address, password)
-                };
-                using (var mess = new MailMessage(senderEmail, receiverEmail)
-                {
-                    Subject = sub,
-                    Body = body
-                })
-                {
-                    smtp.Send(mess);
-                }
-                return RedirectToAction("XacnhanDonhang", "GioHang");
-
-            }
-            catch (Exception)
-            {
-                ViewBag.Error = "Some Error";
-            }
             return RedirectToAction("XacnhanDonhang", "GioHang");
         }
         public ActionResult XacnhanDonhang()

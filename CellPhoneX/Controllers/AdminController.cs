@@ -9,6 +9,7 @@ using PagedList;
 using PagedList.Mvc;
 using System.Net.Mail;
 using System.Net;
+using System.Configuration;
 
 namespace CellPhoneX.Controllers
 {
@@ -416,7 +417,7 @@ namespace CellPhoneX.Controllers
             {
                 return RedirectToAction("SignIn", "Admin");
             }
-            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.Where(s => s.active_status == null || s.active_status ==true).ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             return View();
         }
@@ -424,7 +425,7 @@ namespace CellPhoneX.Controllers
         [HttpPost]
         public ActionResult CreateProduct(FormCollection collection)
         {
-            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.Where(s => s.active_status == null || s.active_status == true).ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             product product = new product();
             product.product_id = Nanoid.Nanoid.Generate(size: 10);
@@ -469,14 +470,14 @@ namespace CellPhoneX.Controllers
 
         public ActionResult EditProduct(string id)
         {
-            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.Where(s => s.active_status == null || s.active_status == true).ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             account acc = (account)Session["TaiKhoanAdmin"];
             if (acc == null || acc.role_id != 1)
             {
                 return RedirectToAction("SignIn", "Admin");
             }
-            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+          
             product product = data.products.SingleOrDefault(p => p.product_id == id);
             return View(product);
         }
@@ -484,7 +485,7 @@ namespace CellPhoneX.Controllers
         [HttpPost]
         public ActionResult EditProduct(string id, FormCollection collection)
         {
-            ViewBag.phoneBrand = new SelectList(data.phone_brands.ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
+            ViewBag.phoneBrand = new SelectList(data.phone_brands.Where(s => s.active_status == null || s.active_status == true).ToList().OrderBy(p => p.phone_brand_name), "phone_brand_id", "phone_brand_name");
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
             product product = data.products.SingleOrDefault(p => p.product_id == id);
             product.product_name = collection["product_name"];
@@ -527,7 +528,7 @@ namespace CellPhoneX.Controllers
                 return RedirectToAction("SignIn", "Admin");
             }
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
-            ViewBag.product = new SelectList(data.products.Where(p => (p.active_status == true || p.active_status == null)).ToList().OrderBy(p => p.product_name), "product_id", "product_name");
+            ViewBag.product = new SelectList(data.products.Where(p => p.active_status == true || p.active_status == null).ToList().OrderBy(p => p.product_name), "product_id", "product_name");
             ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).Where(p => (p.active_status == true || p.active_status == null)).ToList(), "color_id", "color_name");
             return View();
         }
@@ -624,8 +625,8 @@ namespace CellPhoneX.Controllers
         public ActionResult EditProductVersion(FormCollection collection, HttpPostedFileBase file, string id)
         {
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
-            ViewBag.product = new SelectList(data.products.ToList().OrderBy(p => p.product_name), "product_id", "product_name");
-            ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).ToList(), "color_id", "color_name");
+            ViewBag.product = new SelectList(data.products.Where(p => p.active_status == true || p.active_status == null).ToList().OrderBy(p => p.product_name), "product_id", "product_name");
+            ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).Where(p => (p.active_status == true || p.active_status == null)).ToList(), "color_id", "color_name");
             account acc = (account)Session["TaiKhoanAdmin"];
             if (acc == null || acc.role_id != 1)
             {
@@ -639,8 +640,8 @@ namespace CellPhoneX.Controllers
         public ActionResult EditProductVersion(string id, FormCollection collection)
         {
             ViewBag.promotion = new SelectList(data.promotions.Where(p => p.end_date >= DateTime.Now).OrderBy(d => d.end_date).ToList(), "promotion_id", "promotion_id");
-            ViewBag.product = new SelectList(data.products.ToList().OrderBy(p => p.product_name), "product_id", "product_name");
-            ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).ToList(), "color_id", "color_name");
+            ViewBag.product = new SelectList(data.products.Where(p => p.active_status == true || p.active_status == null).ToList().OrderBy(p => p.product_name), "product_id", "product_name");
+            ViewBag.color = new SelectList(data.colors.OrderBy(d => d.color_name).Where(p => (p.active_status == true || p.active_status == null)).ToList(), "color_id", "color_name");
             product_version version = data.product_versions.SingleOrDefault(p => p.version_id == id);
             if (collection["price"] == null || collection["price"] == "")
                 {
@@ -996,9 +997,9 @@ namespace CellPhoneX.Controllers
             customer cus = data.customers.FirstOrDefault(p => p.customer_id == inv.customer_id);
            if (ModelState.IsValid)
             {
-                var senderEmail = new MailAddress("store.confirmmail@gmail.com", "BookStore");
+                var senderEmail = new MailAddress(ConfigurationManager.AppSettings["MAILFROM"], "BookStore");
                 var receiverEmail = new MailAddress(cus.mail, "Receiver");
-                var password = "x1lahcbhnbdvn"; //lahcbhn
+                var password = ConfigurationManager.AppSettings["PASSWORD"]; //lahcbhn
                 var sub = "XAC_NHAN_DON_HANG";
                 token token = new token();
                 token.Token1 = Nanoid.Nanoid.Generate(size: 10);
@@ -1017,8 +1018,8 @@ namespace CellPhoneX.Controllers
                             "Vui lòng nhấn vào link này để XÁC NHẬN ĐƠN HÀNG:" + link;
                 var smtp = new SmtpClient
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
+                    Host = ConfigurationManager.AppSettings["HOST"],
+                    Port = int.Parse(ConfigurationManager.AppSettings["PORT"]),
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,

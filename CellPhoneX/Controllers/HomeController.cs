@@ -115,6 +115,11 @@ namespace CellPhoneX.Controllers
             if (tokenConfirm != null && inv != null)
             {
                 inv.invoice_confirm = "Đã xác nhận";
+                foreach (var item in context.invoice_details.Where(p => p.invoice_id == inv.invoice_id).ToList())
+                {
+                    product_version verPro = context.product_versions.SingleOrDefault(p => p.version_id == item.product_version.version_id);
+                    verPro.amount -= item.amount;
+                }
                 UpdateModel(inv);
                 context.SubmitChanges();
                 context.tokens.DeleteOnSubmit(tokenConfirm);
