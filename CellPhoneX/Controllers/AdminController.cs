@@ -994,12 +994,13 @@ namespace CellPhoneX.Controllers
                             + " có giá: " + item.price + " | Số lượng: "+item.amount +"\n";
                 total += item.amount * item.price;
             }
+            send_mail mail = data.send_mails.SingleOrDefault(m => m.id == "IZvaj2R3Q6");
             customer cus = data.customers.FirstOrDefault(p => p.customer_id == inv.customer_id);
            if (ModelState.IsValid)
             {
-                var senderEmail = new MailAddress(ConfigurationManager.AppSettings["MAILFROM"], "BookStore");
+                var senderEmail = new MailAddress(mail.mail, "CellphoneX");
                 var receiverEmail = new MailAddress(cus.mail, "Receiver");
-                var password = ConfigurationManager.AppSettings["PASSWORD"]; //lahcbhn
+                var password = mail.pass; 
                 var sub = "XAC_NHAN_DON_HANG";
                 token token = new token();
                 token.Token1 = Nanoid.Nanoid.Generate(size: 10);
@@ -1015,11 +1016,13 @@ namespace CellPhoneX.Controllers
                             "Ngày giao hàng (dự kiến): " + inv.deliver_date + "\n" +
                             "Cụ thể: " + phoneInfo + "\n" +
                             "Tổng tiền hàng: " + total.ToString() + " VNĐ" + "\n" +
-                            "Vui lòng nhấn vào link này để XÁC NHẬN ĐƠN HÀNG:" + link;
+                            "Vui lòng nhấn vào link này để XÁC NHẬN ĐƠN HÀNG:" + link + "\n" +
+                            "Xác nhận này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(10) + "\n" +
+                            "Xin cảm ơn quý khách !!!";
                 var smtp = new SmtpClient
                 {
-                    Host = ConfigurationManager.AppSettings["HOST"],
-                    Port = int.Parse(ConfigurationManager.AppSettings["PORT"]),
+                    Host = "smtp.gmail.com",
+                    Port = 587,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,

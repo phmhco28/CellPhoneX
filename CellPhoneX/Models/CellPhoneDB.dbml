@@ -187,6 +187,13 @@
       <Association Name="role_account" Member="accounts" ThisKey="role_id" OtherKey="role_id" Type="account" />
     </Type>
   </Table>
+  <Table Name="dbo.send_mail" Member="send_mails">
+    <Type Name="send_mail">
+      <Column Name="id" Type="System.String" DbType="VarChar(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.specs" Member="specs">
     <Type Name="spec">
       <Column Name="specs_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

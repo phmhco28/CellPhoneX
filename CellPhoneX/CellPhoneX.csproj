@@ -1899,6 +1899,7 @@
     <Content Include="Content\Admin\vendor\jquery\jquery.min.js" />
     <Content Include="Content\Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\Admin\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\app-development.png" />
     <Content Include="Content\body.css" />
     <Content Include="Content\cart.css" />
     <Content Include="Content\DetailProduct.css" />
@@ -2150,7 +2151,6 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Product\ListProduct.cshtml" />
-    <Content Include="Views\Admin\ProductAdmin.cshtml" />
     <Content Include="Views\User\SignIn.cshtml" />
     <Content Include="Views\User\SignUp.cshtml" />
     <Content Include="Views\User\Index.cshtml" />

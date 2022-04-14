@@ -1,5 +1,5 @@
 ﻿@model CellPhoneX.Models.product_version
-@{ ViewBag.Title = "Detail";
+@{ ViewBag.Title = Model.product.product_name;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listI = (List<product_version>)ViewBag.listProDetail;
     var listI2 = (List<customer_comment>)ViewBag.listCom;

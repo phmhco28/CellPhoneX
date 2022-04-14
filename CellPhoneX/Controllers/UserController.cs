@@ -129,6 +129,7 @@ namespace CellPhoneX.Controllers
             if (mail != null || mail != "")
             {
                 customer cus = data.customers.SingleOrDefault(p => p.mail == mail);
+                send_mail gmail = data.send_mails.SingleOrDefault(m => m.id == "IZvaj2R3Q6");
                 if (cus == null)
                 {
                     ViewBag.Thongbao = "Không tìm thấy tài khoản của bạn !!!";
@@ -138,9 +139,9 @@ namespace CellPhoneX.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        var senderEmail = new MailAddress(ConfigurationManager.AppSettings["MAILFROM"], "BookStore");
+                        var senderEmail = new MailAddress(gmail.mail, "CellphoneX");
                         var receiverEmail = new MailAddress(mail, "Receiver");
-                        var password = ConfigurationManager.AppSettings["PASSWORD"]; //lahcbhn
+                        var password = gmail.pass; //lahcbhn
                         var sub = "XAC_NHAN_DOI_MAT_KHAU";
                         token token = new token();
                         token.Token1 = Nanoid.Nanoid.Generate(size: 10);
@@ -151,11 +152,13 @@ namespace CellPhoneX.Controllers
                         var link = string.Format("{0}", Url.Action("ConfirmResetMail", "Home", new { Token = token.Token1, AccID = cus.account_id }, Request.Url.Scheme));
                         var body = "Xin chào: " + cus.customer_name + "\n" +
                                     "Vui lòng nhấn vào link này để XÁC NHẬN ĐỔI MẬT KHẨU: " + link + "\n" +
-                                    "link này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2);
+                                    "Xác nhận này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2) + "\n" +
+                                    "Xin cảm ơn quý khách !!!";
+
                         var smtp = new SmtpClient
                         {
-                            Host = ConfigurationManager.AppSettings["HOST"],
-                            Port = int.Parse(ConfigurationManager.AppSettings["PORT"]),
+                            Host = "smtp.gmail.com",
+                            Port = 587,
                             EnableSsl = true,
                             DeliveryMethod = SmtpDeliveryMethod.Network,
                             UseDefaultCredentials = false,
@@ -255,13 +258,14 @@ namespace CellPhoneX.Controllers
                     customer.account_id = acc.account_id;
                     data.customers.InsertOnSubmit(customer);
                     data.SubmitChanges();
+                    send_mail gmail = data.send_mails.SingleOrDefault(m => m.id == "IZvaj2R3Q6");
                     if (ModelState.IsValid)
                     {
                         try
                         {
-                            var senderEmail = new MailAddress(ConfigurationManager.AppSettings["MAILFROM"], "BookStore");
+                            var senderEmail = new MailAddress(gmail.mail, "CellphoneX");
                             var receiverEmail = new MailAddress(email, "Receiver");
-                            var password = ConfigurationManager.AppSettings["PASSWORD"];
+                            var password = gmail.pass;
                             var sub = "XAC_THUC_TAI_KHOAN";
                             token tk = new token();
                             tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
@@ -270,12 +274,14 @@ namespace CellPhoneX.Controllers
                             data.tokens.InsertOnSubmit(tk);
                             data.SubmitChanges();
                             var link = string.Format("{0}", Url.Action("ConfirmSignUp", "Home", new { Token = tk.Token1, id = acc.account_id }, Request.Url.Scheme));
-                            var body = "Vui lòng click vào link để xác nhận tài khoản: " +link;
+                            var body = "Vui lòng click vào link để xác nhận tài khoản: " +link + "\n" +
+                                        "Xác nhận này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2) + "\n" + 
+                                        "Xin cảm ơn quý khách !!!";
 
                             var smtp = new SmtpClient
                             {
-                                Host = ConfigurationManager.AppSettings["HOST"],
-                                Port = int.Parse(ConfigurationManager.AppSettings["PORT"]),
+                                Host = "smtp.gmail.com",
+                                Port = 587,
                                 EnableSsl = true,
                                 DeliveryMethod = SmtpDeliveryMethod.Network,
                                 UseDefaultCredentials = false,
